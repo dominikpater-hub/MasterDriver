@@ -8144,6 +8144,12 @@ const PACKS = [{
          scenario: { prompt: "Dużo krótkich tras i idlingu. Skutek dla DPF?", options: ["Czyści się", "Zapełnia się szybciej, koszty serwisu", "Bez wpływu"], correct: "Zapełnia się szybciej, koszty serwisu" } },
     ref: "Technika (parafraza)", sourceRef: "Materiały branżowe (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
   }, {
+    id: "eco:klimatyzacja", formats: ["mcq", "scenario"],
+    why: "Klimatyzacja i urządzenia dodatkowe zwiększają zużycie; ogrzewanie postojowe (niezależne) jest znacznie oszczędniejsze niż praca silnika na biegu jałowym.",
+    q: { mcq: { prompt: "Co jest oszczędniejsze do ogrzania kabiny na postoju?", options: ["Silnik na biegu jałowym", "Niezależne ogrzewanie postojowe", "Klimatyzacja"], correct: "Niezależne ogrzewanie postojowe" },
+         scenario: { prompt: "Nocujesz w kabinie zimą. Jak ogrzać się eco?", options: ["Silnik na jałowym całą noc", "Ogrzewanie postojowe", "Nic, marznę"], correct: "Ogrzewanie postojowe" } },
+    ref: "Technika (parafraza)", sourceRef: "Materiały branżowe (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
     id: "eco:oszczednosc-realna", formats: ["mcq", "scenario"],
     why: "Realistyczna, powtarzalna oszczędność z eco-drivingu to zwykle 5-15%; wartości 25-33% dotyczą przejścia od bardzo agresywnego stylu.",
     q: { mcq: { prompt: "Jaka jest realistyczna oszczędność z eco-drivingu we flocie?", options: ["50%", "5-15%", "0%"], correct: "5-15%" },
@@ -8768,9 +8774,16 @@ const license = (() => {
   };
 })();
 
+// ⚑ TRYB DARMOWY — MasterDriver jest w pełni bezpłatny do czasu akceptacji
+// użytkowników. Cała maszyneria paywalla/licencji zostaje w kodzie; ten jeden
+// przełącznik odblokowuje wszystko (moduły PRO, bloki ADR 3–5, egzaminy).
+// Aby WŁĄCZYĆ bramki płatności w przyszłości: zmień na false.
+const FREE_MODE = true;
+
 // Czy istnieje zapisany (aktywowany wcześniej) klucz. Nie waliduje online —
 // raz aktywowany klucz działa offline (kierowca w trasie bez zasięgu).
 function hasLicense() {
+  if (FREE_MODE) return true; // ⚑ tryb darmowy: wszystko odblokowane
   const k = license.load();
   return !!(k && k.length > 3);
 }
@@ -9484,7 +9497,7 @@ function Modules({
     /*#__PURE__*/React.createElement("div", { style: { display: "flex", gap: 8, alignItems: "center", marginTop: 2 } },
       (!licensed && !FREE_MODULES.includes(m.id))
         ? /*#__PURE__*/React.createElement("span", { style: { fontSize: 10, fontFamily: C.mono, color: C.amber, border: `1px solid ${C.amber}`, borderRadius: 6, padding: "2px 6px" } }, "🔒 PRO")
-        : FREE_MODULES.includes(m.id)
+        : (FREE_MODULES.includes(m.id) || FREE_MODE)
           ? /*#__PURE__*/React.createElement("span", { style: { fontSize: 10, fontFamily: C.mono, color: C.greenLite, border: `1px solid ${C.greenLite}`, borderRadius: 6, padding: "2px 6px" } }, "DARMO")
           : null,
       /*#__PURE__*/React.createElement("span", {
