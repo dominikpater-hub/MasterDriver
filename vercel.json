@@ -5,9 +5,15 @@
   "outputDirectory": "dist",
   "installCommand": "npm install",
   "rewrites": [
-    { "source": "/((?!assets/|sw.js|workbox-|manifest.webmanifest|icon|.*\\.[a-z0-9]+$).*)", "destination": "/index.html" }
+    { "source": "/((?!api/|assets/|sw.js|workbox-|manifest.webmanifest|icon|.*\\.[a-z0-9]+$).*)", "destination": "/index.html" }
   ],
   "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    },
     {
       "source": "/sw.js",
       "headers": [

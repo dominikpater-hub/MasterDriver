@@ -2604,14 +2604,58 @@ function QuestionBody({
 const FEEDBACK_KEY = "masterdriver.feedback.v1";
 const FEEDBACK_CATS = ["Błąd merytoryczny", "Literówka", "Niejasne", "Za trudne"];
 
+// Kody kategorii oczekiwane przez backend Franka (/api/feedback).
+const FEEDBACK_CAT_CODE = {
+  "Błąd merytoryczny": "blad",
+  "Literówka": "literowka",
+  "Niejasne": "niejasne",
+  "Za trudne": "trudne"
+};
+const APP_BUILD = "mdrv-1";
+
 function saveFeedback(entry) {
   try {
     const raw = rawStore.getItem(FEEDBACK_KEY);
     const list = raw ? JSON.parse(raw) : [];
-    list.push(entry);
+    // cid = deterministyczne id -> idempotencja przy retry synchronizacji.
+    const withMeta = { ...entry, cid: (entry.factId || "x") + ":" + (entry.ts || Date.now()), synced: false };
+    list.push(withMeta);
     rawStore.setItem(FEEDBACK_KEY, JSON.stringify(list));
+    // Franek synchronizuje uwagę do właściciela (best-effort, nie blokuje UI).
+    try { syncFeedback(); } catch (e) {}
     return true;
   } catch (e) { return false; }
+}
+
+// Wysyła niezsynchronizowane uwagi do /api/feedback i oznacza je jako wysłane.
+// Best-effort: offline / brak backendu -> zostają lokalnie i pójdą przy kolejnej próbie.
+let _syncing = false;
+async function syncFeedback() {
+  if (_syncing) return;
+  let list;
+  try { list = JSON.parse(rawStore.getItem(FEEDBACK_KEY) || "[]"); } catch (e) { return; }
+  const pending = list.filter(f => f && !f.synced);
+  if (!pending.length) return;
+  _syncing = true;
+  try {
+    const items = pending.slice(0, 50).map(f => ({
+      factId: f.factId, topic: f.topic,
+      cat: FEEDBACK_CAT_CODE[f.cat] || "inne",
+      msg: f.msg, ts: f.ts, cid: f.cid, build: APP_BUILD
+    }));
+    const res = await fetch("/api/feedback", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items })
+    });
+    if (res.ok) {
+      const sent = new Set(items.map(i => i.cid));
+      const updated = list.map(f => sent.has(f.cid) ? { ...f, synced: true } : f);
+      rawStore.setItem(FEEDBACK_KEY, JSON.stringify(updated));
+    }
+  } catch (e) {
+    /* offline lub backend jeszcze niepodłączony — spróbujemy później */
+  } finally { _syncing = false; }
 }
 
 function loadFeedback() {
@@ -2642,70 +2686,40 @@ function feedbackAsText(list) {
 
 /* Przycisk eksportu uwag — pokazuje się tylko gdy są jakieś uwagi.
    Pobiera plik .txt; gdy przeglądarka blokuje pobieranie, kopiuje do schowka. */
+// Franek synchronizuje uwagi do właściciela (backend /api/feedback).
+// Nie ma już ręcznego eksportu — Franek wysyła automatycznie, a tu pokazujemy status.
 function FeedbackExport() {
   const [list, setList] = useState(() => loadFeedback());
-  const [msg, setMsg] = useState(null);
-  const [confirmClear, setConfirmClear] = useState(false);
+  const [busy, setBusy] = useState(false);
+  useEffect(() => {
+    // przy wejściu na ekran główny dosyłamy zaległe uwagi
+    Promise.resolve().then(syncFeedback).then(() => setList(loadFeedback())).catch(() => {});
+  }, []);
   if (!list.length) return null;
-
-  function doExport() {
-    const text = feedbackAsText(list);
-    try {
-      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "masterdriver-uwagi.txt";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-      setMsg("Zapisano plik masterdriver-uwagi.txt");
-    } catch (e) {
-      try {
-        navigator.clipboard.writeText(text);
-        setMsg("Skopiowano uwagi do schowka.");
-      } catch (e2) {
-        setMsg("Nie udało się wyeksportować.");
-      }
-    }
-  }
-
+  const pending = list.filter(f => f && !f.synced).length;
+  const sent = list.length - pending;
+  const doSync = async () => {
+    setBusy(true);
+    try { await syncFeedback(); } catch (e) {}
+    setList(loadFeedback());
+    setBusy(false);
+  };
   return /*#__PURE__*/React.createElement("div", {
     style: { ...cardStyle, marginTop: 4 }
   },
     /*#__PURE__*/React.createElement("div", {
       style: { fontSize: 12, color: C.dim, fontFamily: C.mono, marginBottom: 8 }
-    }, "TWOJE UWAGI · ", list.length),
+    }, "💬 FRANEK · uwagi: ", list.length),
     /*#__PURE__*/React.createElement("div", {
       style: { fontSize: 12, color: C.dim, lineHeight: 1.5, marginBottom: 10 }
-    }, "Zgłoszenia zapisane w tym telefonie. Wyślij je nam, a sprawdzimy i damy znać."),
-    /*#__PURE__*/React.createElement("button", {
-      style: btn(C.card, C.text, false, C.line),
-      onClick: doExport
-    }, "📤 Eksportuj uwagi"),
-    msg ? /*#__PURE__*/React.createElement("div", {
-      style: { fontSize: 12, color: C.greenLite, marginTop: 8, textAlign: "center", lineHeight: 1.5 }
-    }, msg) : null,
-    confirmClear
-      ? /*#__PURE__*/React.createElement("div", { style: { marginTop: 10 } },
-          /*#__PURE__*/React.createElement("div", {
-            style: { fontSize: 12, color: C.text, marginBottom: 8, lineHeight: 1.5 }
-          }, "Usunąć wszystkie zapisane uwagi?"),
-          /*#__PURE__*/React.createElement("div", { style: { display: "flex", gap: 8 } },
-            /*#__PURE__*/React.createElement("button", {
-              style: { ...btn(C.card, C.text, false, C.line), flex: 1 },
-              onClick: () => setConfirmClear(false)
-            }, "Anuluj"),
-            /*#__PURE__*/React.createElement("button", {
-              style: { ...btn(C.red, "#fff"), flex: 1 },
-              onClick: () => { clearFeedback(); setList([]); setConfirmClear(false); }
-            }, "Usuń")))
-      : /*#__PURE__*/React.createElement("button", {
-          style: { background: "none", border: "none", color: C.faint, fontSize: 11,
-                   fontFamily: C.mono, cursor: "pointer", marginTop: 8, padding: 0 },
-          onClick: () => setConfirmClear(true)
-        }, "wyczyść uwagi"));
+    }, pending === 0
+      ? "Wszystkie uwagi wysłane. Dzięki — Franek przekazuje je twórcy."
+      : sent + " wysłane · " + pending + " czeka na wysłanie (Franek dośle automatycznie, gdy będzie sieć)."),
+    pending > 0 && /*#__PURE__*/React.createElement("button", {
+      style: { ...btn(C.card, C.text, busy, C.line) },
+      disabled: busy,
+      onClick: doSync
+    }, busy ? "Wysyłam…" : "Wyślij teraz"));
 }
 
 function FranekPanel({ question, onClose }) {
