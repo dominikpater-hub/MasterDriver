@@ -1,0 +1,9 @@
+{
+  "appId": "pl.masterdriver.app",
+  "appName": "MasterDriver",
+  "webDir": "dist",
+  "backgroundColor": "#0E1117",
+  "android": {
+    "backgroundColor": "#0E1117"
+  }
+}

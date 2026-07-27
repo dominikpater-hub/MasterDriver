@@ -1,0 +1,29 @@
+{
+  "name": "masterdriver",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MasterDriver — grywalizowany trener kierowcy zawodowego (ADR, tachograf, czas pracy, ładunek i in.). Silnik Leitnera. Dodatek do nauki, nie kurs akredytowany.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "cap:add": "cap add android",
+    "cap:sync": "npm run build && cap sync",
+    "cap:open": "cap open android"
+  },
+  "dependencies": {
+    "@babel/standalone": "^8.0.4",
+    "jsdom": "^29.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/cli": "^7.0.0",
+    "@capacitor/core": "^7.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.7",
+    "vite-plugin-pwa": "^0.21.1"
+  }
+}

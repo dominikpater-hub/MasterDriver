@@ -1,0 +1,29 @@
+# Zależności
+node_modules/
+core-learning/node_modules/
+
+# Build
+dist/
+core-learning/dist/
+
+# Capacitor / Android (generowane lokalnie)
+android/
+.gradle/
+*.keystore
+*.jks
+
+# Środowisko / sekrety
+.env
+.env.*
+!.env.example
+
+# Systemowe / edytor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+npm-debug.log*
+
+# Vercel
+.vercel/

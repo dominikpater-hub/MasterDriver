@@ -1,0 +1,23 @@
+MasterDriver — Prawa zastrzeżone / All Rights Reserved
+
+Copyright (c) 2026 Dominik Pater. Wszelkie prawa zastrzeżone.
+
+Ten kod źródłowy oraz treści dydaktyczne (moduły ADR, tachograf, czas pracy,
+eco-driving, mocowanie, pierwsza pomoc, załadunek) stanowią własność autora
+i są objęte ochroną prawa autorskiego.
+
+Bez uprzedniej pisemnej zgody właściciela praw NIE wolno:
+  - kopiować, powielać ani rozpowszechniać kodu lub treści,
+  - tworzyć dzieł pochodnych,
+  - wykorzystywać komercyjnie w całości ani w części.
+
+Repozytorium jest publiczne wyłącznie w celu hostingu/wdrożenia (np. Vercel)
+i wglądu właściciela. Publiczna dostępność kodu NIE oznacza udzielenia
+jakiejkolwiek licencji open source.
+
+Zastrzeżenie produktowe: MasterDriver jest pomocą do nauki i przygotowania
+do egzaminów. NIE jest kursem akredytowanym, nie wydaje zaświadczeń ani
+uprawnień. Treści oznaczone jako DRAFT wymagają weryfikacji merytorycznej
+(DGSA / ratownik / prawnik) przed traktowaniem ich jako wiążące.
+
+Kontakt w sprawie licencji: dominikpater@gmail.com
