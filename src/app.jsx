@@ -430,6 +430,96 @@ const PACKS = [{
     q: { mcq: { prompt: "Ile operacji kabotażowych wolno wykonać w 7 dni?", options: ["1", "3", "5", "Bez limitu"], correct: "3" },
          scenario: { prompt: "Skończyłeś 3 operacje kabotażu w danym kraju. Kiedy znów możesz tam kabotażować tym pojazdem?", options: ["Od razu", "Po 4 dniach karencji", "Po 7 dniach zawsze"], correct: "Po 4 dniach karencji" } },
     ref: "Rozp. 1072/2009 zm. 2020/1055", sourceRef: "Rozp. (WE) 1072/2009 (zm. 2020/1055): 3/7 + cooling-off 4 dni", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:tydzien-definicja", formats: ["mcq", "fill"],
+    why: "Tydzień w rozumieniu 561/2006 to okres od poniedziałku 00:00 do niedzieli 24:00.",
+    q: { mcq: { prompt: "Jak zdefiniowany jest tydzień w przepisach o czasie jazdy?", options: ["7 kolejnych dni od startu", "Poniedziałek 00:00 – niedziela 24:00", "Dowolne 7 dni"], correct: "Poniedziałek 00:00 – niedziela 24:00" },
+         fill: { prompt: "Tydzień: od poniedziałku 00:00 do ___ 24:00.", correct: "niedzieli" } },
+    ref: "561/2006 art. 4 lit. i", sourceRef: "Rozp. 561/2006 art. 4 lit. i", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:6-okresow", formats: ["mcq", "scenario"],
+    why: "Kolejny tygodniowy odpoczynek musi rozpocząć się najpóźniej po sześciu okresach 24-godzinnych od końca poprzedniego.",
+    q: { mcq: { prompt: "Po ilu okresach 24h najpóźniej musi być kolejny odpoczynek tygodniowy?", options: ["Po 5", "Po 6", "Po 7"], correct: "Po 6" },
+         scenario: { prompt: "Minął 6. okres 24h od ostatniej pauzy tygodniowej. Co musisz zrobić?", options: ["Jechać dalej", "Rozpocząć odpoczynek tygodniowy", "Skrócić dzienny"], correct: "Rozpocząć odpoczynek tygodniowy" } },
+    ref: "561/2006 art. 8 ust. 6", sourceRef: "Rozp. 561/2006 art. 8 ust. 6", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:dwa-skrocone-zagranica", formats: ["mcq", "scenario"],
+    why: "Dwa kolejne skrócone odpoczynki tygodniowe są dozwolone TYLKO w międzynarodowym przewozie rzeczy, poza państwem siedziby i zamieszkania.",
+    q: { mcq: { prompt: "Kiedy wolno wziąć dwa skrócone odpoczynki tygodniowe z rzędu?", options: ["Zawsze", "Tylko w międzynar. przewozie rzeczy, za granicą", "Nigdy"], correct: "Tylko w międzynar. przewozie rzeczy, za granicą" },
+         scenario: { prompt: "Krajowy przewóz w Polsce. Możesz wziąć dwa skrócone tygodniowe z rzędu?", options: ["Tak", "Nie — tylko międzynarodowy przewóz rzeczy", "Za zgodą szefa"], correct: "Nie — tylko międzynarodowy przewóz rzeczy" } },
+    ref: "561/2006 art. 8 ust. 6b", sourceRef: "Rozp. 561/2006 art. 8 ust. 6b", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:art12-plus", formats: ["mcq", "scenario"],
+    why: "Pakiet Mobilności: dla dojazdu do bazy/domu na odpoczynek tygodniowy można przedłużyć jazdę o 1 h, a o 2 h przy wcześniejszej 30-min przerwie.",
+    q: { mcq: { prompt: "O ile możesz przedłużyć jazdę do bazy na pauzę tygodniową (Pakiet Mobilności)?", options: ["O 30 min", "O 1 h, a o 2 h po wcześniejszej przerwie 30 min", "Bez limitu"], correct: "O 1 h, a o 2 h po wcześniejszej przerwie 30 min" },
+         scenario: { prompt: "Chcesz dojechać do bazy, brakuje 1,5 h jazdy. Warunek na +2 h?", options: ["Nic", "Wcześniejsza 30-min przerwa", "Zgoda ITD"], correct: "Wcześniejsza 30-min przerwa" } },
+    ref: "561/2006 art. 12 (Pakiet Mobilności)", sourceRef: "Rozp. 561/2006 art. 12 zm. 2020/1054", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:delegowanie-imi", formats: ["mcq", "match"],
+    why: "Delegowaniu podlegają kabotaż i cross-trade; zgłoszenie składa się w systemie IMI (osobno dla każdego państwa).",
+    q: { mcq: { prompt: "Gdzie zgłasza się delegowanie kierowcy?", options: ["W ITD", "W systemie IMI", "Na granicy"], correct: "W systemie IMI" },
+         match: { prompt: "Czy podlega delegowaniu?", pairs: { "Kabotaż": "tak", "Cross-trade": "tak", "Tranzyt": "nie" } } },
+    ref: "Dyr. 2020/1057", sourceRef: "Dyr. (UE) 2020/1057 (delegowanie, IMI)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "nowelizacje krajowe"
+  }, {
+    id: "czas:tranzyt-wylaczony", formats: ["mcq", "scenario"],
+    why: "Tranzyt oraz przewozy dwustronne (bilateralne) są wyłączone z obowiązku delegowania.",
+    q: { mcq: { prompt: "Który przewóz jest wyłączony z delegowania?", options: ["Kabotaż", "Tranzyt i przewóz dwustronny", "Cross-trade"], correct: "Tranzyt i przewóz dwustronny" },
+         scenario: { prompt: "Jedziesz tranzytem przez Niemcy z PL do FR. Delegowanie w DE?", options: ["Tak", "Nie — tranzyt wyłączony", "Zależy od ładunku"], correct: "Nie — tranzyt wyłączony" } },
+    ref: "Dyr. 2020/1057", sourceRef: "Dyr. (UE) 2020/1057", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:dyspozycyjnosc-definicja", formats: ["mcq", "scenario"],
+    why: "PUŁAPKA: dyspozycyjność (okres gotowości) NIE jest zdefiniowana w 561/2006 — definicja jest w dyrektywie 2002/15/WE.",
+    q: { mcq: { prompt: "Gdzie zdefiniowana jest 'dyspozycyjność'?", options: ["W 561/2006 art. 4", "W dyrektywie 2002/15/WE", "W ustawie o tachografach"], correct: "W dyrektywie 2002/15/WE" },
+         scenario: { prompt: "Ktoś twierdzi, że dyspozycyjność definiuje art. 4 rozp. 561/2006. Prawda?", options: ["Tak", "Nie — to dyrektywa 2002/15/WE", "Bez znaczenia"], correct: "Nie — to dyrektywa 2002/15/WE" } },
+    ref: "Dyr. 2002/15/WE art. 3", sourceRef: "Dyr. 2002/15/WE art. 3 lit. b", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:inna-praca-przerywa", formats: ["mcq", "scenario"],
+    why: "Wykonanie 'innej pracy' (np. wpis 'młotek') podczas przerwy lub odpoczynku przerywa i kończy ten okres.",
+    q: { mcq: { prompt: "Co dzieje się, gdy podczas przerwy zarejestrujesz 'inną pracę'?", options: ["Nic", "Przerwa zostaje przerwana i kończy się", "Przerwa się wydłuża"], correct: "Przerwa zostaje przerwana i kończy się" },
+         scenario: { prompt: "W czasie przerwy 45 min przestawiasz pojazd z wpisem 'inna praca'. Skutek?", options: ["Przerwa liczy się dalej", "Przerwa przerwana — trzeba od nowa", "Bez wpływu"], correct: "Przerwa przerwana — trzeba od nowa" } },
+    ref: "561/2006 art. 4 · wytyczne KE", sourceRef: "Rozp. 561/2006 art. 4; wytyczne KE nr 3", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:przerwa-6h-praca", formats: ["mcq", "fill"],
+    why: "Ustawa o czasie pracy: po 6 kolejnych godzinach pracy przysługuje przerwa min. 30 min (gdy praca do 9 h) lub 45 min (gdy ponad 9 h).",
+    q: { mcq: { prompt: "Po ilu godzinach pracy przysługuje przerwa wg ustawy o czasie pracy?", options: ["Po 4,5 h", "Po 6 h", "Po 8 h"], correct: "Po 6 h" },
+         fill: { prompt: "Przerwa po 6 h pracy: min. 30 min, a przy pracy ponad 9 h — min. ___ min.", correct: "45" } },
+    ref: "Ustawa o czasie pracy kierowców art. 13", sourceRef: "Ustawa Dz.U. 2026 poz. 477 art. 13", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "kolejny t.j."
+  }, {
+    id: "czas:zaloga-pierwsza-godzina", formats: ["mcq", "scenario"],
+    why: "W załodze dwuosobowej obecność drugiego kierowcy w pierwszej godzinie jest fakultatywna (może dosiąść się w ciągu pierwszej godziny).",
+    q: { mcq: { prompt: "Czy drugi kierowca musi być w pojeździe od samego startu?", options: ["Tak, zawsze", "Nie — może dosiąść w pierwszej godzinie", "Nigdy"], correct: "Nie — może dosiąść w pierwszej godzinie" },
+         scenario: { prompt: "Ruszasz sam, kolega dosiada się po 40 min. Załoga dwuosobowa?", options: ["Nie", "Tak — pierwsza godzina fakultatywna", "Tylko za granicą"], correct: "Tak — pierwsza godzina fakultatywna" } },
+    ref: "561/2006 art. 8 ust. 5", sourceRef: "Rozp. 561/2006 art. 8 ust. 5", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:kara-firma-12000", formats: ["mcq", "fill"],
+    why: "Suma kar dla przedsiębiorcy podczas jednej kontroli drogowej to maksymalnie 12 000 zł.",
+    q: { mcq: { prompt: "Maksymalna suma kar dla firmy na jednej kontroli drogowej?", options: ["2000 zł", "12000 zł", "30000 zł"], correct: "12000 zł" },
+         fill: { prompt: "Suma kar dla przedsiębiorcy na kontroli drogowej: maks. ___ zł.", correct: "12000" } },
+    ref: "Ustawa o transp. drog. art. 92a", sourceRef: "Ustawa o transp. drog. Dz.U. 2025 poz. 1490 art. 92a", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "taryfikator" },
+  {
+    id: "czas:kategorie-naruszen", formats: ["mcq", "match"],
+    why: "Naruszenia dzielą się na kategorie: NMW (mniejszej wagi), PN (poważne), BPN (bardzo poważne), NN (najpoważniejsze).",
+    q: { mcq: { prompt: "Która kategoria naruszenia jest najcięższa?", options: ["NMW", "PN", "NN"], correct: "NN" },
+         match: { prompt: "Dopasuj skrót do wagi naruszenia.", pairs: { "NMW": "mniejszej wagi", "PN": "poważne", "NN": "najpoważniejsze" } } },
+    ref: "Rozp. (UE) 2016/403", sourceRef: "Rozp. (UE) 2016/403 (kategorie naruszeń)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:zakaz-niemcy", formats: ["mcq", "scenario"],
+    why: "W Niemczech obowiązuje zakaz ruchu ciężarówek (>7,5 t) w niedziele i święta 00:00–22:00.",
+    q: { mcq: { prompt: "Kiedy w Niemczech obowiązuje zakaz ruchu ciężarówek?", options: ["Soboty", "Niedziele i święta 00:00–22:00", "Codziennie w nocy"], correct: "Niedziele i święta 00:00–22:00" },
+         scenario: { prompt: "Niedziela 14:00, jedziesz ciężarówką autostradą w Niemczech. Legalne?", options: ["Tak", "Nie — zakaz niedzielny", "Tylko z ładunkiem"], correct: "Nie — zakaz niedzielny" } },
+    ref: "Praktyka kontrolna (DE)", sourceRef: "Przepisy krajowe DE (dane orientacyjne — weryfikować kalendarz)", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "kalendarz roczny" },
+  {
+    id: "czas:zakaz-polska", formats: ["mcq", "fill"],
+    why: "W Polsce zakaz ruchu ciężarówek (>12 t) obowiązuje w niedziele 8:00–22:00, a w wakacje także piątki i soboty 18:00–22:00.",
+    q: { mcq: { prompt: "W jakich godzinach obowiązuje w PL niedzielny zakaz ruchu ciężarówek?", options: ["0:00–24:00", "8:00–22:00", "6:00–18:00"], correct: "8:00–22:00" },
+         fill: { prompt: "W wakacje zakaz obejmuje też piątki i soboty w godzinach 18:00–___:00.", correct: "22" } },
+    ref: "Przepisy krajowe PL", sourceRef: "Przepisy o zakazach ruchu (PL) — weryfikować kalendarz roczny", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "kalendarz roczny" },
+  {
+    id: "czas:rekompensata-en-bloc", formats: ["mcq", "scenario"],
+    why: "Rekompensata za skrócony odpoczynek tygodniowy musi być odebrana w całości (en bloc), dołączona do innego odpoczynku — nie wolno jej dzielić.",
+    q: { mcq: { prompt: "Czy rekompensatę za skrócony odpoczynek tygodniowy można podzielić?", options: ["Tak, na części", "Nie — w całości (en bloc)", "Dowolnie"], correct: "Nie — w całości (en bloc)" },
+         scenario: { prompt: "Masz 15 h rekompensaty. Jak ją odbierasz?", options: ["Po kawałku w tygodniu", "W całości, doczepioną do innego odpoczynku", "Zamiast jazdy"], correct: "W całości, doczepioną do innego odpoczynku" } },
+    ref: "561/2006 art. 8 ust. 6b", sourceRef: "Rozp. 561/2006 art. 8 ust. 6b", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
   }]
 }, {
   id: "pierwsza-pomoc",
