@@ -1698,7 +1698,8 @@ function AdrTrainer({
       },
       onExam: m => startExam(m.id),
       onMixed: () => startMixed(false),
-      onProgress: () => setScreen("progress")
+      onProgress: () => setScreen("progress"),
+      onSettings: () => setScreen("settings")
     });
   }
   if (screen === "home") return /*#__PURE__*/React.createElement(Home, {
@@ -1760,6 +1761,13 @@ function AdrTrainer({
   if (screen === "progress") return /*#__PURE__*/React.createElement(Progress, {
     states: states,
     onHome: () => setScreen("modules"),
+    onReset: () => {
+      storage.clear();
+      setStates(ALL.map(f => newFact(f.id)));
+    }
+  });
+  if (screen === "settings") return /*#__PURE__*/React.createElement(Settings, {
+    onBack: () => setScreen("modules"),
     onReset: () => {
       storage.clear();
       setStates(ALL.map(f => newFact(f.id)));
@@ -1870,6 +1878,7 @@ function Modules({
   onExam,
   onMixed,
   onProgress,
+  onSettings,
   licensed
 }) {
   // Licznik "do przypomnienia" musi liczyć TYLKO treść realnie dostępną —
@@ -2032,7 +2041,10 @@ function Modules({
         onClick: e => { e.stopPropagation(); onExam && onExam(m); },
         style: { fontSize: 10, fontFamily: C.mono, color: C.dim, border: `1px solid ${C.line}`, borderRadius: 6, padding: "2px 6px", cursor: "pointer", marginLeft: "auto" } },
         m.id === "adr" ? "📝 Egzamin" : "📝 Test")));
-  }), /*#__PURE__*/React.createElement(FeedbackExport, null)), /*#__PURE__*/React.createElement(TrFoot, null));
+  }), /*#__PURE__*/React.createElement(FeedbackExport, null), onSettings && /*#__PURE__*/React.createElement("button", {
+    onClick: onSettings,
+    style: { marginTop: 6, background: "transparent", border: `1px solid ${C.line}`, color: C.dim, borderRadius: 10, padding: "10px 14px", fontSize: 12, fontFamily: C.mono, cursor: "pointer", width: "100%" }
+  }, "⚙ Ustawienia · Regulamin · Prywatność")), /*#__PURE__*/React.createElement(TrFoot, null));
 }
 
 /* ═══════════ EKRAN GŁÓWNY ═══════════ */
@@ -3402,6 +3414,32 @@ function Progress({
 }
 
 /* ═══════════ WSPÓLNE ═══════════ */
+/* ═══════════ USTAWIENIA · PRAWNE · PRYWATNOŚĆ ═══════════ */
+function Settings({ onBack, onReset }) {
+  const sec = (title, body) => /*#__PURE__*/React.createElement("div", { style: { ...cardStyle, marginTop: 12 } },
+    /*#__PURE__*/React.createElement("div", { style: { fontSize: 14, fontWeight: 800, marginBottom: 6 } }, title),
+    /*#__PURE__*/React.createElement("div", { style: { fontSize: 13, color: C.dim, lineHeight: 1.6 } }, body));
+  const doReset = () => {
+    let ok = true;
+    try { ok = window.confirm("Wyczyścić cały postęp nauki? Tej operacji nie można cofnąć."); } catch (e) {}
+    if (ok) { onReset && onReset(); try { window.alert("Postęp wyczyszczony."); } catch (e) {} }
+  };
+  return /*#__PURE__*/React.createElement(TrShell, null,
+    /*#__PURE__*/React.createElement(TrHeader, { title: "Ustawienia", left: /*#__PURE__*/React.createElement(BackBtn, { onBack: onBack }) }),
+    /*#__PURE__*/React.createElement("div", { style: { flex: 1, padding: 20, overflowY: "auto" } },
+      sec("O aplikacji", "MasterDriver to grywalizowany trener kierowcy zawodowego (ADR, tachograf, czas pracy, eco-driving, mocowanie, pierwsza pomoc, załadunek). Uczy i utrwala wiedzę silnikiem powtórek. Działa offline, aktualnie w pełni bezpłatnie."),
+      sec("Regulamin — w skrócie", "MasterDriver jest pomocą do nauki i przygotowania do egzaminów. NIE jest kursem akredytowanym, nie wydaje zaświadczeń ani uprawnień i nie zastępuje szkolenia u akredytowanego doradcy (DGSA) ani egzaminu państwowego. Moduł ADR jest podpisany; pozostałe moduły mają status roboczy (DRAFT) i przed traktowaniem ich jako wiążące wymagają weryfikacji eksperckiej (prawnik / ratownik / technik). Materiał pierwszej pomocy oparty jest na Wytycznych ERC 2025 — w realnej sytuacji zawsze dzwoń 112 i słuchaj dyspozytora."),
+      sec("Polityka prywatności (RODO)", "Aplikacja działa lokalnie (local-first). Twój postęp nauki, streak i uwagi zapisujemy WYŁĄCZNIE w pamięci Twojej przeglądarki/telefonu — nie wysyłamy ich na żaden serwer, nie zakładamy kont i nie śledzimy Cię. Nie zbieramy danych osobowych. Dane możesz w każdej chwili usunąć przyciskiem poniżej (lub czyszcząc dane strony w przeglądarce). Uwagi zebrane przez Franka eksportujesz ręcznie z ekranu startowego — dopóki tego nie zrobisz, zostają na urządzeniu."),
+      /*#__PURE__*/React.createElement("button", {
+        onClick: doReset,
+        style: { marginTop: 14, width: "100%", background: "transparent", border: `1px solid ${C.red}`, color: C.danger, borderRadius: 10, padding: "13px 16px", fontSize: 14, fontWeight: 700, cursor: "pointer" }
+      }, "🗑 Wyczyść mój postęp"),
+      /*#__PURE__*/React.createElement("div", { style: { marginTop: 14, fontSize: 11, color: C.faint, fontFamily: C.mono, textAlign: "center", lineHeight: 1.6 } },
+        "MasterDriver · ", ALL.length, " pozycji", /*#__PURE__*/React.createElement("br", null),
+        "Kontakt: dominikpater@gmail.com")),
+    /*#__PURE__*/React.createElement(TrFoot, null));
+}
+
 function TrShell({
   children
 }) {
