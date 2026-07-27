@@ -7556,93 +7556,227 @@ const PACKS = [{
   id: "tachograf",
   title: "Tachograf",
   icon: "🕐",
+  status: "DRAFT",
   facts: [{
     id: "tacho:symbole",
     formats: ["mcq", "match"],
     why: "Cztery podstawowe symbole aktywności są ustawowe i identyczne w całej UE.",
     q: {
-      mcq: {
-        prompt: "Który symbol oznacza prowadzenie pojazdu?",
-        options: ["Kierownica", "Łóżko", "Skrzyżowane młotki", "Kwadrat"],
-        correct: "Kierownica"
-      },
-      match: {
-        prompt: "Dopasuj symbol do aktywności.",
-        pairs: {
-          "Kierownica": "jazda",
-          "Łóżko": "odpoczynek",
-          "Skrzyżowane młotki": "inna praca",
-          "Kwadrat (przekreślony)": "dyspozycyjność"
-        }
-      }
+      mcq: { prompt: "Który symbol oznacza prowadzenie pojazdu?", options: ["Kierownica", "Łóżko", "Skrzyżowane młotki", "Kwadrat"], correct: "Kierownica" },
+      match: { prompt: "Dopasuj symbol do aktywności.", pairs: { "Kierownica": "jazda", "Łóżko": "odpoczynek", "Skrzyżowane młotki": "inna praca", "Kwadrat (przekreślony)": "dyspozycyjność" } }
     },
-    ref: "Rozp. 165/2014"
+    ref: "Rozp. 165/2014",
+    sourceRef: "Rozp. (UE) 165/2014, wersja skons. 31.12.2024",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "kolejny t.j."
   }, {
     id: "tacho:karta-56",
     formats: ["mcq", "fill"],
     why: "Kierowca okazuje na kontroli bieżący dzień + poprzednie 56 dni (od 31.12.2024; wcześniej 28).",
     q: {
-      mcq: {
-        prompt: "Za ile ostatnich dni musisz wykazać aktywność na kontroli?",
-        options: ["7 dni", "28 dni", "56 dni", "365 dni"],
-        correct: "56 dni"
-      },
-      fill: {
-        prompt: "Kierowca musi okazać aktywność za bieżący dzień i poprzednie ___ dni.",
-        correct: "56"
-      }
+      mcq: { prompt: "Za ile ostatnich dni musisz wykazać aktywność na kontroli (reżim UE)?", options: ["7 dni", "28 dni", "56 dni", "365 dni"], correct: "56 dni" },
+      fill: { prompt: "Kierowca musi okazać aktywność za bieżący dzień i poprzednie ___ dni.", correct: "56" }
     },
-    ref: "Rozp. 165/2014 art. 36 · Pakiet Mobilności"
+    ref: "Rozp. 165/2014 art. 36 · Pakiet Mobilności",
+    sourceRef: "Rozp. 165/2014 art. 36 (zm. 2020/1054), stosowane od 31.12.2024",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:aetr-28",
+    formats: ["mcq", "scenario"],
+    why: "PUŁAPKA: w reżimie AETR (trasy poza UE, np. Turcja, Mołdawia) okres okazywania to nadal 28 dni, nie 56.",
+    q: {
+      mcq: { prompt: "Ile dni wstecz okazujesz w kontroli w reżimie AETR (trasa spoza UE)?", options: ["56 dni", "28 dni", "90 dni", "14 dni"], correct: "28 dni" },
+      scenario: { prompt: "Jedziesz do Turcji (strona AETR). Kontrola pyta o zapisy. Jaki okres Cię obowiązuje?", options: ["56 dni jak w UE", "28 dni (AETR)", "Tylko dzień bieżący"], correct: "28 dni (AETR)" }
+    },
+    ref: "Umowa AETR (UNECE)",
+    sourceRef: "Umowa AETR (UNECE), różnica względem reżimu UE",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "prace nad smart tacho V2 w AETR"
   }, {
     id: "tacho:zakres-2026",
     formats: ["mcq", "scenario"],
     why: "Od 1 lipca 2026 tachograf obejmuje też pojazdy >2,5 t w transporcie międzynarodowym i kabotażu.",
     q: {
-      mcq: {
-        prompt: "Od kiedy tachograf obejmuje pojazdy >2,5 t w transporcie międzynarodowym?",
-        options: ["Od 2023", "Od 1 lipca 2026", "Od 2028", "Nigdy"],
-        correct: "Od 1 lipca 2026"
-      },
-      scenario: {
-        prompt: "Prowadzisz busa 3 t w przewozie międzynarodowym po 1.07.2026. Potrzebujesz tachografu?",
-        options: ["Tak, wymagany", "Nie, tylko >3,5 t", "Tylko w Niemczech"],
-        correct: "Tak, wymagany"
-      }
+      mcq: { prompt: "Od kiedy tachograf obejmuje pojazdy >2,5 t w transporcie międzynarodowym?", options: ["Od 2023", "Od 1 lipca 2026", "Od 2028", "Nigdy"], correct: "Od 1 lipca 2026" },
+      scenario: { prompt: "Prowadzisz busa 3 t w przewozie międzynarodowym po 1.07.2026. Potrzebujesz tachografu?", options: ["Tak, wymagany", "Nie, tylko >3,5 t", "Tylko w Niemczech"], correct: "Tak, wymagany" }
     },
-    ref: "Rozp. 165/2014 zm. 2020/1054"
+    ref: "Rozp. 165/2014 zm. 2020/1054",
+    sourceRef: "Rozp. 561/2006 w brzmieniu 2020/1054; ustawa Dz.U. 2026 poz. 477",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "2026-07-01 (wejście)"
   }, {
     id: "tacho:wpis-manualny",
     formats: ["mcq", "scenario"],
     why: "Aktywność bez karty w czytniku (np. prom, inna praca) uzupełniasz wpisem manualnym przy najbliższym logowaniu.",
     q: {
-      mcq: {
-        prompt: "Kiedy robisz wpis manualny?",
-        options: ["Nigdy", "Gdy aktywność odbyła się bez karty w tachografie", "Tylko na koniec miesiąca"],
-        correct: "Gdy aktywność odbyła się bez karty w tachografie"
-      },
-      scenario: {
-        prompt: "Wracałeś promem 6 h bez karty w czytniku. Co robisz przy najbliższym włożeniu karty?",
-        options: ["Nic", "Wpis manualny: odpoczynek na promie", "Wyjmuję kartę na stałe"],
-        correct: "Wpis manualny: odpoczynek na promie"
-      }
+      mcq: { prompt: "Kiedy robisz wpis manualny?", options: ["Nigdy", "Gdy aktywność odbyła się bez karty w tachografie", "Tylko na koniec miesiąca"], correct: "Gdy aktywność odbyła się bez karty w tachografie" },
+      scenario: { prompt: "Wracałeś promem 6 h bez karty w czytniku. Co robisz przy najbliższym włożeniu karty?", options: ["Nic", "Wpis manualny: odpoczynek na promie", "Wyjmuję kartę na stałe"], correct: "Wpis manualny: odpoczynek na promie" }
     },
-    ref: "Rozp. 165/2014 art. 34"
+    ref: "Rozp. 165/2014 art. 34",
+    sourceRef: "Rozp. 165/2014 art. 34",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:symbol-kraju",
+    formats: ["mcq", "fill"],
+    why: "Po przekroczeniu granicy kierowca wpisuje symbol państwa (obowiązek od 2.02.2022 dla tacho cyfrowych).",
+    q: {
+      mcq: { prompt: "Co robisz po przekroczeniu granicy państwa?", options: ["Nic", "Wpisuję symbol kraju w tachografie", "Wyłączam tachograf"], correct: "Wpisuję symbol kraju w tachografie" },
+      fill: { prompt: "Po przekroczeniu granicy wpisujesz w tachografie symbol ___.", correct: "kraju" }
+    },
+    ref: "Rozp. 165/2014 art. 34 ust. 7",
+    sourceRef: "Rozp. 165/2014 art. 34(7); obowiązek od 2.02.2022 (cyfrowe)",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
   }, {
     id: "tacho:awaria",
     formats: ["mcq", "fill"],
     why: "Przy awarii tachografu prowadzisz zapis ręczny (wydruk/rewers), a naprawa w drodze powrotnej lub do 7 dni.",
     q: {
-      mcq: {
-        prompt: "Co robisz przy awarii tachografu w trasie?",
-        options: ["Jadę bez rejestracji", "Prowadzę zapis ręczny aktywności", "Wracam natychmiast do bazy"],
-        correct: "Prowadzę zapis ręczny aktywności"
-      },
-      fill: {
-        prompt: "Niesprawny tachograf musi zostać naprawiony najpóźniej w ciągu ___ dni.",
-        correct: "7"
-      }
+      mcq: { prompt: "Co robisz przy awarii tachografu w trasie?", options: ["Jadę bez rejestracji", "Prowadzę zapis ręczny aktywności", "Wracam natychmiast do bazy"], correct: "Prowadzę zapis ręczny aktywności" },
+      fill: { prompt: "Niesprawny tachograf musi zostać naprawiony najpóźniej w ciągu ___ dni.", correct: "7" }
     },
-    ref: "Rozp. 165/2014 art. 37"
+    ref: "Rozp. 165/2014 art. 37",
+    sourceRef: "Rozp. 165/2014 art. 37",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:karta-waznosc",
+    formats: ["mcq", "fill"],
+    why: "Karta kierowcy jest ważna maksymalnie 5 lat, nie dłużej niż prawo jazdy.",
+    q: {
+      mcq: { prompt: "Na ile lat wydaje się kartę kierowcy?", options: ["1 rok", "3 lata", "5 lat", "10 lat"], correct: "5 lat" },
+      fill: { prompt: "Karta kierowcy jest ważna maksymalnie ___ lat.", correct: "5" }
+    },
+    ref: "Rozp. 165/2014 · ustawa o tachografach",
+    sourceRef: "Rozp. 165/2014; ustawa o tachografach Dz.U. 2024 poz. 1037",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:pwpw",
+    formats: ["mcq", "scenario"],
+    why: "W Polsce kartę kierowcy wydaje PWPW przez info-car.pl (nie starostwo, nie urząd komunikacji).",
+    q: {
+      mcq: { prompt: "Kto w Polsce wydaje kartę kierowcy?", options: ["Starostwo", "PWPW (info-car.pl)", "Urząd komunikacji", "ZUS"], correct: "PWPW (info-car.pl)" },
+      scenario: { prompt: "Potrzebujesz nowej karty kierowcy. Gdzie składasz wniosek?", options: ["W starostwie", "Przez info-car.pl (PWPW)", "W urzędzie skarbowym"], correct: "Przez info-car.pl (PWPW)" }
+    },
+    ref: "Ustawa o tachografach · PWPW/info-car",
+    sourceRef: "Ustawa o tachografach Dz.U. 2024 poz. 1037; opłata 172,20 zł brutto",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "opłata/wzór — okresowo"
+  }, {
+    id: "tacho:pobieranie-90-28",
+    formats: ["mcq", "match"],
+    why: "Dane pobiera się: z jednostki pojazdowej (VU) co najwyżej co 90 dni, z karty kierowcy co najwyżej co 28 dni.",
+    q: {
+      mcq: { prompt: "Co ile dni najpóźniej pobiera się dane z karty kierowcy?", options: ["7 dni", "28 dni", "90 dni", "365 dni"], correct: "28 dni" },
+      match: { prompt: "Dopasuj źródło danych do maksymalnego okresu pobierania.", pairs: { "Jednostka pojazdowa (VU)": "90 dni", "Karta kierowcy": "28 dni" } }
+    },
+    ref: "Rozp. 581/2010",
+    sourceRef: "Rozp. (UE) 581/2010 art. 3",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:g2v2",
+    formats: ["mcq", "scenario"],
+    why: "Smart tachograf drugiej generacji (G2V2) m.in. automatycznie rejestruje przekraczanie granic i miejsca załadunku/rozładunku.",
+    q: {
+      mcq: { prompt: "Co potrafi smart tachograf G2V2, czego nie robił starszy?", options: ["Nic nowego", "Automatycznie rejestruje granice i za/rozładunek", "Wydaje prawo jazdy"], correct: "Automatycznie rejestruje granice i za/rozładunek" },
+      scenario: { prompt: "Twój pojazd ma G2V2. Przekraczasz granicę. Co dzieje się z pozycją?", options: ["Muszę wpisać ręcznie wszystko", "Tacho rejestruje ją automatycznie (Galileo/OSNMA)", "Nie jest rejestrowana"], correct: "Tacho rejestruje ją automatycznie (Galileo/OSNMA)" }
+    },
+    ref: "Rozp. 2016/799 zm. 2021/1228",
+    sourceRef: "Rozp. wyk. (UE) 2016/799 + 2021/1228 (G2V2)",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "specyfikacje techniczne"
+  }, {
+    id: "tacho:brak-karty-15",
+    formats: ["mcq", "fill"],
+    why: "Gdy karta jest zgubiona/uszkodzona, można jechać maksymalnie 15 dni, prowadząc wydruki z tachografu.",
+    q: {
+      mcq: { prompt: "Zgubiłeś kartę kierowcy. Jak długo możesz jeszcze jeździć na wydrukach?", options: ["0 dni", "Do 15 dni", "30 dni", "Bez ograniczeń"], correct: "Do 15 dni" },
+      fill: { prompt: "Bez karty kierowcy (zgubiona/uszkodzona) wolno jechać maksymalnie ___ dni na wydrukach.", correct: "15" }
+    },
+    ref: "Rozp. 165/2014 art. 29",
+    sourceRef: "Rozp. 165/2014 art. 29",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:organ-gum",
+    formats: ["mcq", "scenario"],
+    why: "W Polsce organem właściwym dla tachografów i warsztatów jest GUM (Główny Urząd Miar), nie TDT.",
+    q: {
+      mcq: { prompt: "Który urząd w PL odpowiada za tachografy i warsztaty?", options: ["TDT", "GUM (Główny Urząd Miar)", "ITD", "GITD"], correct: "GUM (Główny Urząd Miar)" },
+      scenario: { prompt: "Warsztat robi legalizację tachografu. Kto go do tego upoważnia w PL?", options: ["TDT", "GUM", "Policja"], correct: "GUM" }
+    },
+    ref: "Ustawa o tachografach Dz.U. 2024 poz. 1037",
+    sourceRef: "Ustawa o tachografach Dz.U. 2024 poz. 1037 (zadania GUM)",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:przechowywanie-12m",
+    formats: ["mcq", "fill"],
+    why: "Przedsiębiorca przechowuje dane z tachografu i kart przez 12 miesięcy.",
+    q: {
+      mcq: { prompt: "Jak długo firma przechowuje dane z tachografu?", options: ["1 miesiąc", "6 miesięcy", "12 miesięcy", "5 lat"], correct: "12 miesięcy" },
+      fill: { prompt: "Przewoźnik przechowuje dane z tachografu i kart przez ___ miesięcy.", correct: "12" }
+    },
+    ref: "Rozp. 165/2014 · przepisy krajowe",
+    sourceRef: "Rozp. 165/2014; rozp. wykonawcze PL o przechowywaniu danych",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:brak-zapisu-kara",
+    formats: ["mcq", "scenario"],
+    why: "Brak zapisu za dzień to naruszenie (orientacyjnie ok. 100 zł/dzień); dni bez jazdy pokrywasz zaświadczeniem o nieprowadzeniu.",
+    q: {
+      mcq: { prompt: "Nie masz zapisu aktywności za dzień, w którym nie jechałeś. Co Cię chroni?", options: ["Nic", "Zaświadczenie o nieprowadzeniu pojazdu", "Ustne wyjaśnienie"], correct: "Zaświadczenie o nieprowadzeniu pojazdu" },
+      scenario: { prompt: "Kontrola stwierdza brak danych za 3 dni bez wyjaśnienia. Skutek?", options: ["Bez konsekwencji", "Kara za każdy brakujący dzień", "Zawsze utrata prawa jazdy"], correct: "Kara za każdy brakujący dzień" }
+    },
+    ref: "Taryfikator · ustawa o transp. drog.",
+    sourceRef: "Ustawa o transp. drog. Dz.U. 2025 poz. 1490 (załączniki)",
+    reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "taryfikator — częste zmiany"
+  }, {
+    id: "tacho:manipulacja",
+    formats: ["mcq", "scenario"],
+    why: "Manipulacja tachografem (magnesy, emulatory) to jedno z najpoważniejszych naruszeń — wysokie kary i utrata reputacji firmy.",
+    q: {
+      mcq: { prompt: "Jak kwalifikowana jest manipulacja tachografem?", options: ["Drobne naruszenie", "Najpoważniejsze naruszenie (wysokie kary)", "Brak naruszenia"], correct: "Najpoważniejsze naruszenie (wysokie kary)" },
+      scenario: { prompt: "Ktoś proponuje magnes na czujnik, żeby 'ukryć' jazdę. Reakcja?", options: ["Biorę, nikt nie zauważy", "Odmawiam — to najcięższe naruszenie", "Tylko za granicą"], correct: "Odmawiam — to najcięższe naruszenie" }
+    },
+    ref: "Rozp. 165/2014 · taryfikator",
+    sourceRef: "Rozp. 165/2014 (integralność); klasyfikacja 2016/403",
+    reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "taryfikator"
+  }, {
+    id: "tacho:dwa-rezimy",
+    formats: ["mcq", "match"],
+    why: "Nie mylić dwóch reżimów: 561/2006 to czas jazdy/odpoczynku (organ ITD/PIP), 165/2014 to urządzenie (organ GUM).",
+    q: {
+      mcq: { prompt: "Które rozporządzenie reguluje samo URZĄDZENIE tachograf?", options: ["561/2006", "165/2014", "2002/15/WE"], correct: "165/2014" },
+      match: { prompt: "Dopasuj rozporządzenie do zakresu.", pairs: { "561/2006": "czas jazdy, przerwy, odpoczynki", "165/2014": "tachograf jako urządzenie" } }
+    },
+    ref: "561/2006 vs 165/2014",
+    sourceRef: "Rozp. 561/2006 vs 165/2014 (odrębne reżimy i organy)",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:wydruk-rewers",
+    formats: ["mcq", "scenario"],
+    why: "Przy awarii/braku karty zapis prowadzisz na wydruku (na odwrocie — rewersie), podpisany, z symbolami aktywności.",
+    q: {
+      mcq: { prompt: "Gdzie robisz zapis ręczny przy awarii tachografu?", options: ["Na kartce z bloczka", "Na odwrocie wydruku (rewersie), podpisany", "W telefonie"], correct: "Na odwrocie wydruku (rewersie), podpisany" },
+      scenario: { prompt: "Tacho nie drukuje aktywności z powodu awarii. Jak dokumentujesz jazdę?", options: ["Wcale", "Ręczny zapis na rewersie wydruku z symbolami", "Dzwonię do bazy"], correct: "Ręczny zapis na rewersie wydruku z symbolami" }
+    },
+    ref: "Rozp. 165/2014 art. 35–37",
+    sourceRef: "Rozp. 165/2014 art. 35–37",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:dyspozycyjnosc-symbol",
+    formats: ["mcq", "scenario"],
+    why: "Czas oczekiwania o znanym z góry końcu (np. kolejka na prom) rejestrujesz jako dyspozycyjność, nie jako odpoczynek.",
+    q: {
+      mcq: { prompt: "Jak rejestrujesz przewidywalne oczekiwanie (np. w kolejce na prom)?", options: ["Jako odpoczynek", "Jako dyspozycyjność", "Jako jazdę"], correct: "Jako dyspozycyjność" },
+      scenario: { prompt: "Czekasz 2 h w kolejce na prom, wiesz z góry ile potrwa. Symbol?", options: ["Odpoczynek", "Dyspozycyjność (kwadrat przekreślony)", "Inna praca"], correct: "Dyspozycyjność (kwadrat przekreślony)" }
+    },
+    ref: "Dyr. 2002/15/WE · Rozp. 165/2014",
+    sourceRef: "Dyr. 2002/15/WE art. 3 lit. b (definicja dyspozycyjności)",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:kontrola-56-dni-dok",
+    formats: ["mcq", "fill"],
+    why: "Na kontroli drogowej masz przy sobie dane z karty, wydruki lub wykresówki oraz zaświadczenia o nieprowadzeniu za wymagany okres.",
+    q: {
+      mcq: { prompt: "Co musisz mieć przy sobie na kontroli za wymagany okres?", options: ["Tylko dowód osobisty", "Dane z karty/wydruki + zaświadczenia o nieprowadzeniu", "Nic"], correct: "Dane z karty/wydruki + zaświadczenia o nieprowadzeniu" },
+      fill: { prompt: "Dni, w których nie prowadziłeś, dokumentujesz ___ o nieprowadzeniu pojazdu.", correct: "zaświadczeniem" }
+    },
+    ref: "Rozp. 165/2014 · 2006/22/WE",
+    sourceRef: "Rozp. 165/2014 art. 36; dyr. 2006/22/WE",
+    reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
   }]
 }, {
   id: "czas-pracy",
