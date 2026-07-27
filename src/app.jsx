@@ -1234,7 +1234,7 @@ function countDueReviews() {
 
 /** Scala zapisane stany z aktualną bazą: nowe fakty dochodzą, usunięte znikają. */
 function mergeStates(saved) {
-  const byId = new Map((saved || []).map(s => [s.id, s]));
+  const byId = new Map((Array.isArray(saved) ? saved : []).map(s => [s.id, s]));
   return ALL.map(f => byId.get(f.id) || newFact(f.id));
 }
 
@@ -3011,7 +3011,7 @@ function HowToGet({
       color: C.dim,
       lineHeight: 1.6
     }
-  }, "MasterADR to pomoc w nauce do egzaminu — weryfikacja i utrwalanie wiedzy. Nie jest kursem akredytowanym ani nie wydaje uprawnień. Szczegóły i terminy potwierdź w wybranym ośrodku i urzędzie marszałkowskim.")
+  }, "MasterDriver to pomoc w nauce — weryfikacja i utrwalanie wiedzy kierowcy zawodowego. Nie jest kursem akredytowanym ani nie wydaje uprawnień. Szczegóły i terminy potwierdź w wybranym ośrodku i urzędzie.")
   ), /*#__PURE__*/React.createElement(TrFoot, null));
 }
 
