@@ -3513,6 +3513,7 @@ function BackBtn({
 }) {
   return /*#__PURE__*/React.createElement("button", {
     onClick: onBack,
+    "aria-label": "Wstecz",
     style: {
       background: "none",
       border: "none",
