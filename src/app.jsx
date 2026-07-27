@@ -7782,436 +7782,625 @@ const PACKS = [{
   id: "czas-pracy",
   title: "Czas pracy",
   icon: "⏱️",
+  status: "DRAFT",
   facts: [{
-    id: "czas:dzienny",
-    formats: ["mcq", "fill", "scenario"],
-    why: "Dzienny czas prowadzenia to maks. 9 h, do 10 h najwyżej dwa razy w tygodniu.",
-    q: {
-      mcq: {
-        prompt: "Ile wynosi standardowy dzienny limit prowadzenia?",
-        options: ["8 h", "9 h", "10 h", "11 h"],
-        correct: "9 h"
-      },
-      fill: {
-        prompt: "Dzienny czas jazdy można wydłużyć do 10 h najwyżej ___ razy w tygodniu.",
-        correct: "dwa"
-      },
-      scenario: {
-        prompt: "Jechałeś już 9 h dziś i dwa razy w tym tygodniu po 10 h. Możesz dziś jechać dłużej?",
-        options: ["Tak, do 10 h", "Nie, limit 10 h wykorzystany 2x", "Tak, bez limitu"],
-        correct: "Nie, limit 10 h wykorzystany 2x"
-      }
-    },
-    ref: "Rozp. 561/2006 art. 6 ust. 1"
+    id: "czas:jazda-9-10", formats: ["mcq", "fill"],
+    why: "Dzienny czas jazdy to 9 h; można przedłużyć do 10 h najwyżej dwa razy w tygodniu.",
+    q: { mcq: { prompt: "Ile godzin możesz prowadzić dziennie w podstawie?", options: ["8 h", "9 h", "11 h", "13 h"], correct: "9 h" },
+         fill: { prompt: "Dzienny czas jazdy 9 h można przedłużyć do 10 h najwyżej ___ razy w tygodniu.", correct: "dwa" } },
+    ref: "561/2006 art. 6 ust. 1", sourceRef: "Rozp. (WE) 561/2006 art. 6 ust. 1 (skons. 31.12.2024)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
   }, {
-    id: "czas:przerwa-45",
-    formats: ["mcq", "match", "order"],
-    why: "Po 4,5 h jazdy obowiązkowa przerwa 45 min — w całości albo 15 + 30 min (w tej kolejności).",
-    q: {
-      mcq: {
-        prompt: "Po ilu godzinach jazdy musisz zrobić przerwę?",
-        options: ["3 h", "4 h", "4,5 h", "6 h"],
-        correct: "4,5 h"
-      },
-      match: {
-        prompt: "Dopasuj przerwę do reguły.",
-        pairs: {
-          "Przerwa pełna": "45 min",
-          "Podział przerwy": "15 + 30 min"
-        }
-      },
-      order: {
-        prompt: "Ułóż poprawny podział przerwy 45 min.",
-        correct: ["15 min", "30 min"]
-      }
-    },
-    ref: "Rozp. 561/2006 art. 7"
+    id: "czas:tydzien-56", formats: ["mcq", "fill"],
+    why: "Tygodniowy czas jazdy nie może przekroczyć 56 h.",
+    q: { mcq: { prompt: "Maksymalny tygodniowy czas jazdy?", options: ["45 h", "48 h", "56 h", "60 h"], correct: "56 h" },
+         fill: { prompt: "Tygodniowy czas prowadzenia pojazdu nie może przekroczyć ___ h.", correct: "56" } },
+    ref: "561/2006 art. 6 ust. 2", sourceRef: "Rozp. 561/2006 art. 6 ust. 2", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
   }, {
-    id: "czas:tygodniowy",
-    formats: ["mcq", "match"],
-    why: "Tygodniowy czas jazdy maks. 56 h; w dwóch kolejnych tygodniach łącznie maks. 90 h.",
-    q: {
-      mcq: {
-        prompt: "Ile wynosi maksymalny tygodniowy czas prowadzenia?",
-        options: ["45 h", "56 h", "60 h", "90 h"],
-        correct: "56 h"
-      },
-      match: {
-        prompt: "Dopasuj limit do okresu.",
-        pairs: {
-          "Jeden tydzień": "56 h",
-          "Dwa kolejne tygodnie": "90 h"
-        }
-      }
-    },
-    ref: "Rozp. 561/2006 art. 6 ust. 2–3"
+    id: "czas:dwa-tyg-90", formats: ["mcq", "scenario"],
+    why: "W dwóch kolejnych tygodniach łączny czas jazdy nie może przekroczyć 90 h.",
+    q: { mcq: { prompt: "Limit jazdy w dwóch kolejnych tygodniach?", options: ["80 h", "90 h", "100 h", "112 h"], correct: "90 h" },
+         scenario: { prompt: "W tygodniu 1 przejechałeś 56 h. Ile maksymalnie w tygodniu 2?", options: ["56 h", "34 h", "45 h"], correct: "34 h" } },
+    ref: "561/2006 art. 6 ust. 3", sourceRef: "Rozp. 561/2006 art. 6 ust. 3", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
   }, {
-    id: "czas:odp-dzienny",
-    formats: ["mcq", "fill", "scenario"],
-    why: "Normalny odpoczynek dzienny min. 11 h; skrócony 9 h maks. 3 razy między odpoczynkami tygodniowymi; podział tylko 3 h + 9 h.",
-    q: {
-      mcq: {
-        prompt: "Ile wynosi normalny dzienny odpoczynek?",
-        options: ["8 h", "9 h", "11 h", "24 h"],
-        correct: "11 h"
-      },
-      fill: {
-        prompt: "Skrócony odpoczynek dzienny (9 h) można stosować maks. ___ razy między odpoczynkami tygodniowymi.",
-        correct: "3"
-      },
-      scenario: {
-        prompt: "Chcesz podzielić odpoczynek dzienny. Jaki podział jest dozwolony?",
-        options: ["3 h + 9 h (razem 12 h)", "5 h + 6 h", "4 h + 7 h"],
-        correct: "3 h + 9 h (razem 12 h)"
-      }
-    },
-    ref: "Rozp. 561/2006 art. 8 ust. 2, 4"
+    id: "czas:przerwa-45", formats: ["mcq", "fill"],
+    why: "Po 4,5 h jazdy przysługuje przerwa co najmniej 45 minut.",
+    q: { mcq: { prompt: "Po ilu godzinach jazdy obowiązkowa jest przerwa 45 min?", options: ["Po 3 h", "Po 4,5 h", "Po 6 h", "Po 8 h"], correct: "Po 4,5 h" },
+         fill: { prompt: "Po 4,5 h jazdy przysługuje przerwa co najmniej ___ minut.", correct: "45" } },
+    ref: "561/2006 art. 7", sourceRef: "Rozp. 561/2006 art. 7", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
   }, {
-    id: "czas:odp-tygodniowy",
-    formats: ["mcq", "scenario"],
-    why: "Normalny odpoczynek tygodniowy 45 h; skrócony min. 24 h. Regularnego 45 h nie wolno spędzać w kabinie.",
-    q: {
-      mcq: {
-        prompt: "Ile wynosi normalny tygodniowy odpoczynek?",
-        options: ["24 h", "36 h", "45 h", "56 h"],
-        correct: "45 h"
-      },
-      scenario: {
-        prompt: "Gdzie NIE wolno spędzać regularnego odpoczynku tygodniowego (45 h)?",
-        options: ["W hotelu", "W kabinie ciężarówki", "W domu"],
-        correct: "W kabinie ciężarówki"
-      }
-    },
-    ref: "Rozp. 561/2006 art. 8 ust. 6, 8"
+    id: "czas:przerwa-15-30", formats: ["mcq", "scenario"],
+    why: "PUŁAPKA: przerwę 45 min można podzielić na 15 + 30 min, w tej kolejności (najpierw 15, potem 30).",
+    q: { mcq: { prompt: "Jak można podzielić przerwę 45 min?", options: ["30 + 15", "15 + 30 (w tej kolejności)", "20 + 25", "Nie wolno dzielić"], correct: "15 + 30 (w tej kolejności)" },
+         scenario: { prompt: "Zrobiłeś przerwę 30 min, a potem 15 min. Czy to poprawny podział 45 min?", options: ["Tak", "Nie — musi być 15 potem 30", "Zależy od kraju"], correct: "Nie — musi być 15 potem 30" } },
+    ref: "561/2006 art. 7", sourceRef: "Rozp. 561/2006 art. 7 (kolejność części)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:odp-dzienny-11", formats: ["mcq", "fill"],
+    why: "Regularny dzienny odpoczynek to 11 h; może być dzielony 3 h + 9 h.",
+    q: { mcq: { prompt: "Ile trwa regularny dzienny odpoczynek?", options: ["8 h", "9 h", "11 h", "24 h"], correct: "11 h" },
+         fill: { prompt: "Regularny dzienny odpoczynek można podzielić na 3 h + ___ h.", correct: "9" } },
+    ref: "561/2006 art. 8 ust. 2", sourceRef: "Rozp. 561/2006 art. 4 lit. g, art. 8", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:odp-skrocony-9", formats: ["mcq", "scenario"],
+    why: "Dzienny odpoczynek można skrócić do 9 h najwyżej 3 razy między dwoma odpoczynkami tygodniowymi.",
+    q: { mcq: { prompt: "Ile razy między odpoczynkami tygodniowymi można skrócić dzienny do 9 h?", options: ["Bez limitu", "3 razy", "1 raz", "5 razy"], correct: "3 razy" },
+         scenario: { prompt: "W tygodniu skróciłeś już 3 dzienne odpoczynki do 9 h. Czwarty raz?", options: ["Można", "Nie — limit 3", "Tylko za granicą"], correct: "Nie — limit 3" } },
+    ref: "561/2006 art. 8 ust. 4", sourceRef: "Rozp. 561/2006 art. 8 ust. 4", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:odp-tygodniowy-45", formats: ["mcq", "match"],
+    why: "Regularny tygodniowy odpoczynek to min. 45 h; skrócony min. 24 h.",
+    q: { mcq: { prompt: "Ile trwa regularny tygodniowy odpoczynek?", options: ["24 h", "35 h", "45 h", "56 h"], correct: "45 h" },
+         match: { prompt: "Dopasuj typ odpoczynku tygodniowego do wymiaru.", pairs: { "Regularny": "min. 45 h", "Skrócony": "min. 24 h" } } },
+    ref: "561/2006 art. 8 ust. 6", sourceRef: "Rozp. 561/2006 art. 4 lit. h, art. 8 ust. 6", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:rekompensata", formats: ["mcq", "scenario"],
+    why: "Skrócony tygodniowy odpoczynek wymaga rekompensaty dołączonej do innego odpoczynku, przed końcem trzeciego tygodnia po tygodniu skrócenia.",
+    q: { mcq: { prompt: "Do kiedy trzeba odebrać rekompensatę za skrócony odpoczynek tygodniowy?", options: ["Nigdy", "Przed końcem 3. tygodnia po skróceniu", "W ciągu roku"], correct: "Przed końcem 3. tygodnia po skróceniu" },
+         scenario: { prompt: "Skróciłeś odpoczynek tygodniowy do 30 h. Ile godzin rekompensaty?", options: ["0 h", "15 h", "45 h"], correct: "15 h" } },
+    ref: "561/2006 art. 8 ust. 6", sourceRef: "Rozp. 561/2006 art. 8 ust. 6b", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:tsue-powrot-pojazdu", formats: ["mcq", "scenario"],
+    why: "Wyrok TSUE z 4.10.2024 uchylił obowiązek powrotu POJAZDU do bazy co 8 tygodni; pozostałe filary Pakietu Mobilności obowiązują.",
+    q: { mcq: { prompt: "Co uchylił wyrok TSUE z 4.10.2024?", options: ["Powrót kierowcy co 4 tyg.", "Powrót pojazdu co 8 tyg.", "Zakaz pauzy w kabinie"], correct: "Powrót pojazdu co 8 tyg." },
+         scenario: { prompt: "Kontrola pyta o dokument powrotu pojazdu co 8 tygodni. Co obowiązuje po 4.10.2024?", options: ["Obowiązek zniesiony wyrokiem TSUE", "Nadal trzeba dokumentować", "Kara 5000 zł"], correct: "Obowiązek zniesiony wyrokiem TSUE" } },
+    ref: "TSUE C-541/20 i in. (4.10.2024)", sourceRef: "Wyrok TSUE 4.10.2024, sprawy C-541/20 do C-555/20", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "możliwy nowy przepis KE"
+  }, {
+    id: "czas:powrot-kierowcy", formats: ["mcq", "fill"],
+    why: "Pracodawca organizuje pracę tak, by kierowca wracał do bazy lub domu co 4 tygodnie (co 3 po dwóch skróconych odpoczynkach z rzędu).",
+    q: { mcq: { prompt: "Co ile tygodni kierowca ma wracać do bazy/domu?", options: ["Co tydzień", "Co 4 tygodnie", "Co 8 tygodni", "Nigdy"], correct: "Co 4 tygodnie" },
+         fill: { prompt: "Po dwóch skróconych odpoczynkach tygodniowych z rzędu kierowca wraca co ___ tygodnie.", correct: "3" } },
+    ref: "561/2006 art. 8 ust. 8a", sourceRef: "Rozp. 561/2006 art. 8 ust. 8a (Pakiet Mobilności)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:kabina-zakaz", formats: ["mcq", "scenario"],
+    why: "Regularnego tygodniowego odpoczynku (45 h) nie wolno spędzać w kabinie; zakwaterowanie na koszt pracodawcy.",
+    q: { mcq: { prompt: "Gdzie NIE wolno spędzać regularnego odpoczynku tygodniowego 45 h?", options: ["W hotelu", "W kabinie pojazdu", "W wynajętym mieszkaniu"], correct: "W kabinie pojazdu" },
+         scenario: { prompt: "Kontrola zastaje Cię na pauzie 45 h w kabinie. Skutek?", options: ["OK", "Naruszenie — kara, nocleg na koszt firmy", "Tylko upomnienie zawsze"], correct: "Naruszenie — kara, nocleg na koszt firmy" } },
+    ref: "561/2006 art. 8 ust. 8", sourceRef: "Rozp. 561/2006 art. 8 ust. 8 (wyrok Vaditrans C-102/16)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:zaloga-30h", formats: ["mcq", "fill"],
+    why: "Przy załodze dwuosobowej doba wydłuża się z 24 h do 30 h; każdy kierowca odbiera min. 9 h odpoczynku (nie liczony jako skrócony).",
+    q: { mcq: { prompt: "Do ilu godzin wydłuża się doba przy załodze dwuosobowej?", options: ["24 h", "26 h", "30 h", "36 h"], correct: "30 h" },
+         fill: { prompt: "W załodze dwuosobowej doba wydłuża się z 24 h do ___ h.", correct: "30" } },
+    ref: "561/2006 art. 8 ust. 5", sourceRef: "Rozp. 561/2006 art. 4 lit. o, art. 8 ust. 5", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:art-12", formats: ["mcq", "scenario"],
+    why: "Art. 12 pozwala odstąpić od limitów w niezbędnym zakresie, by dojechać do bezpiecznego postoju — wymaga odręcznej adnotacji.",
+    q: { mcq: { prompt: "Co jest wymagane przy skorzystaniu z odstępstwa z art. 12?", options: ["Nic", "Odręczna adnotacja o powodzie", "Zgoda policji"], correct: "Odręczna adnotacja o powodzie" },
+         scenario: { prompt: "Brak wolnego parkingu, przekraczasz czas jazdy o 20 min do zatoki. Co robisz?", options: ["Nic nie piszę", "Odręczna adnotacja art. 12 najpóźniej po dojeździe", "Wyłączam tacho"], correct: "Odręczna adnotacja art. 12 najpóźniej po dojeździe" } },
+    ref: "561/2006 art. 12", sourceRef: "Rozp. 561/2006 art. 12", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:prom", formats: ["mcq", "fill"],
+    why: "Regularny dzienny odpoczynek na promie/pociągu można przerwać najwyżej dwa razy, łącznie do 1 h, przy dostępie do koi.",
+    q: { mcq: { prompt: "Ile razy najwyżej można przerwać dzienny odpoczynek na promie?", options: ["Nigdy", "Dwa razy, łącznie do 1 h", "Bez ograniczeń"], correct: "Dwa razy, łącznie do 1 h" },
+         fill: { prompt: "Przerwy odpoczynku na promie mogą trwać łącznie nie dłużej niż ___ h.", correct: "1" } },
+    ref: "561/2006 art. 9", sourceRef: "Rozp. 561/2006 art. 9", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:czas-pracy-48", formats: ["mcq", "fill"],
+    why: "Czas pracy (szerszy niż jazda) to średnio 48 h/tydzień, maks. 60 h w pojedynczym tygodniu.",
+    q: { mcq: { prompt: "Średni tygodniowy czas pracy kierowcy?", options: ["40 h", "48 h", "56 h", "60 h"], correct: "48 h" },
+         fill: { prompt: "Czas pracy: średnio 48 h/tydzień, maks. ___ h w pojedynczym tygodniu.", correct: "60" } },
+    ref: "Dyr. 2002/15/WE · ustawa PL", sourceRef: "Dyr. 2002/15/WE; ustawa o czasie pracy kierowców Dz.U. 2026 poz. 477", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "kolejny t.j. ustawy"
+  }, {
+    id: "czas:pora-nocna-10", formats: ["mcq", "scenario"],
+    why: "Jeśli praca przypada choć w części na porę nocną, dobowy czas pracy to maks. 10 h.",
+    q: { mcq: { prompt: "Limit dobowego czasu pracy przy pracy w porze nocnej?", options: ["8 h", "10 h", "12 h", "13 h"], correct: "10 h" },
+         scenario: { prompt: "Część Twojej pracy wypada w nocy. Ile maks. możesz pracować w dobie?", options: ["10 h", "12 h", "Bez limitu"], correct: "10 h" } },
+    ref: "Ustawa o czasie pracy kierowców art. 21", sourceRef: "Ustawa Dz.U. 2026 poz. 477 art. 21", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "kolejny t.j."
+  }, {
+    id: "czas:kara-kierowca-2000", formats: ["mcq", "fill"],
+    why: "Górny limit grzywny dla kierowcy za pojedyncze naruszenie to 2000 zł.",
+    q: { mcq: { prompt: "Maksymalna grzywna dla kierowcy za jedno naruszenie?", options: ["500 zł", "2000 zł", "12000 zł", "30000 zł"], correct: "2000 zł" },
+         fill: { prompt: "Górny limit grzywny dla kierowcy za pojedyncze naruszenie to ___ zł.", correct: "2000" } },
+    ref: "Ustawa o transp. drog. art. 92", sourceRef: "Ustawa o transp. drog. Dz.U. 2025 poz. 1490 art. 92 (zał. 1)", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "taryfikator — częste zmiany"
+  }, {
+    id: "czas:kontrola-56-dni", formats: ["mcq", "fill"],
+    why: "Kontrola drogowa obejmuje dzień bieżący i 56 dni wstecz (od 31.12.2024).",
+    q: { mcq: { prompt: "Za jaki okres kontrola drogowa sprawdza aktywność (UE)?", options: ["Dzień bieżący + 28 dni", "Dzień bieżący + 56 dni", "Tylko dzień bieżący"], correct: "Dzień bieżący + 56 dni" },
+         fill: { prompt: "Kontrola drogowa obejmuje dzień bieżący i ___ dni wstecz.", correct: "56" } },
+    ref: "Rozp. 2020/1054", sourceRef: "Rozp. (UE) 2020/1054, stosowane od 31.12.2024", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:kabotaz-3-7", formats: ["mcq", "scenario"],
+    why: "Kabotaż: maks. 3 operacje w 7 dni od rozładunku przewozu międzynarodowego, z 4-dniową karencją (cooling-off).",
+    q: { mcq: { prompt: "Ile operacji kabotażowych wolno wykonać w 7 dni?", options: ["1", "3", "5", "Bez limitu"], correct: "3" },
+         scenario: { prompt: "Skończyłeś 3 operacje kabotażu w danym kraju. Kiedy znów możesz tam kabotażować tym pojazdem?", options: ["Od razu", "Po 4 dniach karencji", "Po 7 dniach zawsze"], correct: "Po 4 dniach karencji" } },
+    ref: "Rozp. 1072/2009 zm. 2020/1055", sourceRef: "Rozp. (WE) 1072/2009 (zm. 2020/1055): 3/7 + cooling-off 4 dni", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
   }]
 }, {
   id: "pierwsza-pomoc",
   title: "Pierwsza pomoc",
   icon: "🩹",
+  status: "DRAFT",
   facts: [{
-    id: "pp:kolejnosc",
-    formats: ["mcq", "order"],
-    why: "Najpierw bezpieczeństwo własne i miejsca, potem ocena poszkodowanego, potem wezwanie pomocy.",
-    q: {
-      mcq: {
-        prompt: "Co robisz jako pierwsze na miejscu wypadku?",
-        options: ["Wyciągam poszkodowanego", "Zabezpieczam siebie i miejsce zdarzenia", "Dzwonię do rodziny"],
-        correct: "Zabezpieczam siebie i miejsce zdarzenia"
-      },
-      order: {
-        prompt: "Ułóż kolejność działań.",
-        correct: ["Zabezpiecz miejsce", "Oceń poszkodowanego", "Zadzwoń 112", "Udziel pomocy do przyjazdu służb"]
-      }
-    },
-    ref: "Łańcuch przeżycia"
+    id: "pp:rko-30-2", formats: ["mcq", "fill"],
+    why: "Resuscytacja dorosłego: 30 uciśnięć na 2 oddechy ratownicze.",
+    q: { mcq: { prompt: "Jaki jest stosunek uciśnięć do oddechów w RKO dorosłego?", options: ["15:2", "30:2", "5:1", "10:2"], correct: "30:2" },
+         fill: { prompt: "RKO dorosłego: 30 uciśnięć na ___ oddechy.", correct: "2" } },
+    ref: "ERC 2025 BLS", sourceRef: "Wytyczne ERC 2025, BLS (parafraza)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR — roczne"
   }, {
-    id: "pp:112",
-    formats: ["mcq", "match"],
-    why: "Uniwersalny numer alarmowy w UE to 112. Podajesz: lokalizację, rodzaj zdarzenia, liczbę i stan poszkodowanych.",
-    q: {
-      mcq: {
-        prompt: "Jaki jest uniwersalny numer alarmowy w UE?",
-        options: ["112", "911", "999", "997"],
-        correct: "112"
-      },
-      match: {
-        prompt: "Dopasuj informację do celu zgłoszenia.",
-        pairs: {
-          "Lokalizacja": "dokąd jechać",
-          "Rodzaj zdarzenia": "jakie służby",
-          "Liczba poszkodowanych": "ile zespołów"
-        }
-      }
-    },
-    ref: "System 112"
+    id: "pp:rko-glebokosc", formats: ["mcq", "fill"],
+    why: "Głębokość uciśnięć: co najmniej 5 cm, nie więcej niż 6 cm.",
+    q: { mcq: { prompt: "Jaka jest prawidłowa głębokość uciśnięć klatki u dorosłego?", options: ["2-3 cm", "5-6 cm", "7-8 cm", "10 cm"], correct: "5-6 cm" },
+         fill: { prompt: "Uciśnięcia: co najmniej 5 cm, nie więcej niż ___ cm.", correct: "6" } },
+    ref: "ERC 2025 BLS", sourceRef: "Wytyczne ERC 2025 (parametr stabilny od 2015)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
   }, {
-    id: "pp:rko",
-    formats: ["mcq", "fill"],
-    why: "Przy braku oddechu: RKO 30 uciśnięć / 2 oddechy, tempo 100–120/min, głębokość 5–6 cm.",
-    q: {
-      mcq: {
-        prompt: "Jaki jest schemat RKO u dorosłego?",
-        options: ["15:2", "30:2", "50:5"],
-        correct: "30:2"
-      },
-      fill: {
-        prompt: "Tempo uciśnięć klatki piersiowej to ___–120 na minutę.",
-        correct: "100"
-      }
-    },
-    ref: "Wytyczne resuscytacji"
+    id: "pp:rko-tempo", formats: ["mcq", "fill"],
+    why: "Tempo uciśnięć: 100-120 na minutę.",
+    q: { mcq: { prompt: "Jakie jest prawidłowe tempo uciśnięć?", options: ["60-80/min", "100-120/min", "140-160/min"], correct: "100-120/min" },
+         fill: { prompt: "Tempo uciśnięć w RKO to 100-___ na minutę.", correct: "120" } },
+    ref: "ERC 2025 BLS", sourceRef: "Wytyczne ERC 2025", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
   }, {
-    id: "pp:pozycja-boczna",
-    formats: ["mcq", "scenario"],
-    why: "Nieprzytomnego z zachowanym oddechem układasz w pozycji bocznej — chroni drogi oddechowe.",
-    q: {
-      mcq: {
-        prompt: "Poszkodowany nieprzytomny, ale oddycha. Co robisz?",
-        options: ["Pozycja boczna i kontrola oddechu", "RKO natychmiast", "Sadzam go"],
-        correct: "Pozycja boczna i kontrola oddechu"
-      },
-      scenario: {
-        prompt: "Kierowca po kolizji nieprzytomny w aucie, oddycha, brak zagrożenia pożarem. Wyciągasz go?",
-        options: ["Tak, zawsze", "Nie — nie przemieszczam bez potrzeby, wzywam pomoc", "Tak, żeby ułożyć na ziemi"],
-        correct: "Nie — nie przemieszczam bez potrzeby, wzywam pomoc"
-      }
-    },
-    ref: "Wytyczne pierwszej pomocy"
+    id: "pp:sekwencja-112", formats: ["mcq", "scenario"],
+    why: "ZMIANA 2025: przy osobie niereagującej dzwoń 112 ZANIM potwierdzisz nieprawidłowy oddech — dyspozytor pomoże.",
+    q: { mcq: { prompt: "Kiedy dzwonisz 112 do osoby niereagującej (ERC 2025)?", options: ["Dopiero po ocenie oddechu", "Zanim ocenisz oddech", "Po rozpoczęciu RKO"], correct: "Zanim ocenisz oddech" },
+         scenario: { prompt: "Widzisz osobę niereagującą na ziemi. Pierwszy ruch wg ERC 2025?", options: ["Sprawdzam oddech, potem dzwonię", "Dzwonię 112, oceniam oddech w oczekiwaniu", "Podaję wodę"], correct: "Dzwonię 112, oceniam oddech w oczekiwaniu" } },
+    ref: "ERC 2025 BLS", sourceRef: "Wytyczne ERC 2025 BLS (nowa kolejność)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
   }, {
-    id: "pp:krwotok",
-    formats: ["mcq", "order"],
-    why: "Krwotok: bezpośredni ucisk na ranę, opatrunek uciskowy, uniesienie kończyny jeśli możliwe.",
-    q: {
-      mcq: {
-        prompt: "Pierwsze działanie przy silnym krwotoku z kończyny?",
-        options: ["Bezpośredni ucisk na ranę", "Podanie wody", "Czekanie na karetkę bez działania"],
-        correct: "Bezpośredni ucisk na ranę"
-      },
-      order: {
-        prompt: "Ułóż postępowanie przy krwotoku.",
-        correct: ["Uciśnij ranę", "Załóż opatrunek uciskowy", "Unieś kończynę", "Kontroluj do przyjazdu służb"]
-      }
-    },
-    ref: "Wytyczne pierwszej pomocy"
+    id: "pp:oddech-agonalny", formats: ["mcq", "scenario"],
+    why: "Oddech agonalny (nieregularne westchnienia) to objaw zatrzymania krążenia, NIE prawidłowy oddech — rozpocznij RKO.",
+    q: { mcq: { prompt: "Osoba niereagująca 'łapczywie wzdycha' co kilka sekund. To?", options: ["Prawidłowy oddech — czekaj", "Oddech agonalny — rozpocznij RKO", "Czkawka"], correct: "Oddech agonalny — rozpocznij RKO" },
+         scenario: { prompt: "Poszkodowany nie reaguje i robi pojedyncze westchnienia. Co robisz?", options: ["Pozycja boczna", "RKO — to objaw NZK", "Nic, oddycha"], correct: "RKO — to objaw NZK" } },
+    ref: "ERC 2025 BLS", sourceRef: "Wytyczne ERC 2025 (30-60% NZK z oddechem agonalnym)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:hands-only", formats: ["mcq", "scenario"],
+    why: "Ratownik nieprzeszkolony lub niechcący wykonywać oddechów prowadzi RKO tylko uciśnięciami, bez przerw.",
+    q: { mcq: { prompt: "Nie umiesz/nie chcesz robić oddechów. Co robisz?", options: ["Nic", "Ciągłe uciśnięcia bez przerw (hands-only)", "Czekam na pogotowie"], correct: "Ciągłe uciśnięcia bez przerw (hands-only)" },
+         scenario: { prompt: "Poszkodowany zabrudzony krwią, nie masz maseczki. RKO?", options: ["Rezygnuję", "Tylko uciśnięcia 100-120/min", "Tylko oddechy"], correct: "Tylko uciśnięcia 100-120/min" } },
+    ref: "ERC 2025 BLS", sourceRef: "Wytyczne ERC 2025 (RKO hands-only)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:aed", formats: ["mcq", "scenario"],
+    why: "AED włącz i wykonuj polecenia głosowe; podczas analizy i wyładowania nikt nie dotyka poszkodowanego. Laik może użyć bez szkolenia.",
+    q: { mcq: { prompt: "Jak używa się AED?", options: ["Tylko z uprawnieniami", "Włączyć i słuchać poleceń głosowych", "Nie dla laika"], correct: "Włączyć i słuchać poleceń głosowych" },
+         scenario: { prompt: "AED mówi 'analiza rytmu'. Co robisz?", options: ["Uciskam dalej", "Nikt nie dotyka poszkodowanego", "Wyłączam AED"], correct: "Nikt nie dotyka poszkodowanego" } },
+    ref: "ERC 2025 BLS", sourceRef: "Wytyczne ERC 2025 (dostęp do AED)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:pozycja-boczna", formats: ["mcq", "scenario"],
+    why: "Pozycję boczną stosuje się u osoby nieprzytomnej, która oddycha prawidłowo i nie ma cech urazu.",
+    q: { mcq: { prompt: "Kiedy układasz w pozycji bocznej?", options: ["Zawsze", "Nieprzytomny, oddycha, brak urazu", "Gdy nie oddycha"], correct: "Nieprzytomny, oddycha, brak urazu" },
+         scenario: { prompt: "Nieprzytomny mężczyzna oddycha prawidłowo, brak urazu. Co robisz?", options: ["RKO", "Pozycja boczna + kontrola oddechu", "Sadzam"], correct: "Pozycja boczna + kontrola oddechu" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 First Aid", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:fast", formats: ["mcq", "match"],
+    why: "Udar rozpoznajesz skalą FAST: Face (twarz), Arm (ramię), Speech (mowa), Time (czas — dzwoń 112).",
+    q: { mcq: { prompt: "Co oznacza skrót FAST?", options: ["Nazwa leku", "Face-Arm-Speech-Time (udar)", "Rodzaj opatrunku"], correct: "Face-Arm-Speech-Time (udar)" },
+         match: { prompt: "Dopasuj literę FAST do objawu.", pairs: { "Face": "opadnięcie kącika ust", "Arm": "opadanie ramienia", "Speech": "mowa bełkotliwa", "Time": "dzwoń 112 natychmiast" } } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (skala udaru FAST)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:zawal", formats: ["mcq", "scenario"],
+    why: "Zawał: silny ból zamostkowy >20 min, promieniujący; pozycja półsiedząca, spokój, 112, nie pozwól choremu chodzić.",
+    q: { mcq: { prompt: "Jaka pozycja przy podejrzeniu zawału?", options: ["Na plecach płasko", "Półsiedząca", "Pozycja boczna"], correct: "Półsiedząca" },
+         scenario: { prompt: "Kierowca ma gniotący ból w klatce od 30 min i zimny pot. Co robisz?", options: ["Każę iść do auta", "112, pozycja półsiedząca, spokój", "Podaję wodę i jedzenie"], correct: "112, pozycja półsiedząca, spokój" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 First Aid", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:zadlawienie", formats: ["mcq", "order"],
+    why: "Zadławienie u dorosłego: zachęcaj do kaszlu, potem do 5 uderzeń międzyłopatkowych, potem do 5 uciśnięć nadbrzusza, naprzemiennie.",
+    q: { mcq: { prompt: "Co po nieskutecznych uderzeniach międzyłopatkowych przy zadławieniu?", options: ["Nic", "5 uciśnięć nadbrzusza (Heimlich)", "Podać wodę"], correct: "5 uciśnięć nadbrzusza (Heimlich)" },
+         order: { prompt: "Ułóż kroki przy zadławieniu dorosłego.", correct: ["Zachęcaj do kaszlu", "5 uderzeń międzyłopatkowych", "5 uciśnięć nadbrzusza", "Naprzemiennie do skutku"] } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (zadławienie, podejście stopniowane)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:krwotok", formats: ["mcq", "order"],
+    why: "Krwotok: ucisk bezpośredni, potem opatrunek uciskowy/hemostatyczny, potem opaska uciskowa przy krwotoku z kończyny.",
+    q: { mcq: { prompt: "Pierwszy krok przy silnym krwawieniu z rany?", options: ["Opaska uciskowa od razu", "Ucisk bezpośredni ręką", "Czekać na pogotowie"], correct: "Ucisk bezpośredni ręką" },
+         order: { prompt: "Ułóż kolejność tamowania krwotoku.", correct: ["Ucisk bezpośredni", "Opatrunek uciskowy/hemostatyczny", "Opaska uciskowa (kończyna)"] } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (tamowanie krwotoku)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:opaska-godzina", formats: ["mcq", "fill"],
+    why: "Opaskę uciskową zakładaj 5-7 cm powyżej rany (nie na staw), dociągaj aż krwawienie ustanie, ZAPISZ godzinę założenia i NIE luzuj.",
+    q: { mcq: { prompt: "Co koniecznie zapisujesz po założeniu opaski uciskowej?", options: ["Nazwisko", "Godzinę założenia", "Grupę krwi"], correct: "Godzinę założenia" },
+         fill: { prompt: "Opaskę uciskową zakłada się ___ cm powyżej rany, nigdy na staw.", correct: "5-7" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (opaska uciskowa)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:kask", formats: ["mcq", "scenario"],
+    why: "Kasku motocyklisty NIE zdejmuj, jeśli poszkodowany jest przytomny i oddycha; zdejmij tylko gdy nie oddycha / potrzebna RKO / niedrożne drogi oddechowe.",
+    q: { mcq: { prompt: "Kiedy NIE zdejmować kasku motocykliście?", options: ["Gdy przytomny i oddycha", "Gdy nie oddycha", "Zawsze zdejmować"], correct: "Gdy przytomny i oddycha" },
+         scenario: { prompt: "Motocyklista przytomny, oddycha, skarży się na ból. Kask?", options: ["Zdejmuję od razu", "Zostawiam, stabilizuję", "Zdejmuję i sadzam"], correct: "Zostawiam, stabilizuję" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (priorytet drożności dróg oddechowych)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:rauteka", formats: ["mcq", "scenario"],
+    why: "Chwyt Rauteka służy do szybkiej ewakuacji poszkodowanego ze strefy zagrożenia, nie do rutynowego przemieszczania.",
+    q: { mcq: { prompt: "Do czego służy chwyt Rauteka?", options: ["Do RKO", "Do ewakuacji z zagrożenia", "Do tamowania krwi"], correct: "Do ewakuacji z zagrożenia" },
+         scenario: { prompt: "Auto się pali, poszkodowany w środku. Jak go wyciągasz?", options: ["Czekam na straż", "Chwyt Rauteka", "Za nogi"], correct: "Chwyt Rauteka" } },
+    ref: "Pierwsza pomoc — praktyka", sourceRef: "Materiały gov.pl / ERC 2025 (ewakuacja)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:wyciaganie", formats: ["mcq", "scenario"],
+    why: "Poszkodowanego z pojazdu zasadniczo NIE wyciągaj (ryzyko urazu kręgosłupa) — tylko przy bezpośrednim zagrożeniu (pożar, wyciek, konieczność RKO).",
+    q: { mcq: { prompt: "Kiedy wolno wyciągać poszkodowanego z auta?", options: ["Zawsze", "Tylko przy bezpośrednim zagrożeniu życia", "Nigdy"], correct: "Tylko przy bezpośrednim zagrożeniu życia" },
+         scenario: { prompt: "Poszkodowany w aucie, przytomny, brak pożaru. Co robisz?", options: ["Wyciągam", "Stabilizuję głowę, czekam na służby", "Sadzam prosto"], correct: "Stabilizuję głowę, czekam na służby" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (minimalizacja ruchu)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:tablica-adr", formats: ["mcq", "match"],
+    why: "Pomarańczowa tablica: liczba górna = numer zagrożenia (HIN), dolna = 4-cyfrowy numer UN substancji (np. 1203 = benzyna).",
+    q: { mcq: { prompt: "Co oznacza dolna liczba na pomarańczowej tablicy?", options: ["Numer zagrożenia", "Numer UN substancji", "Masę ładunku"], correct: "Numer UN substancji" },
+         match: { prompt: "Dopasuj element tablicy ADR.", pairs: { "Górna liczba": "numer zagrożenia (HIN)", "Dolna liczba": "numer UN (np. 1203 = benzyna)" } } },
+    ref: "ADR 5.3.2", sourceRef: "Umowa ADR 5.3.2 (tablice pomarańczowe)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ADR 2027"
+  }, {
+    id: "pp:pod-wiatr", formats: ["mcq", "scenario"],
+    why: "Przy wypadku z ładunkiem ADR ustaw się od strony nawietrznej (pod wiatr), by opary szły od Ciebie; nie zbliżaj się do wycieku.",
+    q: { mcq: { prompt: "Jak ustawić się przy wycieku towaru niebezpiecznego?", options: ["Z wiatrem", "Od strony nawietrznej (pod wiatr)", "Jak najbliżej"], correct: "Od strony nawietrznej (pod wiatr)" },
+         scenario: { prompt: "Cysterna ADR wycieka, wiatr wieje w Twoją stronę. Co robisz?", options: ["Podchodzę sprawdzić", "Obchodzę pod wiatr, dzwonię 112", "Gaszę wyciek"], correct: "Obchodzę pod wiatr, dzwonię 112" } },
+    ref: "ADR 5.4.3 (instrukcje pisemne)", sourceRef: "Umowa ADR 5.4.3 (instrukcje pisemne dla załogi)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ADR 2027"
+  }, {
+    id: "pp:trojkat-100", formats: ["mcq", "match"],
+    why: "Trójkąt ostrzegawczy: autostrada/ekspresowa 100 m za pojazdem, poza obszarem zabudowanym 30-50 m.",
+    q: { mcq: { prompt: "W jakiej odległości ustawiasz trójkąt na autostradzie?", options: ["Tuż za autem", "30-50 m", "100 m"], correct: "100 m" },
+         match: { prompt: "Dopasuj miejsce do odległości trójkąta.", pairs: { "Autostrada / ekspresowa": "100 m", "Poza obszarem zabudowanym": "30-50 m" } } },
+    ref: "PoRD art. 50", sourceRef: "Prawo o ruchu drogowym art. 50 (Dz.U. 2024 poz. 1251)", reviewType: "M", copyright: "wolne", verifiedBy: null, monitorUntil: "nowelizacje PoRD"
+  }, {
+    id: "pp:art-162", formats: ["mcq", "fill"],
+    why: "Nieudzielenie pomocy osobie w bezpośrednim niebezpieczeństwie utraty życia podlega karze pozbawienia wolności do lat 3.",
+    q: { mcq: { prompt: "Jaka kara grozi za nieudzielenie pomocy (art. 162 KK)?", options: ["Grzywna 500 zł", "Pozbawienie wolności do lat 3", "Brak kary"], correct: "Pozbawienie wolności do lat 3" },
+         fill: { prompt: "Nieudzielenie pomocy (art. 162 KK) — kara pozbawienia wolności do lat ___.", correct: "3" } },
+    ref: "Kodeks karny art. 162", sourceRef: "Kodeks karny art. 162 (Dz.U. 2025 poz. 383)", reviewType: "M", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
   }]
 }, {
   id: "eco-driving",
   title: "Eco-driving",
   icon: "🍃",
+  status: "DRAFT",
   facts: [{
-    id: "eco:przewidywanie",
-    formats: ["mcq", "scenario"],
-    why: "Przewidywanie ruchu i utrzymanie płynności ogranicza hamowanie — największe źródło strat energii.",
-    q: {
-      mcq: {
-        prompt: "Co najbardziej obniża spalanie w trasie?",
-        options: ["Płynna jazda i przewidywanie", "Częste hamowanie i przyspieszanie", "Jazda na luzie z górki"],
-        correct: "Płynna jazda i przewidywanie"
-      },
-      scenario: {
-        prompt: "Widzisz czerwone światło 300 m przed sobą. Co robisz?",
-        options: ["Utrzymuję gaz i hamuję przed światłami", "Wcześnie odpuszczam gaz i toczę się", "Przyspieszam, może zdążę"],
-        correct: "Wcześnie odpuszczam gaz i toczę się"
-      }
-    },
-    ref: "Zasady eco-drivingu"
+    id: "eco:przewidywanie", formats: ["mcq", "scenario"],
+    why: "Antycypacja (patrzenie daleko, utrzymanie odstępu) ogranicza hamowanie i przyspieszanie — fundament oszczędności.",
+    q: { mcq: { prompt: "Co najbardziej obniża zużycie paliwa w jeździe ciężarówką?", options: ["Szybkie starty", "Antycypacja i płynność", "Częste hamowanie"], correct: "Antycypacja i płynność" },
+         scenario: { prompt: "Zbliżasz się do czerwonego światła 200 m dalej. Eco-ruch?", options: ["Gaz do końca i hamowanie", "Puszczam gaz, tocze się", "Przyspieszam"], correct: "Puszczam gaz, tocze się" } },
+    ref: "Dyr. 2003/59/WE Zał. I", sourceRef: "Dyr. 2003/59/WE Zał. I pkt 1.3; DfT Eco-driving for HGVs", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "rewizja CPC"
   }, {
-    id: "eco:obroty",
-    formats: ["mcq", "fill"],
-    why: "W ciężarówce najekonomiczniejszy zakres to zielone pole obrotomierza (zwykle ok. 1000–1400 obr./min).",
-    q: {
-      mcq: {
-        prompt: "W jakim zakresie obrotów jedziesz najekonomiczniej?",
-        options: ["Zielone pole obrotomierza", "Czerwone pole", "Zawsze maksymalne obroty"],
-        correct: "Zielone pole obrotomierza"
-      },
-      fill: {
-        prompt: "Ekonomiczny zakres obrotów w ciężarówce zaczyna się zwykle ok. ___ obr./min.",
-        correct: "1000"
-      }
-    },
-    ref: "Technika jazdy ciężarówką"
+    id: "eco:obroty", formats: ["mcq", "fill"],
+    why: "Silniki Euro VI pracują ekonomicznie na niskich obrotach (downspeeding), orientacyjnie 1000-1500 obr./min (zielone pole).",
+    q: { mcq: { prompt: "W jakim zakresie obrotów jeździ się ekonomicznie?", options: ["500-800", "1000-1500", "2500-3000"], correct: "1000-1500" },
+         fill: { prompt: "Ekonomiczny (zielony) zakres obrotomierza to ok. 1000-___ obr./min.", correct: "1500" } },
+    ref: "Materiały techniczne (parafraza)", sourceRef: "Energy Saving Trust; materiały producentów (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne — zależne od modelu"
   }, {
-    id: "eco:tempomat",
-    formats: ["mcq", "scenario"],
-    why: "Tempomat (zwłaszcza predykcyjny) wyrównuje prędkość i obniża spalanie na trasie; w terenie górzystym używaj z głową.",
-    q: {
-      mcq: {
-        prompt: "Kiedy tempomat najbardziej oszczędza paliwo?",
-        options: ["Na płaskiej trasie", "W korku", "Na stromych zjazdach"],
-        correct: "Na płaskiej trasie"
-      },
-      scenario: {
-        prompt: "Długi łagodny zjazd. Co robisz dla ekonomii?",
-        options: ["Wykorzystuję rozpęd / eco-roll", "Dodaję gazu", "Hamuję ciągle"],
-        correct: "Wykorzystuję rozpęd / eco-roll"
-      }
-    },
-    ref: "Zasady eco-drivingu"
+    id: "eco:tempomat", formats: ["mcq", "scenario"],
+    why: "Tempomat predykcyjny (dane GPS + mapy 3D) obniża zużycie o kilka procent, wykorzystując energię kinetyczną przed wzniesieniami.",
+    q: { mcq: { prompt: "Na czym polega przewaga tempomatu predykcyjnego?", options: ["Jedzie szybciej", "Zna ukształtowanie trasy z góry (GPS)", "Wyłącza silnik"], correct: "Zna ukształtowanie trasy z góry (GPS)" },
+         scenario: { prompt: "Przed długim wzniesieniem tempomat predykcyjny...", options: ["Hamuje", "Wykorzystuje rozpęd/koryguje bieg z wyprzedzeniem", "Nic nie robi"], correct: "Wykorzystuje rozpęd/koryguje bieg z wyprzedzeniem" } },
+    ref: "Materiały producentów (parafraza)", sourceRef: "Materiały producentów (parafraza, dane liczbowe orientacyjne)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "dane producenta"
   }, {
-    id: "eco:ogumienie",
-    formats: ["mcq", "fill"],
-    why: "Zbyt niskie ciśnienie w oponach zwiększa opory toczenia i spalanie oraz przyspiesza zużycie.",
-    q: {
-      mcq: {
-        prompt: "Jak niskie ciśnienie w oponach wpływa na spalanie?",
-        options: ["Zwiększa je", "Zmniejsza je", "Bez wpływu"],
-        correct: "Zwiększa je"
-      },
-      fill: {
-        prompt: "Ciśnienie w oponach sprawdzasz regularnie, minimum raz na ___ (okres).",
-        correct: "tydzień"
-      }
-    },
-    ref: "Eksploatacja pojazdu"
+    id: "eco:ogumienie", formats: ["mcq", "scenario"],
+    why: "Niedopompowane opony zwiększają opory toczenia i spalanie; opory toczenia to nawet 20-30% zużycia paliwa.",
+    q: { mcq: { prompt: "Jak niedopompowane opony wpływają na spalanie?", options: ["Zmniejszają", "Zwiększają", "Bez wpływu"], correct: "Zwiększają" },
+         scenario: { prompt: "Przed trasą sprawdzasz ciśnienie w oponach. Dlaczego to eco?", options: ["Bez znaczenia", "Prawidłowe ciśnienie = niższe opory i spalanie", "Tylko dla komfortu"], correct: "Prawidłowe ciśnienie = niższe opory i spalanie" } },
+    ref: "Dane branżowe (parafraza)", sourceRef: "Continental/Michelin (parafraza); opory toczenia 20-30% zużycia", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "dane producenta"
+  }, {
+    id: "eco:predkosc-volvo", formats: ["mcq", "fill"],
+    why: "W teście Volvo (zestaw 37 t) redukcja z 90 do 80 km/h obniżyła zużycie o 3,2 l/100 km (ponad 11%).",
+    q: { mcq: { prompt: "Zwolnienie z 90 do 80 km/h daje ok. jakiej oszczędności (test Volvo)?", options: ["0,2 l/100 km", "3,2 l/100 km", "10 l/100 km"], correct: "3,2 l/100 km" },
+         fill: { prompt: "Opór aerodynamiczny rośnie z ___ prędkości.", correct: "kwadratem" } },
+    ref: "Test producenta (parafraza)", sourceRef: "Test Volvo Trucks (parafraza; warunki kontrolowane)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "dane producenta"
+  }, {
+    id: "eco:hamowanie-silnikiem", formats: ["mcq", "scenario"],
+    why: "Hamowanie silnikiem odcina wtrysk paliwa (zużycie zero) i chroni hamulce zasadnicze; retarder pomaga na długich zjazdach.",
+    q: { mcq: { prompt: "Ile paliwa zużywa silnik podczas hamowania silnikiem?", options: ["Więcej niż zwykle", "Praktycznie zero", "Tyle samo"], correct: "Praktycznie zero" },
+         scenario: { prompt: "Długi zjazd górski. Jak zwalniać eco i bezpiecznie?", options: ["Ciągle hamulcem zasadniczym", "Hamowanie silnikiem/retarder", "Na luzie"], correct: "Hamowanie silnikiem/retarder" } },
+    ref: "Technika jazdy (parafraza)", sourceRef: "DfT/Energy Saving Trust (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:idling", formats: ["mcq", "fill"],
+    why: "Bieg jałowy spala orientacyjnie 1-4 l/h; rozgrzewanie silnika na postoju jest zbędne — silnik grzeje się szybciej w ruchu.",
+    q: { mcq: { prompt: "Czy rozgrzewać silnik na postoju przed jazdą?", options: ["Tak, 10 min", "Nie — grzeje się w ruchu", "Zawsze 5 min"], correct: "Nie — grzeje się w ruchu" },
+         fill: { prompt: "Ciężarówka na biegu jałowym spala orientacyjnie 1-___ litry na godzinę.", correct: "4" } },
+    ref: "Dane branżowe (parafraza)", sourceRef: "Materiały branżowe (parafraza; widełki zależne od silnika)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:etykieta-opon", formats: ["mcq", "match"],
+    why: "Etykieta unijna opon: klasa efektywności paliwowej od A (najlepsza) do E; różnica najlepszej i najgorszej to nawet 7,5% paliwa.",
+    q: { mcq: { prompt: "Która klasa etykiety opon jest najbardziej paliwooszczędna?", options: ["Klasa A", "Klasa E", "Klasa G"], correct: "Klasa A" },
+         match: { prompt: "Dopasuj element etykiety opon.", pairs: { "Klasa A": "najlepsza efektywność paliwowa", "Klasa E": "najsłabsza w nowej skali" } } },
+    ref: "Rozp. (UE) 2020/740", sourceRef: "Rozp. (UE) 2020/740 (etykieta opon, skala A-E od 1.05.2021)", reviewType: "T", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "eco:aerodynamika", formats: ["mcq", "scenario"],
+    why: "Owiewki i deflektory poprawiają opływ i obniżają spalanie o kilka procent; kluczowa jest szczelina ciągnik-naczepa.",
+    q: { mcq: { prompt: "Co poprawia aerodynamikę zestawu?", options: ["Otwarte okna", "Owiewki i deflektory", "Wystające elementy"], correct: "Owiewki i deflektory" },
+         scenario: { prompt: "Przy 85 km/h jedziesz z otwartymi oknami. Wpływ na spalanie?", options: ["Rośnie (opór)", "Maleje", "Bez zmian"], correct: "Rośnie (opór)" } },
+    ref: "Dane producentów (parafraza)", sourceRef: "Volvo Trucks (parafraza; kilka % oszczędności)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:masa", formats: ["mcq", "scenario"],
+    why: "Im cięższy ładunek i zbędny balast, tym większe opory i zużycie — nie wozić niepotrzebnego balastu.",
+    q: { mcq: { prompt: "Jak zbędny balast wpływa na spalanie?", options: ["Zmniejsza", "Zwiększa", "Bez wpływu"], correct: "Zwiększa" },
+         scenario: { prompt: "Wozisz od tygodnia niepotrzebne 500 kg sprzętu. Eco-decyzja?", options: ["Zostawiam", "Usuwam zbędny balast", "Dokładam więcej"], correct: "Usuwam zbędny balast" } },
+    ref: "Technika (parafraza)", sourceRef: "Materiały branżowe (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:co2-cele", formats: ["mcq", "fill"],
+    why: "Cele redukcji CO2 dla nowych ciężarówek: -45% (2030), -65% (2035), -90% (od 2040).",
+    q: { mcq: { prompt: "Jaki jest cel redukcji CO2 dla ciężarówek na 2030?", options: ["-15%", "-45%", "-90%"], correct: "-45%" },
+         fill: { prompt: "Cel redukcji CO2 dla ciężarówek od 2040 to -___%.", correct: "90" } },
+    ref: "Rozp. (UE) 2024/1610", sourceRef: "Rozp. (UE) 2019/1242 zm. 2024/1610", reviewType: "T", copyright: "wolne", verifiedBy: null, monitorUntil: "przegląd 2027"
+  }, {
+    id: "eco:euro7", formats: ["mcq", "scenario"],
+    why: "Euro 7 (rozp. 2024/1257) obejmie nowe typy ciężarówek od 1.07.2027, wszystkie nowe od 1.07.2028; limity m.in. z hamulców i opon.",
+    q: { mcq: { prompt: "Od kiedy Euro 7 obejmuje nowe typy ciężarówek?", options: ["Od 2025", "Od 1.07.2027", "Od 2031"], correct: "Od 1.07.2027" },
+         scenario: { prompt: "Euro 7 wprowadza nowość względem starszych norm...", options: ["Tylko CO2", "Limity cząstek z hamulców i opon", "Nic"], correct: "Limity cząstek z hamulców i opon" } },
+    ref: "Rozp. (UE) 2024/1257", sourceRef: "Rozp. (UE) 2024/1257 art. 17 (daty do weryfikacji przy publikacji)", reviewType: "T", copyright: "wolne", verifiedBy: null, monitorUntil: "akty wykonawcze Euro 7"
+  }, {
+    id: "eco:szkolenie-35h", formats: ["mcq", "fill"],
+    why: "Szkolenie okresowe kierowcy zawodowego w PL trwa 35 h (5 modułów po 7 h), co 5 lat; zawiera moduł jazdy racjonalnej (eco).",
+    q: { mcq: { prompt: "Ile trwa szkolenie okresowe kierowcy zawodowego w PL?", options: ["7 h", "21 h", "35 h", "70 h"], correct: "35 h" },
+         fill: { prompt: "Szkolenie okresowe: 35 h, realizowane co ___ lat.", correct: "5" } },
+    ref: "Ustawa o transp. drog. Rozdz. 7a", sourceRef: "Ustawa o transp. drog. Dz.U. 2025 poz. 1490; rozp. MI 25.03.2022", reviewType: "T", copyright: "wolne", verifiedBy: null, monitorUntil: "nowelizacje"
+  }, {
+    id: "eco:kod-95", formats: ["mcq", "scenario"],
+    why: "Świadectwo kwalifikacji zawodowej oznaczane jest kodem 95 na prawie jazdy lub karcie kwalifikacji.",
+    q: { mcq: { prompt: "Jaki kod potwierdza kwalifikację zawodową kierowcy?", options: ["Kod 95", "Kod ADR", "Kod B96"], correct: "Kod 95" },
+         scenario: { prompt: "Brak wpisu kodu 95 przy wykonywaniu przewozu zawodowego oznacza...", options: ["Nic", "Brak wymaganej kwalifikacji", "Wyższą pensję"], correct: "Brak wymaganej kwalifikacji" } },
+    ref: "Dyr. (UE) 2022/2561", sourceRef: "Dyr. (UE) 2022/2561 (kod 95)", reviewType: "T", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "eco:nfosigw", formats: ["mcq", "fill"],
+    why: "NFOŚiGW dofinansowuje zeroemisyjne ciężarówki: do 400 tys. zł na pojazd N2 i do 750 tys. zł na N3.",
+    q: { mcq: { prompt: "Ile wynosi dofinansowanie NFOŚiGW do ciężarówki zeroemisyjnej N3?", options: ["do 70 tys. zł", "do 400 tys. zł", "do 750 tys. zł"], correct: "do 750 tys. zł" },
+         fill: { prompt: "Dofinansowanie do pojazdu N2 (3,5-12 t) to do ___ tys. zł.", correct: "400" } },
+    ref: "NFOŚiGW (program 2025-2029)", sourceRef: "NFOŚiGW, nabór 30.05.2025-30.06.2029", reviewType: "T", copyright: "wolne", verifiedBy: null, monitorUntil: "kolejne nabory / wyczerpanie budżetu"
+  }, {
+    id: "eco:hvo", formats: ["mcq", "scenario"],
+    why: "HVO (uwodorniony olej roślinny) to paliwo drop-in zamienne z ON bez modyfikacji silnika, redukujące emisję GHG nawet o 90% w cyklu życia.",
+    q: { mcq: { prompt: "Czym jest HVO?", options: ["Dodatek do AdBlue", "Paliwo drop-in zamienne z ON", "Rodzaj oleju silnikowego"], correct: "Paliwo drop-in zamienne z ON" },
+         scenario: { prompt: "Tankujesz HVO100 zamiast ON. Trzeba modyfikować silnik?", options: ["Tak, wymiana wtrysków", "Nie — drop-in", "Tylko zimą"], correct: "Nie — drop-in" } },
+    ref: "Dane producentów (parafraza)", sourceRef: "Neste/branża (parafraza; redukcja GHG do 90%)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "dane producenta"
+  }, {
+    id: "eco:bev-rekuperacja", formats: ["mcq", "scenario"],
+    why: "W ciężarówce elektrycznej kluczowa jest rekuperacja i jazda jednopedałowa — płynne zwalnianie odzyskuje energię do baterii.",
+    q: { mcq: { prompt: "Co odzyskuje energię przy zwalnianiu ciężarówki elektrycznej?", options: ["Hamulec zasadniczy", "Rekuperacja (hamowanie odzyskowe)", "Silnik spalinowy"], correct: "Rekuperacja (hamowanie odzyskowe)" },
+         scenario: { prompt: "Jedziesz BEV, zbliżasz się do zjazdu. Eco-technika?", options: ["Twarde hamowanie", "Płynne zwalnianie = rekuperacja", "Luz i hamulec"], correct: "Płynne zwalnianie = rekuperacja" } },
+    ref: "Technika BEV (parafraza)", sourceRef: "Materiały branżowe BEV (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "rozwój technologii"
+  }, {
+    id: "eco:dpf", formats: ["mcq", "scenario"],
+    why: "Płynna jazda ze stałym obciążeniem sprzyja pasywnej regeneracji filtra DPF; częste postoje na biegu jałowym go zaklejają.",
+    q: { mcq: { prompt: "Co sprzyja regeneracji filtra cząstek stałych (DPF)?", options: ["Długie postoje na luzie", "Płynna jazda ze stałym obciążeniem", "Częste zimne starty"], correct: "Płynna jazda ze stałym obciążeniem" },
+         scenario: { prompt: "Dużo krótkich tras i idlingu. Skutek dla DPF?", options: ["Czyści się", "Zapełnia się szybciej, koszty serwisu", "Bez wpływu"], correct: "Zapełnia się szybciej, koszty serwisu" } },
+    ref: "Technika (parafraza)", sourceRef: "Materiały branżowe (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:oszczednosc-realna", formats: ["mcq", "scenario"],
+    why: "Realistyczna, powtarzalna oszczędność z eco-drivingu to zwykle 5-15%; wartości 25-33% dotyczą przejścia od bardzo agresywnego stylu.",
+    q: { mcq: { prompt: "Jaka jest realistyczna oszczędność z eco-drivingu we flocie?", options: ["50%", "5-15%", "0%"], correct: "5-15%" },
+         scenario: { prompt: "Reklama obiecuje 'do 33% mniej paliwa'. Jak to traktować?", options: ["Gwarancja", "Maksimum od agresywnego stylu, nie średnia", "Zawyżone kłamstwo"], correct: "Maksimum od agresywnego stylu, nie średnia" } },
+    ref: "Dane branżowe (parafraza)", sourceRef: "Materiały branżowe/US EPA (parafraza; widełki)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
   }]
 }, {
   id: "zaladunek",
   title: "Załadunek",
   icon: "📦",
+  status: "DRAFT",
   facts: [{
-    id: "zal:rozklad-masy",
-    formats: ["mcq", "scenario"],
-    why: "Środek ciężkości ładunku możliwie nisko i nad osiami; przeciążenie osi to mandat i ryzyko.",
-    q: {
-      mcq: {
-        prompt: "Gdzie powinien wypadać środek ciężkości ładunku?",
-        options: ["Jak najniżej, nad osiami", "Jak najwyżej", "Z tyłu naczepy zawsze"],
-        correct: "Jak najniżej, nad osiami"
-      },
-      scenario: {
-        prompt: "Ciężka skrzynia i lekkie kartony. Co ładujesz niżej?",
-        options: ["Ciężką skrzynię", "Kartony", "Bez znaczenia"],
-        correct: "Ciężką skrzynię"
-      }
-    },
-    ref: "Zasady załadunku"
+    id: "zal:nacisk-napedowa-115", formats: ["mcq", "fill"],
+    why: "Maksymalny nacisk osi napędowej to 11,5 t na wszystkich drogach publicznych w Polsce.",
+    q: { mcq: { prompt: "Maksymalny nacisk osi napędowej na drogach publicznych?", options: ["8 t", "10 t", "11,5 t", "13 t"], correct: "11,5 t" },
+         fill: { prompt: "Nacisk osi napędowej nie może przekraczać ___ t.", correct: "11,5" } },
+    ref: "Ustawa o drogach publ. art. 41", sourceRef: "Ustawa o drogach publ. Dz.U. 2025 poz. 889 art. 41", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "nowelizacje"
   }, {
-    id: "zal:dmc-osie",
-    formats: ["mcq", "fill"],
-    why: "Sprawdzasz DMC i naciski osi — przeciążenie osi możliwe nawet przy prawidłowej masie całkowitej.",
-    q: {
-      mcq: {
-        prompt: "Czy przy prawidłowej masie całkowitej można przeciążyć oś?",
-        options: ["Tak, przy złym rozmieszczeniu", "Nie, nigdy", "Tylko zimą"],
-        correct: "Tak, przy złym rozmieszczeniu"
-      },
-      fill: {
-        prompt: "Dopuszczalną masę całkowitą pojazdu oznacza skrót ___.",
-        correct: "DMC"
-      }
-    },
-    ref: "Przepisy o ruchu drogowym"
+    id: "zal:nacisk-pojedyncza-10", formats: ["mcq", "fill"],
+    why: "Oś pojedyncza nienapędowa: maksymalny nacisk 10 t.",
+    q: { mcq: { prompt: "Nacisk pojedynczej osi nienapędowej?", options: ["8 t", "10 t", "11,5 t"], correct: "10 t" },
+         fill: { prompt: "Oś pojedyncza nienapędowa: maks. ___ t.", correct: "10" } },
+    ref: "Dyr. 96/53/WE · przepisy PL", sourceRef: "Dyr. 96/53/WE; ustawa o drogach publ. Dz.U. 2025 poz. 889", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "rewizja 96/53/WE"
   }, {
-    id: "zal:kontrola-trasa",
-    formats: ["mcq", "order"],
-    why: "Zabezpieczenie ładunku kontrolujesz przed startem, po pierwszych kilometrach i po każdej przerwie.",
-    q: {
-      mcq: {
-        prompt: "Kiedy sprawdzasz zabezpieczenie ładunku?",
-        options: ["Nigdy w trasie", "Po pierwszych km i po przerwach", "Tylko na końcu"],
-        correct: "Po pierwszych km i po przerwach"
-      },
-      order: {
-        prompt: "Ułóż kolejność kontroli ładunku.",
-        correct: ["Sprawdź przed startem", "Sprawdź po pierwszych kilometrach", "Sprawdź po przerwach"]
-      }
-    },
-    ref: "Dobre praktyki mocowania"
+    id: "zal:dmc-40", formats: ["mcq", "fill"],
+    why: "Dopuszczalna masa całkowita zespołu to zwykle 40 t (44 t w transporcie intermodalnym).",
+    q: { mcq: { prompt: "Typowa maksymalna DMC zespołu pojazdów?", options: ["24 t", "40 t", "60 t"], correct: "40 t" },
+         fill: { prompt: "W transporcie intermodalnym DMC zespołu może wynosić ___ t.", correct: "44" } },
+    ref: "Dyr. 96/53/WE", sourceRef: "Dyr. 96/53/WE (w rewizji — nie traktować jako ostateczne)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "rewizja 96/53/WE"
   }, {
-    id: "zal:dokumenty",
-    formats: ["mcq", "match"],
-    why: "Załadunek potwierdzasz w dokumentach przewozowych; rozbieżności zgłaszasz przed wyjazdem (uwagi w CMR).",
-    q: {
-      mcq: {
-        prompt: "Widzisz uszkodzone opakowania przy załadunku. Co robisz?",
-        options: ["Wpisuję uwagi do CMR przed wyjazdem", "Ignoruję", "Zgłaszam po rozładunku"],
-        correct: "Wpisuję uwagi do CMR przed wyjazdem"
-      },
-      match: {
-        prompt: "Dopasuj dokument do funkcji.",
-        pairs: {
-          "CMR": "międzynarodowy list przewozowy",
-          "WZ": "wydanie towaru z magazynu"
-        }
-      }
-    },
-    ref: "Konwencja CMR"
+    id: "zal:kara-10proc", formats: ["mcq", "fill"],
+    why: "Przekroczenie nacisku osi napędowej do 10% = kara 3000 zł.",
+    q: { mcq: { prompt: "Kara za przekroczenie nacisku osi napędowej do 10%?", options: ["500 zł", "3000 zł", "10000 zł"], correct: "3000 zł" },
+         fill: { prompt: "Przekroczenie nacisku osi do 10% to kara ___ zł.", correct: "3000" } },
+    ref: "Ustawa o drogach publ. art. 41d", sourceRef: "Ustawa o drogach publ. Dz.U. 2025 poz. 889 art. 41d ust. 2", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "taryfikator"
+  }, {
+    id: "zal:kara-20proc", formats: ["mcq", "match"],
+    why: "Przekroczenie nacisku o 10-20% = 6000 zł, powyżej 20% = 10000 zł.",
+    q: { mcq: { prompt: "Kara za przekroczenie nacisku osi powyżej 20%?", options: ["3000 zł", "6000 zł", "10000 zł"], correct: "10000 zł" },
+         match: { prompt: "Dopasuj przekroczenie nacisku do kary.", pairs: { "do 10%": "3000 zł", "10-20%": "6000 zł", "powyżej 20%": "10000 zł" } } },
+    ref: "Ustawa o drogach publ. art. 41d", sourceRef: "Ustawa o drogach publ. Dz.U. 2025 poz. 889 art. 41d ust. 2", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "taryfikator"
+  }, {
+    id: "zal:rozklad-masy", formats: ["mcq", "scenario"],
+    why: "Ładunek rozkłada się równomiernie, ciężkie elementy nad osiami i przy ścianie przedniej, środek ciężkości nisko.",
+    q: { mcq: { prompt: "Gdzie umieszcza się najcięższe elementy ładunku?", options: ["Z tyłu na górze", "Nad osiami, nisko, przy ścianie przedniej", "Na jednym boku"], correct: "Nad osiami, nisko, przy ścianie przedniej" },
+         scenario: { prompt: "Masz kilka ciężkich palet i lekkie kartony. Jak układasz?", options: ["Ciężkie na górę", "Ciężkie nisko nad osiami, lekkie wyżej", "Losowo"], correct: "Ciężkie nisko nad osiami, lekkie wyżej" } },
+    ref: "KE Best Practices (Annex 8.1)", sourceRef: "European Best Practices Guidelines 2014, Annex 8.1 (parafraza)", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje wytycznych"
+  }, {
+    id: "zal:odciazenie-przod", formats: ["mcq", "scenario"],
+    why: "Za dużo masy z tyłu odciąża oś przednią i pogarsza prowadzenie i hamowanie.",
+    q: { mcq: { prompt: "Czym grozi przeładowanie tyłu naczepy?", options: ["Niczym", "Odciążenie osi przedniej, gorsze prowadzenie", "Lepsza przyczepność"], correct: "Odciążenie osi przedniej, gorsze prowadzenie" },
+         scenario: { prompt: "Kierownica robi się 'lekka' po załadunku z tyłu. Przyczyna?", options: ["Za mały ładunek", "Środek ciężkości za bardzo z tyłu", "Za niskie ciśnienie w oponach"], correct: "Środek ciężkości za bardzo z tyłu" } },
+    ref: "KE Best Practices", sourceRef: "European Best Practices Guidelines (parafraza)", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje wytycznych"
+  }, {
+    id: "zal:art-43", formats: ["mcq", "scenario"],
+    why: "Czynności ładunkowe należą do nadawcy/odbiorcy, ale załadunek musi zapewniać przewóz zgodny z przepisami (masa, naciski osi).",
+    q: { mcq: { prompt: "Kto zasadniczo odpowiada za czynności ładunkowe?", options: ["Zawsze kierowca", "Nadawca lub odbiorca (o ile umowa nie stanowi inaczej)", "Ubezpieczyciel"], correct: "Nadawca lub odbiorca (o ile umowa nie stanowi inaczej)" },
+         scenario: { prompt: "Załadowano Ci pojazd z przekroczeniem nacisku osi. Twoja pozycja?", options: ["Muszę jechać", "Mogę odmówić jazdy niezgodnej z przepisami", "To tylko sprawa firmy"], correct: "Mogę odmówić jazdy niezgodnej z przepisami" } },
+    ref: "Prawo przewozowe art. 43", sourceRef: "Prawo przewozowe Dz.U. 2024 poz. 1262 art. 43", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "nowelizacje"
+  }, {
+    id: "zal:odmowa", formats: ["mcq", "scenario"],
+    why: "Kierowca współodpowiada za stan załadunku i może odmówić jazdy pojazdem przeładowanym lub źle załadowanym.",
+    q: { mcq: { prompt: "Czy kierowca może odmówić jazdy przeładowanym pojazdem?", options: ["Nie", "Tak — współodpowiada za załadunek", "Tylko za granicą"], correct: "Tak — współodpowiada za załadunek" },
+         scenario: { prompt: "Widzisz, że ładunek przekracza DMC. Co robisz?", options: ["Jadę mimo to", "Odmawiam do czasu przeładunku", "Zdejmuję tablice"], correct: "Odmawiam do czasu przeładunku" } },
+    ref: "Prawo przewozowe · PoRD", sourceRef: "Prawo przewozowe art. 43; odpowiedzialność kierowcy", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "nowelizacje"
+  }, {
+    id: "zal:sprawdzenie-po-km", formats: ["mcq", "scenario"],
+    why: "Załadunek sprawdza się ponownie po pierwszych kilometrach i po przerwach — może się przesunąć/poluzować.",
+    q: { mcq: { prompt: "Kiedy ponownie sprawdzić załadunek i mocowanie?", options: ["Nigdy", "Po pierwszych km i po przerwach", "Tylko na końcu trasy"], correct: "Po pierwszych km i po przerwach" },
+         scenario: { prompt: "Po 20 km od załadunku zatrzymujesz się. Po co sprawdzasz ładunek?", options: ["Bez sensu", "Mógł się przesunąć/poluzować", "Tylko formalność"], correct: "Mógł się przesunąć/poluzować" } },
+    ref: "IRU checklist (parafraza)", sourceRef: "IRU Safe Loading Checklist (parafraza)", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "zal:przeciazenie-skutki", formats: ["mcq", "scenario"],
+    why: "Przeciążenie osi grozi karą pieniężną, zatrzymaniem pojazdu i nakazem przeładunku.",
+    q: { mcq: { prompt: "Jakie skutki ma stwierdzone przeciążenie osi?", options: ["Tylko upomnienie", "Kara, zatrzymanie pojazdu, nakaz przeładunku", "Brak"], correct: "Kara, zatrzymanie pojazdu, nakaz przeładunku" },
+         scenario: { prompt: "Waga na kontroli pokazuje przeciążenie osi napędowej. Co dalej?", options: ["Jadę dalej", "Kara + możliwy nakaz przeładunku", "Zwrot za paliwo"], correct: "Kara + możliwy nakaz przeładunku" } },
+    ref: "Ustawa o drogach publ. art. 41d", sourceRef: "Ustawa o drogach publ. Dz.U. 2025 poz. 889 art. 41d", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "taryfikator"
+  }, {
+    id: "zal:organ-kary", formats: ["mcq", "match"],
+    why: "Kary za naruszenia nakładają m.in. ITD, Policja, Straż Graniczna i naczelnik urzędu celno-skarbowego — decyzją administracyjną.",
+    q: { mcq: { prompt: "Kto może nałożyć karę za przeciążenie?", options: ["Tylko sąd", "ITD, Policja, SG, KAS", "Nadawca"], correct: "ITD, Policja, SG, KAS" },
+         match: { prompt: "Dopasuj cechę kary za przeciążenie.", pairs: { "Forma": "decyzja administracyjna", "Termin zapłaty": "21 dni" } } },
+    ref: "Ustawa o drogach publ. art. 41d", sourceRef: "Ustawa o drogach publ. Dz.U. 2025 poz. 889 art. 41d", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "nowelizacje"
+  }, {
+    id: "zal:szerokosc-255", formats: ["mcq", "fill"],
+    why: "Dopuszczalna szerokość pojazdu to zwykle 2,55 m (2,60 m dla nadwozi izotermicznych/chłodni).",
+    q: { mcq: { prompt: "Dopuszczalna szerokość zwykłego pojazdu ciężarowego?", options: ["2,30 m", "2,55 m", "3,00 m"], correct: "2,55 m" },
+         fill: { prompt: "Nadwozia chłodnicze mogą mieć szerokość do ___ m.", correct: "2,60" } },
+    ref: "Dyr. 96/53/WE · warunki techn.", sourceRef: "Dyr. 96/53/WE; rozp. warunki techn. Dz.U. 2024 poz. 502", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "rewizja 96/53/WE"
+  }, {
+    id: "zal:wysokosc-4", formats: ["mcq", "scenario"],
+    why: "W Polsce nie ma sztywnego limitu wysokości 4 m, ale realnie planuje się przejazd pod wiadukty/tunele wg wysokości zestawu.",
+    q: { mcq: { prompt: "Co realnie ogranicza wysokość załadunku?", options: ["Nic", "Wiadukty, tunele, bramownice na trasie", "Kolor plandeki"], correct: "Wiadukty, tunele, bramownice na trasie" },
+         scenario: { prompt: "Ładunek podnosi wysokość zestawu do 4,2 m. Co robisz?", options: ["Jadę bez sprawdzania", "Planuję trasę pod skrajnie pionowe", "Zdejmuję dach"], correct: "Planuję trasę pod skrajnie pionowe" } },
+    ref: "Praktyka trasy", sourceRef: "Praktyka planowania trasy (skrajnia pionowa)", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "zal:dlugosc-zespol", formats: ["mcq", "fill"],
+    why: "Typowa maksymalna długość zespołu ciągnik + naczepa to 16,5 m, a pojazd + przyczepa 18,75 m.",
+    q: { mcq: { prompt: "Maksymalna długość zestawu ciągnik + naczepa?", options: ["12 m", "16,5 m", "20 m"], correct: "16,5 m" },
+         fill: { prompt: "Zestaw pojazd + przyczepa: maks. ___ m.", correct: "18,75" } },
+    ref: "Dyr. 96/53/WE", sourceRef: "Dyr. 96/53/WE (masy i wymiary)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "rewizja 96/53/WE"
+  }, {
+    id: "zal:min-nacisk", formats: ["mcq", "scenario"],
+    why: "Zbyt mały nacisk na oś napędową pogarsza przyczepność (poślizg przy ruszaniu, zwłaszcza zimą).",
+    q: { mcq: { prompt: "Czym grozi zbyt mały nacisk na oś napędową?", options: ["Lepszym spalaniem", "Utratą przyczepności napędu", "Niczym"], correct: "Utratą przyczepności napędu" },
+         scenario: { prompt: "Pusta naczepa, śliska nawierzchnia, koła buksują. Powód?", options: ["Za duży nacisk", "Za mały nacisk na oś napędową", "Za dobre opony"], correct: "Za mały nacisk na oś napędową" } },
+    ref: "KE Best Practices", sourceRef: "European Best Practices Guidelines (min. naciski osi)", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "zal:znak-ograniczenie", formats: ["mcq", "scenario"],
+    why: "Znak lub uchwała może lokalnie ograniczyć nacisk osi do 10 t lub 8 t na wybranych drogach.",
+    q: { mcq: { prompt: "Czy nacisk osi może być lokalnie ograniczony poniżej 11,5 t?", options: ["Nie", "Tak — znakiem/uchwałą do 10 lub 8 t", "Tylko na autostradach"], correct: "Tak — znakiem/uchwałą do 10 lub 8 t" },
+         scenario: { prompt: "Znak ogranicza nacisk do 8 t, Twoja oś ma 10 t. Co robisz?", options: ["Jadę mimo to", "Szukam trasy alternatywnej / zezwolenia", "Ignoruję znak"], correct: "Szukam trasy alternatywnej / zezwolenia" } },
+    ref: "Ustawa o drogach publ. art. 41", sourceRef: "Ustawa o drogach publ. Dz.U. 2025 poz. 889 art. 41", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "nowelizacje"
+  }, {
+    id: "zal:dyr-96-53", formats: ["mcq", "scenario"],
+    why: "Ramy UE mas i wymiarów to dyrektywa 96/53/WE — obecnie w rewizji, więc limitów nie podaje się jako ostatecznych.",
+    q: { mcq: { prompt: "Który akt UE reguluje masy i wymiary pojazdów?", options: ["561/2006", "96/53/WE", "165/2014"], correct: "96/53/WE" },
+         scenario: { prompt: "Ktoś podaje 'ostateczne' nowe limity mas z 96/53/WE. Jak traktować?", options: ["Jako pewnik", "Ostrożnie — dyrektywa w rewizji", "Zignorować przepis"], correct: "Ostrożnie — dyrektywa w rewizji" } },
+    ref: "Dyr. 96/53/WE", sourceRef: "Dyr. 96/53/WE (rewizja COM(2023)445)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "rewizja 96/53/WE"
+  }, {
+    id: "zal:kara-podwyzszona", formats: ["mcq", "fill"],
+    why: "Przy jednoczesnym przejeździe pojazdu nienormatywnego bez zezwolenia kary rosną do 12 000 zł (≤20%) i 20 000 zł (>20%).",
+    q: { mcq: { prompt: "Maksymalna podwyższona kara za nacisk przy przejeździe nienormatywnym bez zezwolenia?", options: ["10000 zł", "12000 zł", "20000 zł"], correct: "20000 zł" },
+         fill: { prompt: "Kara podwyższona przy przekroczeniu do 20% to ___ zł.", correct: "12000" } },
+    ref: "Ustawa o drogach publ. art. 41d ust. 3", sourceRef: "Ustawa o drogach publ. Dz.U. 2025 poz. 889 art. 41d ust. 3", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "taryfikator"
+  }, {
+    id: "zal:kontrola-zabezpieczenia", formats: ["mcq", "scenario"],
+    why: "Zabezpieczenie ładunku podlega kontroli drogowej wg dyrektywy 2014/47/UE (pojazdy >3,5 t).",
+    q: { mcq: { prompt: "Który akt reguluje kontrolę drogową zabezpieczenia ładunku?", options: ["96/53/WE", "2014/47/UE", "561/2006"], correct: "2014/47/UE" },
+         scenario: { prompt: "Kontrola sprawdza mocowanie ładunku >3,5 t. Podstawa?", options: ["Brak podstawy", "Dyrektywa 2014/47/UE", "Kodeks pracy"], correct: "Dyrektywa 2014/47/UE" } },
+    ref: "Dyr. 2014/47/UE", sourceRef: "Dyr. 2014/47/UE (drogowe kontrole techniczne)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
   }]
 }, {
   id: "mocowanie",
   title: "Mocowanie",
   icon: "🔗",
+  status: "DRAFT",
   facts: [{
-    id: "moc:metody",
-    formats: ["mcq", "match"],
-    why: "EN 12195-1 przewiduje trzy metody: mocowanie (lashing), blokowanie (blocking), ryglowanie (locking).",
-    q: {
-      mcq: {
-        prompt: "Które to metody zabezpieczania wg EN 12195-1?",
-        options: ["Mocowanie, blokowanie, ryglowanie", "Klejenie, wiązanie, ważenie", "Tylko pasy"],
-        correct: "Mocowanie, blokowanie, ryglowanie"
-      },
-      match: {
-        prompt: "Dopasuj metodę do opisu.",
-        pairs: {
-          "Mocowanie (lashing)": "pasy/łańcuchy napinające ładunek",
-          "Blokowanie (blocking)": "oparcie o ścianę/belki",
-          "Ryglowanie (locking)": "mechaniczne zamki (np. twist-lock)"
-        }
-      }
-    },
-    ref: "EN 12195-1:2010"
+    id: "moc:08g-przod", formats: ["mcq", "fill"],
+    why: "PUŁAPKA: współczynnik 0,8g dotyczy WYŁĄCZNIE kierunku do przodu; do tyłu i na boki to 0,5g.",
+    q: { mcq: { prompt: "W którym kierunku obowiązuje współczynnik 0,8g?", options: ["Do przodu", "Do tyłu", "We wszystkich"], correct: "Do przodu" },
+         fill: { prompt: "Do tyłu i na boki obowiązuje współczynnik ___ g.", correct: "0,5" } },
+    ref: "EN 12195-1:2010", sourceRef: "EN 12195-1:2010 / PN-EN 12195-1:2011 (parafraza — norma chroniona)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja EN 12195-1"
   }, {
-    id: "moc:lc",
-    formats: ["mcq", "fill"],
-    why: "LC (Lashing Capacity) to maksymalna dopuszczalna siła robocza pasa, w daN na etykiecie.",
-    q: {
-      mcq: {
-        prompt: "Co oznacza LC na etykiecie pasa?",
-        options: ["Długość pasa", "Maksymalną siłę roboczą (daN)", "Kolor pasa"],
-        correct: "Maksymalną siłę roboczą (daN)"
-      },
-      fill: {
-        prompt: "LC (Lashing Capacity) podaje się w jednostce ___.",
-        correct: "daN"
-      }
-    },
-    ref: "EN 12195-2"
+    id: "moc:metody-3", formats: ["mcq", "match"],
+    why: "Trzy metody mocowania: odciągowe (dociskowe), blokowanie i ryglowanie/positive-fit (wypełnienie przestrzeni).",
+    q: { mcq: { prompt: "Która z metod polega na dociśnięciu ładunku pasem od góry?", options: ["Blokowanie", "Mocowanie odciągowe (dociskowe)", "Positive-fit"], correct: "Mocowanie odciągowe (dociskowe)" },
+         match: { prompt: "Dopasuj metodę mocowania do opisu.", pairs: { "Odciągowe": "docisk pasem od góry", "Blokowanie": "opór o element pojazdu", "Positive-fit": "wypełnienie przestrzeni ładunkowej" } } },
+    ref: "EN 12195-1 / KE Best Practices", sourceRef: "EN 12195-1; European Best Practices Guidelines (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "rewizja EN 12195-1"
   }, {
-    id: "moc:stf-shf",
-    formats: ["mcq", "match"],
-    why: "STF to siła napięcia pozostająca w pasie po naprężeniu; SHF (ok. 50 daN) to znormalizowana siła ręki.",
-    q: {
-      mcq: {
-        prompt: "Co opisuje STF?",
-        options: ["Siłę napięcia pasa po naprężeniu", "Długość pasa", "Wagę ładunku"],
-        correct: "Siłę napięcia pasa po naprężeniu"
-      },
-      match: {
-        prompt: "Dopasuj skrót do znaczenia.",
-        pairs: {
-          "LC": "maks. siła robocza",
-          "STF": "siła napięcia wstępnego",
-          "SHF": "siła ręki (~50 daN)"
-        }
-      }
-    },
-    ref: "EN 12195-2 — etykieta pasa"
+    id: "moc:lc", formats: ["mcq", "fill"],
+    why: "LC (lashing capacity) to udźwig mocowania w daN — dla mocowania kształtowego i odciągu bezpośredniego.",
+    q: { mcq: { prompt: "Co oznacza LC na etykiecie pasa?", options: ["Długość pasa", "Udźwig mocowania (lashing capacity)", "Kolor pasa"], correct: "Udźwig mocowania (lashing capacity)" },
+         fill: { prompt: "LC podaje się w jednostce ___ (nie w kg).", correct: "daN" } },
+    ref: "EN 12195-2", sourceRef: "EN 12195-2 / PN-EN 12195-2 (parafraza)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
   }, {
-    id: "moc:tarcie",
-    formats: ["mcq", "scenario"],
-    why: "Maty antypoślizgowe zwiększają współczynnik tarcia — mniej pasów potrzebnych do tej samej pewności.",
-    q: {
-      mcq: {
-        prompt: "Po co stosuje się maty antypoślizgowe?",
-        options: ["Zwiększają tarcie, mniej pasów", "Dla koloru", "Zastępują pasy całkowicie"],
-        correct: "Zwiększają tarcie, mniej pasów"
-      },
-      scenario: {
-        prompt: "Paleta na śliskiej podłodze naczepy. Co poprawi zabezpieczenie najprościej?",
-        options: ["Mata antypoślizgowa pod paletę", "Wyższa prędkość", "Nic"],
-        correct: "Mata antypoślizgowa pod paletę"
-      }
-    },
-    ref: "EN 12195-1 — współczynnik tarcia"
+    id: "moc:stf", formats: ["mcq", "scenario"],
+    why: "STF (standard tension force) to standardowa siła napięcia — dla mocowania dociskowego; min. 0,1×LC, maks. 0,5×LC.",
+    q: { mcq: { prompt: "Do jakiego mocowania odnosi się STF?", options: ["Kształtowego", "Dociskowego", "Blokowania"], correct: "Dociskowego" },
+         scenario: { prompt: "Mocujesz ładunek pasem od góry (docisk). Który parametr etykiety liczy się najbardziej?", options: ["LC", "STF", "Kolor"], correct: "STF" } },
+    ref: "EN 12195-2", sourceRef: "EN 12195-2 (parafraza; STF 0,1-0,5 LC)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
   }, {
-    id: "moc:stan-pasa",
-    formats: ["mcq", "scenario"],
-    why: "Pas z przecięciami, przetarciami szwów lub nieczytelną etykietą wycofujesz z użycia.",
-    q: {
-      mcq: {
-        prompt: "Kiedy pas nadaje się do wycofania?",
-        options: ["Przecięcia/przetarcia lub brak etykiety", "Gdy jest brudny", "Po każdym kursie"],
-        correct: "Przecięcia/przetarcia lub brak etykiety"
-      },
-      scenario: {
-        prompt: "Pas ma naderwany szew, ale „jeszcze trzyma”. Używasz go?",
-        options: ["Nie — wycofuję z użycia", "Tak, jak zawsze", "Tak, tylko na krótkie trasy"],
-        correct: "Nie — wycofuję z użycia"
-      }
-    },
-    ref: "EN 12195-2 — kontrola stanu"
+    id: "moc:lc-vs-stf", formats: ["mcq", "match"],
+    why: "PUŁAPKA: nie mylić LC (mocowanie kształtowe/bezpośrednie) z STF (mocowanie dociskowe).",
+    q: { mcq: { prompt: "Który parametr dotyczy mocowania kształtowego/odciągu bezpośredniego?", options: ["STF", "LC", "SHF"], correct: "LC" },
+         match: { prompt: "Dopasuj parametr do rodzaju mocowania.", pairs: { "LC": "kształtowe / odciąg bezpośredni", "STF": "dociskowe (top-over)" } } },
+    ref: "EN 12195-1/2", sourceRef: "EN 12195-1/2 (parafraza)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:shf", formats: ["mcq", "fill"],
+    why: "SHF (standard hand force) to normowa siła ręki = 50 daN.",
+    q: { mcq: { prompt: "Ile wynosi standardowa siła ręki (SHF)?", options: ["10 daN", "50 daN", "500 daN"], correct: "50 daN" },
+         fill: { prompt: "SHF (siła ręki) wynosi ___ daN.", correct: "50" } },
+    ref: "EN 12195-2", sourceRef: "EN 12195-2 (parafraza)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:tarcie-02", formats: ["mcq", "scenario"],
+    why: "Przy braku wiarygodnych danych o tarciu przyjmuje się współczynnik maks. µ = 0,2.",
+    q: { mcq: { prompt: "Jaki współczynnik tarcia przyjąć przy braku danych?", options: ["µ = 0,6", "µ = 0,2", "µ = 1,0"], correct: "µ = 0,2" },
+         scenario: { prompt: "Nie znasz tarcia między ładunkiem a podłogą. Co przyjmujesz do obliczeń?", options: ["Najwyższe możliwe", "Ostrożnie µ = 0,2", "Zero"], correct: "Ostrożnie µ = 0,2" } },
+    ref: "EN 12195-1 / KE Best Practices", sourceRef: "EN 12195-1; European Best Practices (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:maty", formats: ["mcq", "scenario"],
+    why: "Maty antypoślizgowe zwiększają tarcie i zmniejszają liczbę potrzebnych pasów.",
+    q: { mcq: { prompt: "Do czego służą maty antypoślizgowe?", options: ["Do ozdoby", "Zwiększają tarcie ładunku", "Zmniejszają tarcie"], correct: "Zwiększają tarcie ładunku" },
+         scenario: { prompt: "Ładunek łatwo się przesuwa po gładkiej podłodze. Co pomoże?", options: ["Mniej pasów", "Maty antypoślizgowe pod ładunek", "Nic"], correct: "Maty antypoślizgowe pod ładunek" } },
+    ref: "KE Best Practices", sourceRef: "European Best Practices Guidelines (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "moc:kat-dociskowy", formats: ["mcq", "fill"],
+    why: "Dla mocowania dociskowego kąt pasa najlepiej jak najbliższy pionu (optymalnie 75-90°) — wtedy docisk jest największy.",
+    q: { mcq: { prompt: "Jaki kąt pasa jest optymalny dla mocowania dociskowego?", options: ["30-45°", "75-90°", "10-20°"], correct: "75-90°" },
+         fill: { prompt: "Dla mocowania dociskowego optymalny kąt to 75-___°.", correct: "90" } },
+    ref: "EN 12195-1 (parafraza)", sourceRef: "EN 12195-1 (parafraza)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:kat-odciag", formats: ["mcq", "scenario"],
+    why: "Dla odciągów (mocowanie bezpośrednie) skuteczny zakres kątów to ok. 30-60°.",
+    q: { mcq: { prompt: "Skuteczny zakres kątów dla odciągów bezpośrednich?", options: ["0-10°", "30-60°", "85-90°"], correct: "30-60°" },
+         scenario: { prompt: "Mocujesz maszynę odciągami bezpośrednimi. Jak ustawiasz kąt?", options: ["Prawie poziomo", "W zakresie 30-60°", "Pionowo"], correct: "W zakresie 30-60°" } },
+    ref: "EN 12195-1 (parafraza)", sourceRef: "EN 12195-1 (parafraza)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:en12642-xl", formats: ["mcq", "scenario"],
+    why: "PUŁAPKA: nadwozie XL (EN 12642) zwalnia z dodatkowego mocowania TYLKO przy positive-fit (wypełnieniu przestrzeni), nie zawsze.",
+    q: { mcq: { prompt: "Kiedy nadwozie XL zwalnia z dodatkowego mocowania?", options: ["Zawsze", "Tylko przy positive-fit", "Nigdy"], correct: "Tylko przy positive-fit" },
+         scenario: { prompt: "Masz nadwozie XL, ale między ładunkiem a ścianami są duże luki. Mocujesz?", options: ["Nie trzeba, XL", "Tak — brak positive-fit", "Zależy od pogody"], correct: "Tak — brak positive-fit" } },
+    ref: "EN 12642:2016", sourceRef: "EN 12642:2016 / PN-EN 12642 (parafraza)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja EN 12642"
+  }, {
+    id: "moc:sciana-przednia", formats: ["mcq", "fill"],
+    why: "Dla nadwozia XL ściana przednia musi wytrzymać 0,5×masa ładunku×g (tylna 0,3×, boczne 0,4×).",
+    q: { mcq: { prompt: "Jaką część masy ładunku wytrzymuje ściana przednia nadwozia XL?", options: ["0,3×", "0,4×", "0,5×"], correct: "0,5×" },
+         fill: { prompt: "Ściana tylna nadwozia XL wytrzymuje ___× masy ładunku.", correct: "0,3" } },
+    ref: "EN 12642:2016", sourceRef: "EN 12642:2016 (parafraza)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja EN 12642"
+  }, {
+    id: "moc:etykieta-pasa", formats: ["mcq", "scenario"],
+    why: "Pas mocujący musi mieć czytelną etykietę (LC, STF, SHF); dane podaje się w daN, nie w kg.",
+    q: { mcq: { prompt: "W jakiej jednostce podaje się parametry pasa mocującego?", options: ["kg", "daN", "N/mm"], correct: "daN" },
+         scenario: { prompt: "Pas nie ma czytelnej etykiety LC/STF. Co robisz?", options: ["Używam mimo to", "Wycofuję — brak etykiety", "Doklejam własną"], correct: "Wycofuję — brak etykiety" } },
+    ref: "EN 12195-2", sourceRef: "EN 12195-2 (parafraza; etykieta pasa)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:wydluzenie-7", formats: ["mcq", "fill"],
+    why: "Dopuszczalne wydłużenie pasa mocującego pod obciążeniem to maks. 7%.",
+    q: { mcq: { prompt: "Maksymalne wydłużenie pasa mocującego?", options: ["3%", "7%", "15%"], correct: "7%" },
+         fill: { prompt: "Wydłużenie pasa mocującego nie może przekraczać ___%.", correct: "7" } },
+    ref: "EN 12195-2", sourceRef: "EN 12195-2 (parafraza)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:kontrola-2014-47", formats: ["mcq", "scenario"],
+    why: "Kontrola drogowa mocowania odbywa się wg zasad z EN 12195-1 (załącznik do dyrektywy 2014/47/UE).",
+    q: { mcq: { prompt: "Według czego kontroluje się mocowanie ładunku na drodze?", options: ["Uznania kontrolera", "EN 12195-1 (dyr. 2014/47/UE)", "Kodeksu pracy"], correct: "EN 12195-1 (dyr. 2014/47/UE)" },
+         scenario: { prompt: "Kontrola ocenia, czy mocowanie utrzyma siły. Do czego się odnosi?", options: ["Do wagi", "Do EN 12195-1", "Do koloru pasów"], correct: "Do EN 12195-1" } },
+    ref: "Dyr. 2014/47/UE", sourceRef: "Dyr. 2014/47/UE, Zał. III (EN 12195-1)", reviewType: "T", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "moc:c-abc", formats: ["mcq", "scenario"],
+    why: "System mocowania musi wytrzymać siłę równą całej masie ładunku do przodu i połowie masy na boki i do tyłu.",
+    q: { mcq: { prompt: "Jaką siłę do przodu musi wytrzymać mocowanie?", options: ["Połowę masy ładunku", "Całą masę ładunku", "Podwójną masę"], correct: "Całą masę ładunku" },
+         scenario: { prompt: "Sprawdzasz, czy mocowanie wytrzyma. Bok i tył?", options: ["Cała masa", "Połowa masy ładunku", "Ćwierć masy"], correct: "Połowa masy ładunku" } },
+    ref: "DVSA / EN 12195-1 (parafraza)", sourceRef: "DVSA Securing loads (parafraza); zgodne z EN 12195-1", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "moc:cialo-obce", formats: ["mcq", "scenario"],
+    why: "Ładunek niestabilny (podatny na przewrócenie) liczy się z współczynnikiem 0,6g na bok — wymaga dodatkowego zabezpieczenia.",
+    q: { mcq: { prompt: "Jaki współczynnik boczny dla ładunku podatnego na przewrócenie?", options: ["0,5g", "0,6g", "0,8g"], correct: "0,6g" },
+         scenario: { prompt: "Wysoki, wąski ładunek grozi przewróceniem. Co uwzględniasz?", options: ["Nic", "Wyższy współczynnik boczny (0,6g)", "Niższy współczynnik"], correct: "Wyższy współczynnik boczny (0,6g)" } },
+    ref: "EN 12195-1:2010", sourceRef: "EN 12195-1:2010 (parafraza; ładunki niestabilne)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:blokowanie", formats: ["mcq", "scenario"],
+    why: "Blokowanie wykorzystuje opór o elementy pojazdu (ściana przednia, kłonice) — najskuteczniej działa przy ścianie przedniej.",
+    q: { mcq: { prompt: "O co opiera się ładunek przy metodzie blokowania?", options: ["O powietrze", "O elementy pojazdu (ściany/kłonice)", "O pasy"], correct: "O elementy pojazdu (ściany/kłonice)" },
+         scenario: { prompt: "Ustawiasz ciężkie palety. Gdzie blokowanie jest najlepsze?", options: ["Na środku luzem", "Przy ścianie przedniej", "Na samym końcu"], correct: "Przy ścianie przedniej" } },
+    ref: "KE Best Practices", sourceRef: "European Best Practices Guidelines (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "moc:kontrola-pasa", formats: ["mcq", "scenario"],
+    why: "Pas z przetarciami, naciętymi włóknami lub uszkodzonym napinaczem wycofuje się z użycia.",
+    q: { mcq: { prompt: "Co zrobić z przetartym pasem mocującym?", options: ["Używać dalej", "Wycofać z użycia", "Tylko na krótkie trasy"], correct: "Wycofać z użycia" },
+         scenario: { prompt: "Zauważasz nacięte włókna na pasie. Decyzja?", options: ["Jeszcze posłuży", "Wycofuję natychmiast", "Zawiązuję węzeł"], correct: "Wycofuję natychmiast" } },
+    ref: "EN 12195-2 — kontrola stanu", sourceRef: "EN 12195-2 (parafraza; kryteria wycofania pasa)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:daN-nie-kg", formats: ["mcq", "fill"],
+    why: "PUŁAPKA jednostek: parametry mocowania podaje się w daN (dekaniutonach), nie w kilogramach.",
+    q: { mcq: { prompt: "W jakiej jednostce są dane mocowania (LC, STF)?", options: ["kg", "daN", "tony"], correct: "daN" },
+         fill: { prompt: "Parametry mocowania podaje się w ___, nie w kg.", correct: "daN" } },
+    ref: "EN 12195-2", sourceRef: "EN 12195-2 (parafraza; jednostka daN)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
   }]
 }];
 
