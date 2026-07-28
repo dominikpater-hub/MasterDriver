@@ -946,6 +946,96 @@ const PACKS = [{
     q: { mcq: { prompt: "Jaka jest realistyczna oszczędność z eco-drivingu we flocie?", options: ["50%", "5-15%", "0%"], correct: "5-15%" },
          scenario: { prompt: "Reklama obiecuje 'do 33% mniej paliwa'. Jak to traktować?", options: ["Gwarancja", "Maksimum od agresywnego stylu, nie średnia", "Zawyżone kłamstwo"], correct: "Maksimum od agresywnego stylu, nie średnia" } },
     ref: "Dane branżowe (parafraza)", sourceRef: "Materiały branżowe/US EPA (parafraza; widełki)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:coasting", formats: ["mcq", "scenario"],
+    why: "Funkcja EcoRoll/coasting rozłącza napęd i pozwala pojazdowi toczyć się swobodnie, wykorzystując energię kinetyczną na zjazdach.",
+    q: { mcq: { prompt: "Co robi funkcja EcoRoll?", options: ["Dodaje gazu", "Pozwala toczyć się swobodnie (rozłączony napęd)", "Hamuje silnikiem"], correct: "Pozwala toczyć się swobodnie (rozłączony napęd)" },
+         scenario: { prompt: "Delikatny zjazd, chcesz oszczędzać. EcoRoll...", options: ["Szkodzi", "Wykorzystuje rozpęd bez paliwa", "Zwiększa spalanie"], correct: "Wykorzystuje rozpęd bez paliwa" } },
+    ref: "Technika (parafraza)", sourceRef: "Materiały producentów (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:retarder", formats: ["mcq", "scenario"],
+    why: "Retarder i hamulec silnikowy pozwalają zwalniać bez zużywania hamulców zasadniczych, zwłaszcza na długich zjazdach.",
+    q: { mcq: { prompt: "Po co używać retardera na długim zjeździe?", options: ["Dla mocy", "By nie przegrzać hamulców zasadniczych", "Dla hałasu"], correct: "By nie przegrzać hamulców zasadniczych" },
+         scenario: { prompt: "5 km stromego zjazdu. Czym zwalniasz?", options: ["Ciągle nogą na hamulcu", "Retarder/hamulec silnikowy", "Na luzie"], correct: "Retarder/hamulec silnikowy" } },
+    ref: "Technika (parafraza)", sourceRef: "Materiały branżowe (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:predkosc-80-85", formats: ["mcq", "fill"],
+    why: "Najbardziej ekonomiczna prędkość ciężarówki to ok. 80-85 km/h; powyżej tego spalanie rośnie gwałtownie (opór z kwadratem prędkości).",
+    q: { mcq: { prompt: "Jaka prędkość jest najbardziej ekonomiczna dla ciężarówki?", options: ["60 km/h", "80-85 km/h", "100 km/h"], correct: "80-85 km/h" },
+         fill: { prompt: "Powyżej ok. ___ km/h spalanie ciężarówki rośnie gwałtownie.", correct: "85" } },
+    ref: "Dane branżowe (parafraza)", sourceRef: "Testy producentów (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:downspeeding", formats: ["mcq", "scenario"],
+    why: "Downspeeding (jazda na wysokim biegu przy niskich obrotach) oszczędza paliwo, ale wymaga płynności — gwałtowne przyspieszanie z bardzo niskich obrotów szkodzi napędowi.",
+    q: { mcq: { prompt: "Czego wymaga downspeeding, by nie szkodzić silnikowi?", options: ["Gwałtownego gazu", "Płynności", "Wysokich obrotów"], correct: "Płynności" },
+         scenario: { prompt: "Wysoki bieg, bardzo niskie obroty, dajesz pełny gaz. To...", options: ["OK", "Szkodliwe dla układu korbowego", "Oszczędne zawsze"], correct: "Szkodliwe dla układu korbowego" } },
+    ref: "Technika (parafraza)", sourceRef: "Materiały branżowe (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:rrc-opony", formats: ["mcq", "fill"],
+    why: "Opory toczenia odpowiadają za znaczną część zużycia paliwa (do ~30%); opony klasy A mają współczynnik RRC poniżej 6,5 kg/t.",
+    q: { mcq: { prompt: "Jaki udział w zużyciu paliwa mają opory toczenia opon?", options: ["ok. 5%", "do ok. 30%", "ok. 60%"], correct: "do ok. 30%" },
+         fill: { prompt: "Opona klasy A ma współczynnik oporów toczenia poniżej ___ kg/t.", correct: "6,5" } },
+    ref: "Dane branżowe (parafraza)", sourceRef: "Continental/etykieta opon (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:paliwo-koszt", formats: ["mcq", "fill"],
+    why: "Paliwo to zwykle 30-40% kosztów transportu — największa pozycja kosztowa, dlatego eco-driving realnie wpływa na wynik firmy.",
+    q: { mcq: { prompt: "Jaki udział w kosztach transportu ma zwykle paliwo?", options: ["5-10%", "30-40%", "70%"], correct: "30-40%" },
+         fill: { prompt: "Paliwo to zwykle 30-___% kosztów transportu.", correct: "40" } },
+    ref: "Dane branżowe", sourceRef: "TLP/KE (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:srednie-spalanie", formats: ["mcq", "fill"],
+    why: "Średnie spalanie zestawu 40 t to orientacyjnie 25-32 l/100 km; redukcja o 1 l/100 km daje zauważalne oszczędności roczne.",
+    q: { mcq: { prompt: "Orientacyjne średnie spalanie zestawu 40 t?", options: ["10-15 l/100 km", "25-32 l/100 km", "50 l/100 km"], correct: "25-32 l/100 km" },
+         fill: { prompt: "Średnie spalanie zestawu 40 t to ok. 25-___ l/100 km.", correct: "32" } },
+    ref: "Dane branżowe", sourceRef: "Materiały branżowe (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:telematyka", formats: ["mcq", "scenario"],
+    why: "Systemy telematyczne rejestrują obroty, prędkość i nacisk na gaz, tworząc ranking stylu jazdy i normy spalania floty.",
+    q: { mcq: { prompt: "Co robi telematyka pod kątem eco-drivingu?", options: ["Nic", "Ocenia styl jazdy i spalanie", "Zwiększa moc"], correct: "Ocenia styl jazdy i spalanie" },
+         scenario: { prompt: "Firma wprowadza scoring stylu jazdy. Cel?", options: ["Kara dla wszystkich", "Zachęta do oszczędnej jazdy", "Więcej pracy"], correct: "Zachęta do oszczędnej jazdy" } },
+    ref: "Technika (parafraza)", sourceRef: "Materiały branżowe (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:vecto", formats: ["mcq", "scenario"],
+    why: "VECTO to narzędzie KE do certyfikacji emisji CO2 i zużycia paliwa nowych ciężarówek (>3,5 t) sprzedawanych w UE.",
+    q: { mcq: { prompt: "Do czego służy VECTO?", options: ["Do nawigacji", "Do certyfikacji CO2/zużycia ciężarówek", "Do tankowania"], correct: "Do certyfikacji CO2/zużycia ciężarówek" },
+         scenario: { prompt: "Nowa ciężarówka w UE. Co mówi VECTO?", options: ["Nic", "Certyfikowane CO2 i zużycie paliwa", "Cenę"], correct: "Certyfikowane CO2 i zużycie paliwa" } },
+    ref: "Rozp. 2017/2400", sourceRef: "Rozp. wyk. (UE) 2017/2400 (VECTO)", reviewType: "T", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "eco:lkw-maut", formats: ["mcq", "scenario"],
+    why: "Niemiecka opłata drogowa LKW-Maut zawiera komponent CO2 — pojazdy czystsze płacą mniej, zeroemisyjne są zwolnione do 30.06.2031.",
+    q: { mcq: { prompt: "Co różnicuje stawkę LKW-Maut w Niemczech?", options: ["Kolor pojazdu", "Klasa emisji CO2", "Marka"], correct: "Klasa emisji CO2" },
+         scenario: { prompt: "Ciężarówka zeroemisyjna w DE do 2031. LKW-Maut?", options: ["Najwyższa stawka", "Zwolnienie", "Bez zmian"], correct: "Zwolnienie" } },
+    ref: "Dyr. eurowinieta (DE)", sourceRef: "Dyr. 1999/62/WE zm. 2022/362; LKW-Maut (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "stawki roczne"
+  }, {
+    id: "eco:afir", formats: ["mcq", "fill"],
+    why: "AFIR wymusza strefy ładowania dla e-ciężarówek wzdłuż sieci TEN-T: min. 2800 kW do 2027 i 3600 kW do 2030.",
+    q: { mcq: { prompt: "Czego wymaga AFIR wzdłuż TEN-T?", options: ["Stacji LPG", "Stref szybkiego ładowania eHDV", "Myjni"], correct: "Stref szybkiego ładowania eHDV" },
+         fill: { prompt: "AFIR: strefy ładowania eHDV min. 2800 kW do 2027 i ___ kW do 2030.", correct: "3600" } },
+    ref: "Rozp. (UE) 2023/1804", sourceRef: "Rozp. (UE) 2023/1804 (AFIR)", reviewType: "T", copyright: "wolne", verifiedBy: null, monitorUntil: "wdrożenie krajowe"
+  }, {
+    id: "eco:mcs", formats: ["mcq", "scenario"],
+    why: "MCS (Megawatt Charging System) to nowy standard ultraszybkiego ładowania ciężarówek, pozwalający naładować w czasie przerwy kierowcy.",
+    q: { mcq: { prompt: "Co umożliwia standard MCS?", options: ["Wolne ładowanie nocne", "Ładowanie megawatowe w czasie przerwy", "Tankowanie LNG"], correct: "Ładowanie megawatowe w czasie przerwy" },
+         scenario: { prompt: "Przerwa 45 min, ładowarka MCS. Efekt?", options: ["Ledwo ruszy", "Znaczne doładowanie w czasie pauzy", "Nic"], correct: "Znaczne doładowanie w czasie pauzy" } },
+    ref: "Standard MCS", sourceRef: "Standard MCS (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "rozwój standardu"
+  }, {
+    id: "eco:lng", formats: ["mcq", "scenario"],
+    why: "LNG/bio-LNG daje niższą emisję CO2 (od ok. 20% do niemal 100% dla biometanu); zbiorniki są kriogeniczne (bardzo niska temperatura).",
+    q: { mcq: { prompt: "Czym cechują się zbiorniki LNG?", options: ["Wysoka temperatura", "Kriogeniczne (bardzo niska temp.)", "Ciśnienie atmosferyczne"], correct: "Kriogeniczne (bardzo niska temp.)" },
+         scenario: { prompt: "Bio-LNG względem diesla pod kątem CO2?", options: ["Wyższa emisja", "Znacznie niższa emisja", "Bez różnicy"], correct: "Znacznie niższa emisja" } },
+    ref: "Dane branżowe (parafraza)", sourceRef: "Materiały branżowe LNG (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:zasieg-bev-temp", formats: ["mcq", "scenario"],
+    why: "Zasięg ciężarówki elektrycznej spada zimą (ogrzewanie kabiny obciąża baterię) i przy wyższych prędkościach (opór z kwadratem prędkości).",
+    q: { mcq: { prompt: "Kiedy zasięg e-ciężarówki jest niższy?", options: ["Latem na wolno", "Zimą i przy dużej prędkości", "Zawsze taki sam"], correct: "Zimą i przy dużej prędkości" },
+         scenario: { prompt: "Mróz, autostrada 90 km/h w BEV. Zasięg?", options: ["Wyższy", "Wyraźnie niższy", "Bez zmian"], correct: "Wyraźnie niższy" } },
+    ref: "Technika BEV (parafraza)", sourceRef: "Materiały branżowe BEV (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:serwis-geometria", formats: ["mcq", "scenario"],
+    why: "Niesprawny stan techniczny — złe ciśnienie, zużyte filtry, zła geometria kół, niesprawne wtryskiwacze — to 'ukryci pożeracze' paliwa.",
+    q: { mcq: { prompt: "Co po cichu zwiększa spalanie?", options: ["Regularny serwis", "Zła geometria kół i zużyte filtry", "Prawidłowe ciśnienie"], correct: "Zła geometria kół i zużyte filtry" },
+         scenario: { prompt: "Spalanie wzrosło bez zmiany stylu jazdy. Sprawdzasz?", options: ["Nic", "Ciśnienie, filtry, geometrię", "Kolor kabiny"], correct: "Ciśnienie, filtry, geometrię" } },
+    ref: "Technika (parafraza)", sourceRef: "Materiały branżowe (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
   }]
 }, {
   id: "zaladunek",
@@ -1072,6 +1162,96 @@ const PACKS = [{
     q: { mcq: { prompt: "Który akt reguluje kontrolę drogową zabezpieczenia ładunku?", options: ["96/53/WE", "2014/47/UE", "561/2006"], correct: "2014/47/UE" },
          scenario: { prompt: "Kontrola sprawdza mocowanie ładunku >3,5 t. Podstawa?", options: ["Brak podstawy", "Dyrektywa 2014/47/UE", "Kodeks pracy"], correct: "Dyrektywa 2014/47/UE" } },
     ref: "Dyr. 2014/47/UE", sourceRef: "Dyr. 2014/47/UE (drogowe kontrole techniczne)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "zal:masa-vs-nacisk", formats: ["mcq", "scenario"],
+    why: "DMC (dopuszczalna masa całkowita) to co innego niż nacisk osi — można mieścić się w DMC, a przekroczyć nacisk pojedynczej osi przy złym rozkładzie.",
+    q: { mcq: { prompt: "Czy mieszcząc się w DMC masz pewność, że naciski osi są OK?", options: ["Tak, zawsze", "Nie — zły rozkład może przeciążyć oś", "Nacisk nie istnieje"], correct: "Nie — zły rozkład może przeciążyć oś" },
+         scenario: { prompt: "Waga pokazuje DMC OK, ale oś napędowa 12 t. Problem?", options: ["Nie", "Tak — przekroczony nacisk osi", "Dopiero od 15 t"], correct: "Tak — przekroczony nacisk osi" } },
+    ref: "Ustawa o drogach publ. · 96/53/WE", sourceRef: "Ustawa o drogach publ. Dz.U. 2025 poz. 889; dyr. 96/53/WE", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "rewizja 96/53/WE"
+  }, {
+    id: "zal:tara-ladownosc", formats: ["mcq", "fill"],
+    why: "Ładowność to różnica między dopuszczalną masą całkowitą a masą własną pojazdu (tarą).",
+    q: { mcq: { prompt: "Jak obliczysz ładowność pojazdu?", options: ["DMC + tara", "DMC - masa własna (tara)", "Masa własna x 2"], correct: "DMC - masa własna (tara)" },
+         fill: { prompt: "Ładowność = DMC minus masa ___ pojazdu.", correct: "własna" } },
+    ref: "Prawo o ruchu drogowym", sourceRef: "Prawo o ruchu drogowym (definicje mas)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "zal:pojazd-nienormatywny", formats: ["mcq", "scenario"],
+    why: "Pojazd nienormatywny (przekraczający dopuszczalne masy/naciski/wymiary) wymaga zezwolenia odpowiedniej kategorii (I–V).",
+    q: { mcq: { prompt: "Czego wymaga przejazd pojazdem nienormatywnym?", options: ["Niczego", "Zezwolenia kategorii I–V", "Tylko pilota"], correct: "Zezwolenia kategorii I–V" },
+         scenario: { prompt: "Ładunek ponadgabarytowy bez zezwolenia. Skutek?", options: ["Legalne", "Kara i zatrzymanie", "Zniżka"], correct: "Kara i zatrzymanie" } },
+    ref: "Prawo o ruchu drogowym art. 64", sourceRef: "Prawo o ruchu drogowym art. 64–64f", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "nowelizacje"
+  }, {
+    id: "zal:nadawca-dane", formats: ["mcq", "scenario"],
+    why: "Nadawca odpowiada za prawidłowość podanych danych o masie ładunku; błędne dane mogą skutkować przeciążeniem pojazdu.",
+    q: { mcq: { prompt: "Kto odpowiada za prawidłowość danych o masie ładunku?", options: ["Kierowca sam", "Nadawca", "Ubezpieczyciel"], correct: "Nadawca" },
+         scenario: { prompt: "Nadawca zaniżył masę, oś przeciążona. Co robisz mimo dokumentów?", options: ["Jadę na dokumentach", "Nie jadę z przeciążeniem", "Ignoruję wagę"], correct: "Nie jadę z przeciążeniem" } },
+    ref: "Prawo przewozowe art. 43", sourceRef: "Prawo przewozowe Dz.U. 2024 poz. 1262 art. 43", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "zal:waga-kontrola", formats: ["mcq", "scenario"],
+    why: "Naciski osi sprawdza się na wagach (najazdowych lub przenośnych) podczas kontroli drogowej.",
+    q: { mcq: { prompt: "Jak kontrola sprawdza naciski osi?", options: ["Na oko", "Ważeniem na wadze", "Z dokumentów tylko"], correct: "Ważeniem na wadze" },
+         scenario: { prompt: "ITD kieruje Cię na wagę najazdową. Powód?", options: ["Kontrola nacisków osi", "Sprawdzenie paliwa", "Pomiar prędkości"], correct: "Kontrola nacisków osi" } },
+    ref: "Ustawa o drogach publ.", sourceRef: "Ustawa o drogach publ. Dz.U. 2025 poz. 889", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "zal:burty-drzwi", formats: ["mcq", "scenario"],
+    why: "Ładunek nie może naciskać na drzwi ani burty w sposób, który grozi ich otwarciem i wypadnięciem ładunku.",
+    q: { mcq: { prompt: "Czy ładunek może napierać na drzwi/burty?", options: ["Tak, dowolnie", "Nie — grozi wypadnięciem", "Tylko z tyłu"], correct: "Nie — grozi wypadnięciem" },
+         scenario: { prompt: "Palety napierają na tylne drzwi. Ryzyko?", options: ["Brak", "Otwarcie drzwi i wypadnięcie ładunku", "Lepsze mocowanie"], correct: "Otwarcie drzwi i wypadnięcie ładunku" } },
+    ref: "KE Best Practices", sourceRef: "European Best Practices Guidelines (parafraza)", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "zal:przesuniecie-hamowanie", formats: ["mcq", "scenario"],
+    why: "Podczas hamowania ładunek napiera do przodu z siłą do 0,8 masy — dlatego przód (ściana przednia) jest najważniejszy w zabezpieczeniu.",
+    q: { mcq: { prompt: "W którą stronę napiera ładunek przy hamowaniu?", options: ["Do tyłu", "Do przodu", "Na boki"], correct: "Do przodu" },
+         scenario: { prompt: "Gwałtowne hamowanie, ładunek luźny. Gdzie poleci?", options: ["Do tyłu", "Do przodu na ścianę/kabinę", "Zostanie"], correct: "Do przodu na ścianę/kabinę" } },
+    ref: "EN 12195-1 (0,8g przód)", sourceRef: "EN 12195-1 (parafraza)", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "zal:srodek-wysoko", formats: ["mcq", "scenario"],
+    why: "Wysoko położony środek ciężkości ładunku zwiększa ryzyko wywrócenia na łukach i rondach — ciężkie ładuj nisko.",
+    q: { mcq: { prompt: "Czym grozi wysoko położony środek ciężkości?", options: ["Lepszą stabilnością", "Ryzykiem wywrotki na łuku", "Niższym spalaniem"], correct: "Ryzykiem wywrotki na łuku" },
+         scenario: { prompt: "Ciężkie palety na górze stosu. Rondo. Ryzyko?", options: ["Żadne", "Wywrócenie", "Lepsza przyczepność"], correct: "Wywrócenie" } },
+    ref: "KE Best Practices", sourceRef: "European Best Practices Guidelines (parafraza)", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "zal:rownomiernosc-boczna", formats: ["mcq", "scenario"],
+    why: "Nierównomierne obciążenie boczne (całość na jednej stronie) pogarsza stateczność i nierówno obciąża opony/zawieszenie.",
+    q: { mcq: { prompt: "Czym grozi ładunek zsunięty na jedną stronę?", options: ["Niczym", "Pogorszenie stateczności", "Lepsza jazda"], correct: "Pogorszenie stateczności" },
+         scenario: { prompt: "Cały ciężar po lewej stronie naczepy. Efekt?", options: ["OK", "Przechył, nierówne opony", "Oszczędność"], correct: "Przechył, nierówne opony" } },
+    ref: "KE Best Practices", sourceRef: "European Best Practices Guidelines (parafraza)", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "zal:oznakowanie-wystajacy", formats: ["mcq", "scenario"],
+    why: "Ładunek wystający poza obrys pojazdu musi być oznakowany (tablica/światło), zgodnie z przepisami ruchu drogowego.",
+    q: { mcq: { prompt: "Co z ładunkiem wystającym poza obrys?", options: ["Nic", "Oznakować (tablica/światło)", "Skryć"], correct: "Oznakować (tablica/światło)" },
+         scenario: { prompt: "Rura wystaje 1,5 m za tył. Co robisz?", options: ["Jadę tak", "Oznaczam wystający ładunek", "Skracam trasę"], correct: "Oznaczam wystający ładunek" } },
+    ref: "Prawo o ruchu drogowym", sourceRef: "Prawo o ruchu drogowym (ładunek wystający)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "nowelizacje"
+  }, {
+    id: "zal:przeciazenie-opony", formats: ["mcq", "scenario"],
+    why: "Przeciążenie skraca żywotność opon i hamulców, wydłuża drogę hamowania i uszkadza nawierzchnię dróg.",
+    q: { mcq: { prompt: "Jak przeciążenie wpływa na hamowanie?", options: ["Skraca drogę", "Wydłuża drogę hamowania", "Bez wpływu"], correct: "Wydłuża drogę hamowania" },
+         scenario: { prompt: "Stałe przeciążanie pojazdu. Skutki techniczne?", options: ["Dłuższa żywotność", "Szybsze zużycie opon/hamulców", "Niższe spalanie"], correct: "Szybsze zużycie opon/hamulców" } },
+    ref: "Bezpieczeństwo techniczne", sourceRef: "Materiały branżowe (parafraza)", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "zal:cmr", formats: ["mcq", "scenario"],
+    why: "Międzynarodowy list przewozowy CMR (lub e-CMR) potwierdza umowę przewozu i jest podstawowym dokumentem ładunku.",
+    q: { mcq: { prompt: "Jaki dokument potwierdza międzynarodowy przewóz ładunku?", options: ["Paragon", "List przewozowy CMR", "Dowód rejestracyjny"], correct: "List przewozowy CMR" },
+         scenario: { prompt: "Kontrola pyta o dokument ładunku w przewozie międzynar. Pokazujesz?", options: ["Nic", "CMR / e-CMR", "Prawo jazdy"], correct: "CMR / e-CMR" } },
+    ref: "Konwencja CMR", sourceRef: "Konwencja CMR (list przewozowy)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "zal:os-tandem", formats: ["mcq", "scenario"],
+    why: "Dopuszczalny nacisk osi wielokrotnej (tandem, tridem) zależy od rozstawu osi — im mniejszy rozstaw, tym niższy dopuszczalny łączny nacisk.",
+    q: { mcq: { prompt: "Od czego zależy dopuszczalny nacisk osi tandem?", options: ["Od koloru", "Od rozstawu osi", "Od marki"], correct: "Od rozstawu osi" },
+         scenario: { prompt: "Osie tandem blisko siebie. Dopuszczalny łączny nacisk?", options: ["Wyższy", "Niższy niż przy dużym rozstawie", "Bez limitu"], correct: "Niższy niż przy dużym rozstawie" } },
+    ref: "Dyr. 96/53/WE", sourceRef: "Dyr. 96/53/WE (osie wielokrotne)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "rewizja 96/53/WE"
+  }, {
+    id: "zal:rozladunek-kolejnosc", formats: ["mcq", "scenario"],
+    why: "Kolejność rozładunku wpływa na chwilowy rozkład masy — po zdjęciu części ładunku naciski osi mogą się zmienić i wymagać sprawdzenia.",
+    q: { mcq: { prompt: "Czy częściowy rozładunek może zmienić naciski osi?", options: ["Nie", "Tak — sprawdź po zdjęciu części ładunku", "Tylko przy pełnym"], correct: "Tak — sprawdź po zdjęciu części ładunku" },
+         scenario: { prompt: "Zdejmujesz ładunek z przodu, jedziesz dalej. Co warto?", options: ["Nic", "Sprawdzić rozkład i mocowanie", "Przyspieszyć"], correct: "Sprawdzić rozkład i mocowanie" } },
+    ref: "IRU checklist", sourceRef: "IRU Safe Loading Checklist (parafraza)", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "zal:most-ograniczenie", formats: ["mcq", "scenario"],
+    why: "Mosty i wiadukty mają własne ograniczenia masy (znak) — przekroczenie grozi uszkodzeniem obiektu i wysoką karą.",
+    q: { mcq: { prompt: "Co oznacza znak ograniczenia masy przed mostem?", options: ["Sugestię", "Zakaz wjazdu cięższych pojazdów", "Ograniczenie prędkości"], correct: "Zakaz wjazdu cięższych pojazdów" },
+         scenario: { prompt: "Most z ograniczeniem 24 t, masz 30 t. Wjeżdżasz?", options: ["Tak", "Nie — szukam objazdu", "Powoli"], correct: "Nie — szukam objazdu" } },
+    ref: "Prawo o ruchu drogowym", sourceRef: "Prawo o ruchu drogowym (znaki ograniczeń)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
   }]
 }, {
   id: "mocowanie",
@@ -1198,6 +1378,96 @@ const PACKS = [{
     q: { mcq: { prompt: "W jakiej jednostce są dane mocowania (LC, STF)?", options: ["kg", "daN", "tony"], correct: "daN" },
          fill: { prompt: "Parametry mocowania podaje się w ___, nie w kg.", correct: "daN" } },
     ref: "EN 12195-2", sourceRef: "EN 12195-2 (parafraza; jednostka daN)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:liczba-pasow", formats: ["mcq", "scenario"],
+    why: "Liczba potrzebnych pasów zależy od masy ładunku, współczynnika tarcia i kąta mocowania — nie od 'wyczucia'.",
+    q: { mcq: { prompt: "Od czego zależy liczba pasów mocujących?", options: ["Od koloru pasa", "Od masy, tarcia i kąta", "Zawsze 2"], correct: "Od masy, tarcia i kąta" },
+         scenario: { prompt: "Śliska podłoga (małe tarcie). Liczba pasów?", options: ["Mniejsza", "Większa niż przy dużym tarciu", "Bez znaczenia"], correct: "Większa niż przy dużym tarciu" } },
+    ref: "EN 12195-1", sourceRef: "EN 12195-1 (parafraza — obliczenia sił)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:krawedzie", formats: ["mcq", "scenario"],
+    why: "Ostre krawędzie ładunku przecinają pas — stosuj ochraniacze krawędzi (naroży), które też lepiej rozkładają docisk.",
+    q: { mcq: { prompt: "Do czego służą ochraniacze krawędzi?", options: ["Do ozdoby", "Chronią pas przed przecięciem i rozkładają docisk", "Do napinania"], correct: "Chronią pas przed przecięciem i rozkładają docisk" },
+         scenario: { prompt: "Pas biegnie przez ostry kant blachy. Co dodajesz?", options: ["Nic", "Ochraniacz krawędzi", "Drugi węzeł"], correct: "Ochraniacz krawędzi" } },
+    ref: "KE Best Practices", sourceRef: "European Best Practices Guidelines (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "moc:wezel-zakaz", formats: ["mcq", "scenario"],
+    why: "Na pasie mocującym nie wolno wiązać węzłów — węzeł drastycznie obniża jego wytrzymałość.",
+    q: { mcq: { prompt: "Czy można związać węzeł na pasie mocującym?", options: ["Tak", "Nie — obniża wytrzymałość", "Tylko podwójny"], correct: "Nie — obniża wytrzymałość" },
+         scenario: { prompt: "Pas za długi, chcesz skrócić węzłem. Reakcja?", options: ["Wiążę węzeł", "Używam napinacza/skracam prawidłowo", "Tnę nożem"], correct: "Używam napinacza/skracam prawidłowo" } },
+    ref: "EN 12195-2", sourceRef: "EN 12195-2 (parafraza)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:kotwiczenie-punkty", formats: ["mcq", "scenario"],
+    why: "Punkty mocowania (uchwyty, kłonice) na naczepie mają określoną wytrzymałość — mocowanie jest tak mocne jak najsłabszy punkt.",
+    q: { mcq: { prompt: "Co ogranicza siłę mocowania oprócz pasa?", options: ["Nic", "Wytrzymałość punktu kotwiczenia", "Kolor naczepy"], correct: "Wytrzymałość punktu kotwiczenia" },
+         scenario: { prompt: "Mocny pas, ale słaby uchwyt na ramie. Efekt?", options: ["Bez znaczenia", "Ograniczenie do wytrzymałości uchwytu", "Pas się wzmacnia"], correct: "Ograniczenie do wytrzymałości uchwytu" } },
+    ref: "EN 12640 / praktyka", sourceRef: "EN 12640 (punkty mocowania, parafraza)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:cylindry-kliny", formats: ["mcq", "scenario"],
+    why: "Ładunki toczące się (rury, cewki, cylindry) zabezpiecza się klinami/kołyskami przed toczeniem, dodatkowo do mocowania pasami.",
+    q: { mcq: { prompt: "Jak zabezpieczyć ładunek podatny na toczenie?", options: ["Tylko pas", "Kliny/kołyski + pasy", "Nic"], correct: "Kliny/kołyski + pasy" },
+         scenario: { prompt: "Duża stalowa rura na naczepie. Zabezpieczenie?", options: ["Jeden pas", "Kliny przeciw toczeniu + mocowanie", "Luźno"], correct: "Kliny przeciw toczeniu + mocowanie" } },
+    ref: "KE Best Practices / CTU", sourceRef: "European Best Practices Guidelines; CTU Code (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "moc:ladunek-luzny", formats: ["mcq", "scenario"],
+    why: "Ładunek sypki lub lekki (podatny na zwianie) zabezpiecza się przykryciem — plandeką lub siatką.",
+    q: { mcq: { prompt: "Jak zabezpieczyć ładunek sypki/lekki?", options: ["Zostawić", "Przykryć plandeką/siatką", "Tylko pas"], correct: "Przykryć plandeką/siatką" },
+         scenario: { prompt: "Wozisz lekki materiał podatny na zwianie. Co robisz?", options: ["Nic", "Przykrywam siatką/plandeką", "Jadę wolniej"], correct: "Przykrywam siatką/plandeką" } },
+    ref: "KE Best Practices", sourceRef: "European Best Practices Guidelines (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "moc:antyposlizg-06", formats: ["mcq", "fill"],
+    why: "Mata antypoślizgowa podnosi współczynnik tarcia (orientacyjnie do ~0,6), co znacznie zmniejsza liczbę potrzebnych pasów.",
+    q: { mcq: { prompt: "Jak mata antypoślizgowa wpływa na liczbę pasów?", options: ["Zwiększa", "Zmniejsza (większe tarcie)", "Bez wpływu"], correct: "Zmniejsza (większe tarcie)" },
+         fill: { prompt: "Mata antypoślizgowa podnosi współczynnik tarcia orientacyjnie do ok. ___.", correct: "0,6" } },
+    ref: "KE Best Practices", sourceRef: "European Best Practices Guidelines (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "moc:kombinacja", formats: ["mcq", "scenario"],
+    why: "Najskuteczniejsze jest łączenie metod: blokowanie (opór o ścianę) + mocowanie odciągowe/dociskowe.",
+    q: { mcq: { prompt: "Co daje najlepsze zabezpieczenie ładunku?", options: ["Jedna metoda", "Łączenie blokowania i mocowania", "Sama plandeka"], correct: "Łączenie blokowania i mocowania" },
+         scenario: { prompt: "Palety przy ścianie przedniej. Dodatkowo?", options: ["Nic — ściana wystarczy zawsze", "Docisk pasami dla pewności", "Zdejmuję ścianę"], correct: "Docisk pasami dla pewności" } },
+    ref: "EN 12195-1 / KE", sourceRef: "EN 12195-1; European Best Practices (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:napinacz", formats: ["mcq", "scenario"],
+    why: "Pas dociskowy napina się napinaczem zapadkowym (grzechotką); STF to siła osiągana standardowo napinaczem, nie sama siła ręki.",
+    q: { mcq: { prompt: "Czym napinasz pas dociskowy?", options: ["Ręką", "Napinaczem zapadkowym (grzechotką)", "Kluczem"], correct: "Napinaczem zapadkowym (grzechotką)" },
+         scenario: { prompt: "Chcesz osiągnąć wartość STF z etykiety. Jak?", options: ["Szarpnięciem", "Napinaczem zgodnie z etykietą", "Nogą"], correct: "Napinaczem zgodnie z etykietą" } },
+    ref: "EN 12195-2", sourceRef: "EN 12195-2 (parafraza)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:mieszanie-lc", formats: ["mcq", "scenario"],
+    why: "Nie należy mieszać w jednym mocowaniu elementów o różnym LC — o wytrzymałości decyduje najsłabszy element zestawu.",
+    q: { mcq: { prompt: "Co decyduje o wytrzymałości zestawu mocującego?", options: ["Najmocniejszy element", "Najsłabszy element", "Średnia"], correct: "Najsłabszy element" },
+         scenario: { prompt: "Łączysz pas LC 2500 z hakiem LC 1000. Realne LC?", options: ["2500", "1000 (najsłabszy)", "3500"], correct: "1000 (najsłabszy)" } },
+    ref: "EN 12195-2", sourceRef: "EN 12195-2 (parafraza)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:eumos", formats: ["mcq", "scenario"],
+    why: "EUMOS 40509 to test stabilności jednostki ładunkowej (palety) — dotyczy głównie producentów opakowań, ale jest ujęty w kontroli 2014/47/UE.",
+    q: { mcq: { prompt: "Czego dotyczy EUMOS 40509?", options: ["Stabilności jednostki ładunkowej", "Emisji CO2", "Czasu jazdy"], correct: "Stabilności jednostki ładunkowej" },
+         scenario: { prompt: "Paleta rozjeżdża się mimo owinięcia folią. Problem?", options: ["Mocowanie kierowcy", "Niestabilna jednostka ładunkowa (EUMOS)", "Za mało pasów zawsze"], correct: "Niestabilna jednostka ładunkowa (EUMOS)" } },
+    ref: "EUMOS 40509 / dyr. 2014/47/UE", sourceRef: "EUMOS 40509:2020; dyr. 2014/47/UE (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "moc:ctu-code", formats: ["mcq", "scenario"],
+    why: "CTU Code (IMO/ILO/UNECE) to kodeks pakowania jednostek transportowych — istotny przy kontenerach i transporcie intermodalnym.",
+    q: { mcq: { prompt: "Czego dotyczy CTU Code?", options: ["Pakowania jednostek transportowych (kontenery)", "Czasu pracy", "Opłat drogowych"], correct: "Pakowania jednostek transportowych (kontenery)" },
+         scenario: { prompt: "Pakujesz kontener na transport morsko-drogowy. Wytyczne?", options: ["Brak", "CTU Code", "Tylko EN 12195"], correct: "CTU Code" } },
+    ref: "CTU Code (IMO/UNECE)", sourceRef: "CTU Code 2014 (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "moc:positive-fit-luki", formats: ["mcq", "fill"],
+    why: "Positive-fit (wypełnienie przestrzeni) działa, gdy luki są małe — dla celów kontrolnych orientacyjnie do ok. 15 cm łącznie, bez dużych przerw.",
+    q: { mcq: { prompt: "Kiedy wypełnienie przestrzeni (positive-fit) zabezpiecza ładunek?", options: ["Przy dużych lukach", "Gdy luki są małe", "Zawsze"], correct: "Gdy luki są małe" },
+         fill: { prompt: "Positive-fit wymaga ___ luk między ładunkiem a ścianami.", correct: "małych" } },
+    ref: "EN 12642 / kontrola", sourceRef: "EN 12642; wytyczne kontrolne (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:sprawdzenie-trasa", formats: ["mcq", "scenario"],
+    why: "Mocowanie sprawdza się po pierwszych kilometrach i po przerwach — pasy mogą poluzować się po osiadaniu ładunku.",
+    q: { mcq: { prompt: "Kiedy skontrolować napięcie pasów?", options: ["Nigdy", "Po pierwszych km i po przerwach", "Dopiero u celu"], correct: "Po pierwszych km i po przerwach" },
+         scenario: { prompt: "Po 30 km pasy wydają się luźniejsze. Co robisz?", options: ["Jadę dalej", "Dociągam napinaczem", "Zdejmuję"], correct: "Dociągam napinaczem" } },
+    ref: "KE Best Practices", sourceRef: "European Best Practices Guidelines (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
+  }, {
+    id: "moc:pas-lc-przyklad", formats: ["mcq", "scenario"],
+    why: "Typowy pas transportowy ma LC rzędu 2500 daN — wartość odczytujesz z etykiety, nie zgadujesz.",
+    q: { mcq: { prompt: "Skąd znasz udźwig (LC) konkretnego pasa?", options: ["Zgaduję", "Z etykiety pasa", "Z koloru"], correct: "Z etykiety pasa" },
+         scenario: { prompt: "Etykieta nieczytelna, nie znasz LC. Używasz pasa?", options: ["Tak", "Nie — bez znanego LC nie liczę mocowania", "Zakładam 5000"], correct: "Nie — bez znanego LC nie liczę mocowania" } },
+    ref: "EN 12195-2", sourceRef: "EN 12195-2 (parafraza; etykieta)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
   }]
 }];
 
