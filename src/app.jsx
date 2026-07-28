@@ -304,6 +304,96 @@ const PACKS = [{
     ref: "Rozp. 165/2014 · 2006/22/WE",
     sourceRef: "Rozp. 165/2014 art. 36; dyr. 2006/22/WE",
     reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:typy-kart", formats: ["mcq", "match"],
+    why: "Istnieją cztery typy kart tachografowych: kierowcy, warsztatowa, przedsiębiorstwa i kontrolna.",
+    q: { mcq: { prompt: "Ile jest typów kart tachografowych?", options: ["2", "3", "4"], correct: "4" },
+         match: { prompt: "Dopasuj kartę do posiadacza.", pairs: { "Karta kierowcy": "kierowca", "Karta przedsiębiorstwa": "firma", "Karta kontrolna": "inspektor" } } },
+    ref: "Rozp. 165/2014", sourceRef: "Rozp. (UE) 165/2014", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:kalibracja", formats: ["mcq", "fill"],
+    why: "Tachograf wymaga okresowej kalibracji/legalizacji w autoryzowanym warsztacie co 2 lata.",
+    q: { mcq: { prompt: "Co ile lat tachograf przechodzi obowiązkową kalibrację?", options: ["Co rok", "Co 2 lata", "Co 5 lat"], correct: "Co 2 lata" },
+         fill: { prompt: "Tachograf kalibruje się w autoryzowanym warsztacie co ___ lata.", correct: "2" } },
+    ref: "Rozp. 165/2014 art. 23", sourceRef: "Rozp. 165/2014 art. 23 (przeglądy)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:wykresowka", formats: ["mcq", "match"],
+    why: "Tachograf analogowy zapisuje aktywność na wykresówce (tarczy); tachograf cyfrowy zapisuje na karcie kierowcy.",
+    q: { mcq: { prompt: "Na czym zapisuje aktywność tachograf analogowy?", options: ["Na karcie", "Na wykresówce (tarczy)", "W chmurze"], correct: "Na wykresówce (tarczy)" },
+         match: { prompt: "Dopasuj typ tachografu do nośnika.", pairs: { "Analogowy": "wykresówka", "Cyfrowy": "karta kierowcy" } } },
+    ref: "Rozp. 165/2014", sourceRef: "Rozp. (UE) 165/2014", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:czas-utc", formats: ["mcq", "scenario"],
+    why: "Tachograf cyfrowy rejestruje czas w UTC (czas uniwersalny), niezależnie od strefy czasowej.",
+    q: { mcq: { prompt: "W jakim czasie tachograf cyfrowy rejestruje zdarzenia?", options: ["Czas lokalny", "UTC", "Czas kierowcy"], correct: "UTC" },
+         scenario: { prompt: "Przekraczasz strefę czasową. Czas na tachografie...", options: ["Zmienia się z lokalnym", "Zostaje w UTC", "Cofa się"], correct: "Zostaje w UTC" } },
+    ref: "Rozp. 165/2014 · 2016/799", sourceRef: "Rozp. wyk. (UE) 2016/799 (specyfikacja)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "tacho:przedluzenie-karty", formats: ["mcq", "scenario"],
+    why: "Wniosek o wymianę karty przed końcem ważności składa się najwcześniej 60 dni, a najpóźniej ok. 15 dni roboczych przed jej wygaśnięciem.",
+    q: { mcq: { prompt: "Ile dni przed końcem ważności najwcześniej złożyć wniosek o nową kartę?", options: ["7 dni", "60 dni", "180 dni"], correct: "60 dni" },
+         scenario: { prompt: "Karcie kończy się ważność za tydzień, nie złożyłeś wniosku. Ryzyko?", options: ["Brak", "Przerwa bez ważnej karty", "Automatyczne przedłużenie"], correct: "Przerwa bez ważnej karty" } },
+    ref: "Ustawa o tachografach · PWPW", sourceRef: "Ustawa o tachografach Dz.U. 2024 poz. 1037; PWPW/info-car", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "procedura — okresowo"
+  }, {
+    id: "tacho:g2v1-2019", formats: ["mcq", "fill"],
+    why: "Smart tachograf pierwszej generacji (Gen2 V1) obowiązuje w nowo rejestrowanych pojazdach od 15 czerwca 2019.",
+    q: { mcq: { prompt: "Od kiedy w nowych pojazdach obowiązuje smart tachograf (Gen2 V1)?", options: ["Od 2014", "Od 15.06.2019", "Od 2023"], correct: "Od 15.06.2019" },
+         fill: { prompt: "Smart tachograf Gen2 V1 — nowe rejestracje od 15.06.____.", correct: "2019" } },
+    ref: "Rozp. 165/2014 · 2016/799", sourceRef: "Rozp. (UE) 165/2014; 2016/799", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "historyczne" },
+  {
+    id: "tacho:retrofit-2025", formats: ["mcq", "scenario"],
+    why: "Pojazdy w transporcie międzynarodowym musiały mieć smart tachograf G2V2 do 19 sierpnia 2025 (etap zakończony).",
+    q: { mcq: { prompt: "Do kiedy pojazdy w transporcie międzynarodowym musiały mieć G2V2?", options: ["Do 2023", "Do 19.08.2025", "Do 2027"], correct: "Do 19.08.2025" },
+         scenario: { prompt: "Jeździsz międzynarodowo starym tacho cyfrowym w 2026. Zgodne?", options: ["Tak", "Nie — wymagany G2V2", "Tylko latem"], correct: "Nie — wymagany G2V2" } },
+    ref: "Rozp. 2020/1054", sourceRef: "Rozp. (UE) 2020/1054; komunikat DG MOVE 19.08.2025", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "historyczne" },
+  {
+    id: "tacho:osnma", formats: ["mcq", "scenario"],
+    why: "G2V2 potwierdza pozycję pojazdu przez system Galileo/OSNMA (uwierzytelniona nawigacja satelitarna), trudniejszy do sfałszowania.",
+    q: { mcq: { prompt: "Skąd G2V2 bierze wiarygodną pozycję pojazdu?", options: ["Z telefonu", "Z Galileo/OSNMA", "Z wpisu ręcznego"], correct: "Z Galileo/OSNMA" },
+         scenario: { prompt: "Po co G2V2 używa OSNMA?", options: ["Do radia", "By pozycja była uwierzytelniona i trudna do podrobienia", "Do niczego"], correct: "By pozycja była uwierzytelniona i trudna do podrobienia" } },
+    ref: "Rozp. 2021/1228", sourceRef: "Rozp. wyk. (UE) 2021/1228 (G2V2, OSNMA)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "specyfikacje" },
+  {
+    id: "tacho:ddd-podpis", formats: ["mcq", "scenario"],
+    why: "Dane pobrane z tachografu (pliki .ddd) są cyfrowo podpisane, więc ich autentyczność da się zweryfikować.",
+    q: { mcq: { prompt: "Dlaczego danych z tachografu nie da się łatwo podrobić?", options: ["Są zaszyfrowane hasłem", "Są cyfrowo podpisane", "Są drukowane"], correct: "Są cyfrowo podpisane" },
+         scenario: { prompt: "Ktoś edytował plik .ddd w notatniku. Wykryje się to?", options: ["Nie", "Tak — podpis cyfrowy przestanie się zgadzać", "Tylko na granicy"], correct: "Tak — podpis cyfrowy przestanie się zgadzać" } },
+    ref: "Rozp. 2016/799 (Zał. IC)", sourceRef: "Rozp. wyk. (UE) 2016/799 (podpis cyfrowy)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne" },
+  {
+    id: "tacho:company-lock", formats: ["mcq", "scenario"],
+    why: "Przedsiębiorca zakłada w jednostce pojazdowej blokadę firmy (company lock), by chronić swoje dane przed odczytem przez inne firmy.",
+    q: { mcq: { prompt: "Do czego służy blokada firmy (company lock) w tachografie?", options: ["Blokuje jazdę", "Chroni dane firmy w VU", "Wyłącza GPS"], correct: "Chroni dane firmy w VU" },
+         scenario: { prompt: "Sprzedajesz pojazd innej firmie. Co warto zrobić z blokadą firmy?", options: ["Nic", "Zdjąć blokadę (company unlock)", "Zniszczyć tacho"], correct: "Zdjąć blokadę (company unlock)" } },
+    ref: "Rozp. 165/2014", sourceRef: "Rozp. (UE) 165/2014 (blokady przedsiębiorstwa)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne" },
+  {
+    id: "tacho:okazanie", formats: ["mcq", "scenario"],
+    why: "Na żądanie kontroli kierowca okazuje kartę, wydruki i wykresówki z wymaganego okresu.",
+    q: { mcq: { prompt: "Co okazujesz na żądanie kontroli tachografowej?", options: ["Tylko dowód", "Kartę, wydruki, wykresówki", "Nic"], correct: "Kartę, wydruki, wykresówki" },
+         scenario: { prompt: "ITD prosi o dane za ostatnie tygodnie. Odmawiasz?", options: ["Tak", "Nie — mam obowiązek okazać", "Tylko z adwokatem"], correct: "Nie — mam obowiązek okazać" } },
+    ref: "Rozp. 165/2014 art. 36", sourceRef: "Rozp. 165/2014 art. 36", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne" },
+  {
+    id: "tacho:kontrola-itd", formats: ["mcq", "match"],
+    why: "Na drodze przestrzeganie czasu jazdy i tachografu kontroluje m.in. ITD i Policja; kontrolę w firmie prowadzi ITD/PIP.",
+    q: { mcq: { prompt: "Kto kontroluje czas jazdy i tachograf na drodze?", options: ["Straż pożarna", "ITD i Policja", "Urząd skarbowy"], correct: "ITD i Policja" },
+         match: { prompt: "Dopasuj kontrolę do organu.", pairs: { "Kontrola drogowa": "ITD / Policja", "Kontrola w firmie": "ITD / PIP" } } },
+    ref: "Dyr. 2006/22/WE · ustawa o transp. drog.", sourceRef: "Dyr. 2006/22/WE; ustawa o transp. drog.", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne" },
+  {
+    id: "tacho:tolerancja-2025", formats: ["mcq", "scenario"],
+    why: "Po terminie doposażenia w G2V2 obowiązywał okres tolerancji egzekwowania (1.01–28.02.2025); normalne karanie od 1 marca 2025.",
+    q: { mcq: { prompt: "Od kiedy ruszyło normalne karanie za brak G2V2 (po doposażeniu)?", options: ["Od 1.01.2025", "Od 1.03.2025", "Od 2026"], correct: "Od 1.03.2025" },
+         scenario: { prompt: "Luty 2025, brak G2V2. Co obowiązywało?", options: ["Pełne kary", "Okres tolerancji egzekwowania", "Zakaz jazdy"], correct: "Okres tolerancji egzekwowania" } },
+    ref: "Ustalenia państw członkowskich", sourceRef: "Ustalenia MS (tolerancja 1.01–28.02.2025)", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "historyczne" },
+  {
+    id: "tacho:montaz-35t", formats: ["mcq", "fill"],
+    why: "Obowiązek montażu tachografu dotyczy pojazdów o DMC powyżej 3,5 t oraz przewożących ponad 9 osób (z kierowcą).",
+    q: { mcq: { prompt: "Od jakiej masy pojazd co do zasady musi mieć tachograf?", options: ["> 2,5 t", "> 3,5 t", "> 7,5 t"], correct: "> 3,5 t" },
+         fill: { prompt: "Tachograf: pojazdy o DMC powyżej ___ t (i przewozy > 9 osób).", correct: "3,5" } },
+    ref: "Rozp. 165/2014 art. 3", sourceRef: "Rozp. 165/2014 art. 3 (zakres)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "1.07.2026 dla >2,5 t międzynar." },
+  {
+    id: "tacho:kabotaz-zaladunek", formats: ["mcq", "scenario"],
+    why: "G2V2 automatycznie rejestruje miejsca załadunku i rozładunku, co ułatwia kontrolę kabotażu.",
+    q: { mcq: { prompt: "Co nowego rejestruje G2V2 pod kątem kabotażu?", options: ["Nic", "Miejsca załadunku i rozładunku", "Zużycie paliwa"], correct: "Miejsca załadunku i rozładunku" },
+         scenario: { prompt: "Kontrola sprawdza kabotaż. Skąd dane o za/rozładunku w G2V2?", options: ["Z pamięci kierowcy", "Automatycznie zarejestrowane w tacho", "Z listu przewozowego tylko"], correct: "Automatycznie zarejestrowane w tacho" } },
+    ref: "Rozp. 2021/1228", sourceRef: "Rozp. wyk. (UE) 2021/1228 (rejestracja za/rozładunku)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "specyfikacje"
   }]
 }, {
   id: "czas-pracy",
