@@ -610,6 +610,12 @@ const PACKS = [{
     q: { mcq: { prompt: "Czy rekompensatę za skrócony odpoczynek tygodniowy można podzielić?", options: ["Tak, na części", "Nie — w całości (en bloc)", "Dowolnie"], correct: "Nie — w całości (en bloc)" },
          scenario: { prompt: "Masz 15 h rekompensaty. Jak ją odbierasz?", options: ["Po kawałku w tygodniu", "W całości, doczepioną do innego odpoczynku", "Zamiast jazdy"], correct: "W całości, doczepioną do innego odpoczynku" } },
     ref: "561/2006 art. 8 ust. 6b", sourceRef: "Rozp. 561/2006 art. 8 ust. 6b", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "czas:zarzadzajacy", formats: ["mcq", "scenario"],
+    why: "Zarządzający transportem odpowiada za organizację pracy i nadzór nad danymi tachografu; w wielu naruszeniach czasu pracy odpowiedzialność jest równoległa: kierowca + firma + zarządzający.",
+    q: { mcq: { prompt: "Kto odpowiada za organizację pracy i nadzór nad danymi tachografu?", options: ["Tylko kierowca", "Zarządzający transportem (odpowiedzialność równoległa)", "Nikt"], correct: "Zarządzający transportem (odpowiedzialność równoległa)" },
+         scenario: { prompt: "Systematyczne przekroczenia w firmie. Kto może odpowiadać?", options: ["Tylko kierowca", "Kierowca, firma i zarządzający", "Tylko dyspozytor"], correct: "Kierowca, firma i zarządzający" } },
+    ref: "Ustawa o transp. drog.", sourceRef: "Ustawa o transp. drog. (odpowiedzialność zarządzającego)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "nowelizacje"
   }]
 }, {
   id: "pierwsza-pomoc",
@@ -820,6 +826,78 @@ const PACKS = [{
     q: { mcq: { prompt: "Jakiej normie odpowiada typowa apteczka samochodowa?", options: ["DIN 13164", "ISO 9001", "EN 12195"], correct: "DIN 13164" },
          fill: { prompt: "Materiały jałowe w apteczce mają trwałość ok. ___ lat.", correct: "5" } },
     ref: "DIN 13164", sourceRef: "DIN 13164:2022 (skład apteczki)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje normy"
+  }, {
+    id: "pp:wstrzas", formats: ["mcq", "scenario"],
+    why: "Wstrząs: blada, zimna, spocona skóra, szybkie słabo wyczuwalne tętno, przyspieszony oddech. Ułóż na plecach z uniesionymi nogami (~30 cm), okryj, nie podawaj picia.",
+    q: { mcq: { prompt: "Typowe objawy wstrząsu?", options: ["Ciepła sucha skóra, wolne tętno", "Blada zimna spocona skóra, szybkie tętno", "Zaczerwienienie i gorączka"], correct: "Blada zimna spocona skóra, szybkie tętno" },
+         scenario: { prompt: "Poszkodowany po krwotoku: blady, zimny pot, szybkie tętno. Pozycja?", options: ["Półsiedząca", "Na plecach z uniesionymi nogami, okryć", "Na brzuchu"], correct: "Na plecach z uniesionymi nogami, okryć" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (wstrząs)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:omdlenie", formats: ["mcq", "scenario"],
+    why: "Omdlenie to krótkotrwała utrata przytomności z samoistnym powrotem. Ułóż na plecach, unieś nogi; po odzyskaniu przytomności wstawanie stopniowe. Mit: nie sadzać gwałtownie.",
+    q: { mcq: { prompt: "Co zrobić przy omdleniu?", options: ["Posadzić i dać wody", "Ułożyć na plecach, unieść nogi", "Postawić na nogi"], correct: "Ułożyć na plecach, unieść nogi" },
+         scenario: { prompt: "Ktoś zemdlał i szybko odzyskał przytomność. Stawiasz go od razu?", options: ["Tak", "Nie — wstawanie stopniowe", "Sadzam gwałtownie"], correct: "Nie — wstawanie stopniowe" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (omdlenie)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:zlamanie", formats: ["mcq", "scenario"],
+    why: "Złamanie: unieruchom kończynę w pozycji zastanej. Zasada Potta: przy złamaniu kości unieruchom dwa sąsiadujące stawy; przy urazie stawu — dwie sąsiadujące kości.",
+    q: { mcq: { prompt: "Co mówi zasada Potta przy złamaniu kości?", options: ["Nastawić kość", "Unieruchomić dwa sąsiadujące stawy", "Rozcierać miejsce"], correct: "Unieruchomić dwa sąsiadujące stawy" },
+         scenario: { prompt: "Podejrzenie złamania przedramienia. Co robisz?", options: ["Nastawiam", "Unieruchamiam w pozycji zastanej (2 stawy)", "Każę ruszać ręką"], correct: "Unieruchamiam w pozycji zastanej (2 stawy)" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (urazy kończyn)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:zlamanie-otwarte", formats: ["mcq", "scenario"],
+    why: "Złamanie otwarte: załóż jałowy opatrunek wokół wystającej kości, nie nastawiaj i nie wpychaj kości do rany.",
+    q: { mcq: { prompt: "Co robisz przy złamaniu otwartym (kość wystaje)?", options: ["Wpycham kość", "Jałowy opatrunek wokół, nie nastawiam", "Obwiązuję ciasno kość"], correct: "Jałowy opatrunek wokół, nie nastawiam" },
+         scenario: { prompt: "Kość przebiła skórę. Wpychasz ją z powrotem?", options: ["Tak", "Nie — opatrunek wokół, nie ruszam", "Myję i wciskam"], correct: "Nie — opatrunek wokół, nie ruszam" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (złamanie otwarte)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:rana-ssaca", formats: ["mcq", "scenario"],
+    why: "Rana ssąca klatki piersiowej (zasysanie powietrza, bulgotanie): nie zakrywaj szczelnie — szczelny opatrunek grozi odmą prężną. Pilnie 112.",
+    q: { mcq: { prompt: "Jak postąpić z raną ssącą klatki piersiowej?", options: ["Zakleić szczelnie", "Nie zakrywać szczelnie (ryzyko odmy prężnej)", "Zatkać palcem na stałe"], correct: "Nie zakrywać szczelnie (ryzyko odmy prężnej)" },
+         scenario: { prompt: "Rana klatki, słychać zasysanie powietrza. Kleisz szczelny opatrunek?", options: ["Tak, szczelnie", "Nie — grozi odmą prężną, 112", "Owijam ciasno"], correct: "Nie — grozi odmą prężną, 112" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (urazy klatki)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:odma-prezna", formats: ["mcq", "scenario"],
+    why: "Odma prężna to stan bezpośredniego zagrożenia życia: narastająca duszność, poszerzenie żył szyjnych, przesunięcie tchawicy — pilnie 112.",
+    q: { mcq: { prompt: "Odma prężna to...", options: ["Drobny uraz", "Stan bezpośredniego zagrożenia życia", "Rodzaj opatrunku"], correct: "Stan bezpośredniego zagrożenia życia" },
+         scenario: { prompt: "Po urazie klatki: narastająca duszność, przesunięta tchawica. Reakcja?", options: ["Czekać", "Pilnie 112 — podejrzenie odmy prężnej", "Dać pić"], correct: "Pilnie 112 — podejrzenie odmy prężnej" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (odma prężna)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:hipotermia", formats: ["mcq", "scenario"],
+    why: "Hipotermia: chroń przed dalszą utratą ciepła, obchodź się delikatnie (gwałtowne ruchy mogą wywołać zatrzymanie krążenia), ciepłe okrycie, ciepłe słodkie napoje jeśli przytomny; nie rozcierać.",
+    q: { mcq: { prompt: "Jak postępować z osobą wychłodzoną (hipotermia)?", options: ["Energicznie rozcierać", "Delikatnie, ciepłe okrycie, nie rozcierać", "Gorąca kąpiel od razu"], correct: "Delikatnie, ciepłe okrycie, nie rozcierać" },
+         scenario: { prompt: "Wychłodzony poszkodowany. Rozcierasz go energicznie?", options: ["Tak", "Nie — delikatnie, ryzyko NZK", "Wkładam do gorącej wody"], correct: "Nie — delikatnie, ryzyko NZK" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (hipotermia)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:odmrozenia", formats: ["mcq", "scenario"],
+    why: "Odmrożenia: ogrzewaj stopniowo, nie rozcieraj śniegiem ani nie ogrzewaj gwałtownie (ryzyko dalszego uszkodzenia tkanek).",
+    q: { mcq: { prompt: "Jak ogrzewać odmrożenia?", options: ["Rozcierać śniegiem", "Stopniowo, bez rozcierania", "Nad ogniem"], correct: "Stopniowo, bez rozcierania" },
+         scenario: { prompt: "Odmrożone palce. Rozcierasz je śniegiem?", options: ["Tak", "Nie — stopniowe ogrzewanie", "Grzeję zapalniczką"], correct: "Nie — stopniowe ogrzewanie" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (odmrożenia)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:triage", formats: ["mcq", "scenario"],
+    why: "Przy wielu poszkodowanych (uproszczony triage): najpierw poleć chodzącym przejść w wyznaczone miejsce; osoby ciche/nieruchome wymagają najpilniejszej oceny (paradoks triage).",
+    q: { mcq: { prompt: "Kogo przy wielu ofiarach ocenia się najpilniej?", options: ["Głośno krzyczących", "Cichych/nieruchomych", "Chodzących"], correct: "Cichych/nieruchomych" },
+         scenario: { prompt: "Wiele ofiar. Pierwszy ruch wg uproszczonego triage?", options: ["Ratuję najgłośniejszego", "Odsyłam chodzących w jedno miejsce", "Działam losowo"], correct: "Odsyłam chodzących w jedno miejsce" } },
+    ref: "ERC 2025 / START", sourceRef: "Uproszczony triage START (parafraza; nie procedura profesjonalna)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:wytrzewienie", formats: ["mcq", "scenario"],
+    why: "Uraz brzucha z wytrzewieniem: nie wpychaj wypadniętych narządów, okryj wilgotnym jałowym opatrunkiem, ułóż na plecach z ugiętymi nogami, nie podawaj picia.",
+    q: { mcq: { prompt: "Co robisz przy wytrzewieniu (wypadnięte narządy)?", options: ["Wpycham narządy", "Okrywam wilgotnym jałowym opatrunkiem", "Podaję wodę"], correct: "Okrywam wilgotnym jałowym opatrunkiem" },
+         scenario: { prompt: "Rozległa rana brzucha, widoczne jelita. Wpychasz je?", options: ["Tak", "Nie — wilgotny jałowy opatrunek, nie poić", "Myję i wciskam"], correct: "Nie — wilgotny jałowy opatrunek, nie poić" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (urazy brzucha)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:oko-cialo-obce", formats: ["mcq", "scenario"],
+    why: "Uraz oka: nie usuwaj wbitych/przenikających ciał obcych, osłoń oko; przy substancji chemicznej płucz oko dużą ilością wody (od nosa na zewnątrz).",
+    q: { mcq: { prompt: "Ciało obce wbite w gałkę oczną. Co robisz?", options: ["Wyciągam", "Osłaniam, nie usuwam", "Przemywam i wyciskam"], correct: "Osłaniam, nie usuwam" },
+         scenario: { prompt: "Chemikalia prysnęły do oka. Pierwsza pomoc?", options: ["Przecieram chusteczką", "Płuczę dużą ilością wody", "Zakrywam na sucho"], correct: "Płuczę dużą ilością wody" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (uraz oka)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:aspiryna-zawal", formats: ["mcq", "scenario"],
+    why: "Przy bólu wieńcowym u osoby przytomnej i bez uczulenia można pomóc w rozgryzieniu aspiryny (ERC 2025: 150-500 mg). Nie podawaj przy alergii na ASA ani osobie nieprzytomnej.",
+    q: { mcq: { prompt: "Komu NIE podajemy aspiryny przy bólu w klatce?", options: ["Przytomnemu bez uczulenia", "Uczulonemu na ASA lub nieprzytomnemu", "Nikomu nie wolno"], correct: "Uczulonemu na ASA lub nieprzytomnemu" },
+         scenario: { prompt: "Ból wieńcowy, przytomny, brak uczulenia. Aspiryna?", options: ["Nie wolno", "Można pomóc rozgryźć 150-500 mg", "Podać 5 tabletek"], correct: "Można pomóc rozgryźć 150-500 mg" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (aspiryna 150-500 mg; RCUK upraszcza do 300 mg)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR — dawka do potwierdzenia"
   }]
 }, {
   id: "eco-driving",
@@ -1036,6 +1114,18 @@ const PACKS = [{
     q: { mcq: { prompt: "Co po cichu zwiększa spalanie?", options: ["Regularny serwis", "Zła geometria kół i zużyte filtry", "Prawidłowe ciśnienie"], correct: "Zła geometria kół i zużyte filtry" },
          scenario: { prompt: "Spalanie wzrosło bez zmiany stylu jazdy. Sprawdzasz?", options: ["Nic", "Ciśnienie, filtry, geometrię", "Kolor kabiny"], correct: "Ciśnienie, filtry, geometrię" } },
     ref: "Technika (parafraza)", sourceRef: "Materiały branżowe (parafraza)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "orientacyjne"
+  }, {
+    id: "eco:etoll-pl", formats: ["mcq", "scenario"],
+    why: "W Polsce trwa reforma opłat e-TOLL w kierunku stawki trójskładnikowej (infrastruktura wg Euro + koszty zewnętrzne wg emisji CO2 i zanieczyszczeń) — czyściejsze pojazdy mają płacić mniej.",
+    q: { mcq: { prompt: "W jakim kierunku zmienia się polski e-TOLL?", options: ["Stała stawka dla wszystkich", "Zależność od klasy emisji CO2", "Zniesienie opłat"], correct: "Zależność od klasy emisji CO2" },
+         scenario: { prompt: "Po reformie e-TOLL czystszy pojazd zapłaci...", options: ["Więcej", "Mniej", "Tyle samo"], correct: "Mniej" } },
+    ref: "e-TOLL (reforma w toku)", sourceRef: "Projekt reformy e-TOLL PL (status legislacyjny — do weryfikacji)", reviewType: "T", copyright: "parafraza", verifiedBy: null, monitorUntil: "wejście w życie reformy"
+  }, {
+    id: "eco:spalanie-wzor", formats: ["mcq", "fill"],
+    why: "Średnie spalanie liczy się wzorem: (zużyte litry / przejechane km) × 100. Np. 500 l na 1800 km = 27,8 l/100 km.",
+    q: { mcq: { prompt: "Jak obliczysz średnie spalanie w l/100 km?", options: ["km / litry", "(litry / km) × 100", "litry × km"], correct: "(litry / km) × 100" },
+         fill: { prompt: "500 litrów na 1000 km to ___ l/100 km.", correct: "50" } },
+    ref: "Ekonomika (parafraza)", sourceRef: "Wzór podstawowy (materiał dydaktyczny)", reviewType: "T", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
   }]
 }, {
   id: "zaladunek",
@@ -1252,6 +1342,12 @@ const PACKS = [{
     q: { mcq: { prompt: "Co oznacza znak ograniczenia masy przed mostem?", options: ["Sugestię", "Zakaz wjazdu cięższych pojazdów", "Ograniczenie prędkości"], correct: "Zakaz wjazdu cięższych pojazdów" },
          scenario: { prompt: "Most z ograniczeniem 24 t, masz 30 t. Wjeżdżasz?", options: ["Tak", "Nie — szukam objazdu", "Powoli"], correct: "Nie — szukam objazdu" } },
     ref: "Prawo o ruchu drogowym", sourceRef: "Prawo o ruchu drogowym (znaki ograniczeń)", reviewType: "L", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "zal:rozklad-a-nacisk", formats: ["mcq", "scenario"],
+    why: "Rozkład masy wprost przekłada się na naciski osi: przesunięcie ładunku do przodu zwiększa nacisk osi przedniej i odciąża tylną, i odwrotnie. Dokładny nacisk wylicza się z pozycji ładunku i rozstawu osi.",
+    q: { mcq: { prompt: "Przesunięcie ładunku do przodu naczepy...", options: ["Odciąża oś przednią", "Zwiększa nacisk z przodu, odciąża tył", "Nie zmienia nacisków"], correct: "Zwiększa nacisk z przodu, odciąża tył" },
+         scenario: { prompt: "Oś tylna przeciążona. Jak zmienić rozkład (jeśli można)?", options: ["Dołożyć z tyłu", "Przesunąć ładunek do przodu", "Nic nie da się zrobić"], correct: "Przesunąć ładunek do przodu" } },
+    ref: "KE Best Practices (rozkład masy)", sourceRef: "European Best Practices Guidelines (parafraza); dokładne obliczenie wg pozycji i rozstawu osi", reviewType: "L", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje"
   }]
 }, {
   id: "mocowanie",
@@ -1468,6 +1564,12 @@ const PACKS = [{
     q: { mcq: { prompt: "Skąd znasz udźwig (LC) konkretnego pasa?", options: ["Zgaduję", "Z etykiety pasa", "Z koloru"], correct: "Z etykiety pasa" },
          scenario: { prompt: "Etykieta nieczytelna, nie znasz LC. Używasz pasa?", options: ["Tak", "Nie — bez znanego LC nie liczę mocowania", "Zakładam 5000"], correct: "Nie — bez znanego LC nie liczę mocowania" } },
     ref: "EN 12195-2", sourceRef: "EN 12195-2 (parafraza; etykieta)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
+  }, {
+    id: "moc:liczba-pasow-zasada", formats: ["mcq", "scenario"],
+    why: "Zasada praktyczna: im większa masa i im mniejsze tarcie, tym więcej pasów dociskowych; przy dobrym tarciu (mata) potrzeba ich mniej. Dokładną liczbę wylicza się wg EN 12195-1 — aplikacja uczy zasady, nie zastępuje obliczeń.",
+    q: { mcq: { prompt: "Kiedy potrzeba więcej pasów dociskowych?", options: ["Duża masa i małe tarcie", "Mała masa i duże tarcie", "Zawsze tyle samo"], correct: "Duża masa i małe tarcie" },
+         scenario: { prompt: "Ten sam ładunek, dokładasz matę antypoślizgową. Liczba pasów?", options: ["Rośnie", "Może zmaleć (większe tarcie)", "Bez zmian"], correct: "Może zmaleć (większe tarcie)" } },
+    ref: "EN 12195-1 (zasada)", sourceRef: "EN 12195-1 (parafraza; dokładne obliczenie wg normy)", reviewType: "T", copyright: "zamknięte", verifiedBy: null, monitorUntil: "rewizja normy"
   }]
 }];
 
