@@ -736,6 +736,90 @@ const PACKS = [{
     q: { mcq: { prompt: "Jaka kara grozi za nieudzielenie pomocy (art. 162 KK)?", options: ["Grzywna 500 zł", "Pozbawienie wolności do lat 3", "Brak kary"], correct: "Pozbawienie wolności do lat 3" },
          fill: { prompt: "Nieudzielenie pomocy (art. 162 KK) — kara pozbawienia wolności do lat ___.", correct: "3" } },
     ref: "Kodeks karny art. 162", sourceRef: "Kodeks karny art. 162 (Dz.U. 2025 poz. 383)", reviewType: "M", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "pp:aed-elektrody", formats: ["mcq", "scenario"],
+    why: "Elektrody AED: jedna pod prawym obojczykiem, druga w linii pachowej środkowej po lewej stronie (poniżej lewej pachy).",
+    q: { mcq: { prompt: "Gdzie naklejasz elektrody AED?", options: ["Obie na środku klatki", "Pod prawym obojczykiem i pod lewą pachą", "Na plecach"], correct: "Pod prawym obojczykiem i pod lewą pachą" },
+         scenario: { prompt: "Klatka mokra od potu przed naklejeniem elektrod. Co robisz?", options: ["Naklejam mimo to", "Osuszam skórę", "Rezygnuję z AED"], correct: "Osuszam skórę" } },
+    ref: "ERC 2025 BLS", sourceRef: "Wytyczne ERC 2025 (rozmieszczenie elektrod)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:dziecko-rko", formats: ["mcq", "scenario"],
+    why: "RKO dziecka: zacznij od 5 oddechów ratowniczych, potem uciskaj na głębokość ok. 1/3 klatki (u dziecka ~5 cm, u niemowlęcia ~4 cm).",
+    q: { mcq: { prompt: "Od czego zaczynasz RKO u dziecka?", options: ["Od uciśnięć", "Od 5 oddechów ratowniczych", "Od AED"], correct: "Od 5 oddechów ratowniczych" },
+         scenario: { prompt: "Dziecko nie oddycha (najczęściej niedotlenienie). Pierwszy krok?", options: ["30 uciśnięć", "5 oddechów ratowniczych", "Pozycja boczna"], correct: "5 oddechów ratowniczych" } },
+    ref: "ERC 2025 PLS", sourceRef: "Wytyczne ERC 2025 (dzieci)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:niemowle-zadlawienie", formats: ["mcq", "scenario"],
+    why: "Zadławione niemowlę (<1 r.ż.): 5 uderzeń międzyłopatkowych i 5 uciśnięć klatki — NIE stosuje się rękoczynu Heimlicha.",
+    q: { mcq: { prompt: "Czego NIE stosuje się u zadławionego niemowlęcia?", options: ["Uderzeń międzyłopatkowych", "Rękoczynu Heimlicha", "Uciśnięć klatki"], correct: "Rękoczynu Heimlicha" },
+         scenario: { prompt: "Niemowlę się zadławiło. Sekwencja?", options: ["Heimlich", "5 uderzeń międzyłopatkowych + 5 uciśnięć klatki", "Tylko czekać"], correct: "5 uderzeń międzyłopatkowych + 5 uciśnięć klatki" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (niemowlę)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:anafilaksja", formats: ["mcq", "scenario"],
+    why: "Anafilaksja: lek pierwszego rzutu to adrenalina domięśniowo w udo (np. EpiPen); wezwij 112 nawet przy poprawie (ryzyko przebiegu dwufazowego).",
+    q: { mcq: { prompt: "Lek pierwszego rzutu w anafilaksji?", options: ["Wapno", "Adrenalina domięśniowo w udo", "Aspiryna"], correct: "Adrenalina domięśniowo w udo" },
+         scenario: { prompt: "Po podaniu adrenaliny objawy ustąpiły. Dzwonisz 112?", options: ["Nie trzeba", "Tak — możliwy nawrót dwufazowy", "Tylko przy nawrocie"], correct: "Tak — możliwy nawrót dwufazowy" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (anafilaksja)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:padaczka", formats: ["mcq", "order"],
+    why: "Napad drgawkowy: NIE wkładaj nic do ust, nie przytrzymuj na siłę; chroń głowę, usuń niebezpieczne przedmioty, po napadzie pozycja boczna.",
+    q: { mcq: { prompt: "Co jest błędem przy napadzie drgawkowym?", options: ["Ochrona głowy", "Wkładanie czegoś do ust", "Kontrola oddechu po napadzie"], correct: "Wkładanie czegoś do ust" },
+         order: { prompt: "Ułóż postępowanie przy napadzie drgawkowym.", correct: ["Chroń głowę i usuń zagrożenia", "Nie przytrzymuj na siłę", "Po napadzie pozycja boczna", "Kontroluj oddech"] } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (drgawki)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:oparzenie", formats: ["mcq", "fill"],
+    why: "Oparzenie termiczne: schładzaj bieżącą chłodną wodą (ok. 15-20°C) przez 15-20 min; nie smaruj masłem, nie przykładaj lodu.",
+    q: { mcq: { prompt: "Jak schładzać oparzenie?", options: ["Lodem", "Bieżącą chłodną wodą 15-20 min", "Masłem"], correct: "Bieżącą chłodną wodą 15-20 min" },
+         fill: { prompt: "Oparzenie schładzaj wodą ok. 15-20°C przez ___ minut.", correct: "15-20" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (oparzenia)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:amputacja", formats: ["mcq", "scenario"],
+    why: "Amputowaną część owiń jałowo, włóż do szczelnej torebki, a tę do pojemnika z wodą z lodem — NIE zamrażać i nie kłaść bezpośrednio na lodzie.",
+    q: { mcq: { prompt: "Jak zabezpieczyć amputowaną część ciała?", options: ["Zamrozić", "Jałowo + szczelna torebka + pojemnik z wodą z lodem", "Bezpośrednio na lód"], correct: "Jałowo + szczelna torebka + pojemnik z wodą z lodem" },
+         scenario: { prompt: "Odcięty palec. Kładziesz go prosto na kostkach lodu?", options: ["Tak", "Nie — przez szczelną torebkę, nie zamrażać", "W cieple"], correct: "Nie — przez szczelną torebkę, nie zamrażać" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (amputacja)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:cialo-obce-rana", formats: ["mcq", "scenario"],
+    why: "Ciała obcego wbitego w ranę NIE usuwaj (może tamować krwawienie) — stabilizuj i obłóż opatrunkiem wokół.",
+    q: { mcq: { prompt: "Co robisz z nożem wbitym w ranę?", options: ["Wyciągam", "Stabilizuję i obkładam wokół", "Wpycham głębiej"], correct: "Stabilizuję i obkładam wokół" },
+         scenario: { prompt: "Pręt w brzuchu poszkodowanego. Usuwasz?", options: ["Tak", "Nie — stabilizuję, nie usuwam", "Obracam"], correct: "Nie — stabilizuję, nie usuwam" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (ciało obce w ranie)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:hipoglikemia", formats: ["mcq", "scenario"],
+    why: "Niedocukrzenie u przytomnego: podaj cukier/glukozę (15-20 g) doustnie. Nieprzytomnemu NIE podawaj nic do ust — dzwoń 112.",
+    q: { mcq: { prompt: "Osoba z cukrzycą, przytomna, słania się i poci. Co dajesz?", options: ["Nic", "Cukier/glukozę doustnie", "Wodę z solą"], correct: "Cukier/glukozę doustnie" },
+         scenario: { prompt: "Cukrzyk stracił przytomność. Podajesz sok do ust?", options: ["Tak", "Nie — nic doustnie, 112", "Tylko łyk"], correct: "Nie — nic doustnie, 112" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (hipoglikemia)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:czad", formats: ["mcq", "scenario"],
+    why: "Zatrucie tlenkiem węgla (czad): wynieś poszkodowanego na świeże powietrze, dbając o własne bezpieczeństwo; 112, w razie NZK — RKO.",
+    q: { mcq: { prompt: "Pierwszy krok przy zatruciu czadem?", options: ["Podać wodę", "Wynieść na świeże powietrze (bezpiecznie)", "Zostawić w pomieszczeniu"], correct: "Wynieść na świeże powietrze (bezpiecznie)" },
+         scenario: { prompt: "Kolega nieprzytomny w kabinie z ogrzewaniem. Wchodzisz bez zabezpieczenia?", options: ["Tak, szybko", "Nie — najpierw wietrzę/zabezpieczam się", "Czekam"], correct: "Nie — najpierw wietrzę/zabezpieczam się" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 (zatrucia)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:kregoslup", formats: ["mcq", "scenario"],
+    why: "Przy podejrzeniu urazu kręgosłupa: ręczna stabilizacja głowy w osi ciała; ERC 2025 odradza rutynowe zakładanie kołnierza przez laika.",
+    q: { mcq: { prompt: "Jak laik zabezpiecza kręgosłup szyjny wg ERC 2025?", options: ["Zakłada kołnierz", "Ręczna stabilizacja głowy w osi", "Sadza poszkodowanego"], correct: "Ręczna stabilizacja głowy w osi" },
+         scenario: { prompt: "Wypadek, podejrzenie urazu szyi. Zakładasz kołnierz?", options: ["Tak, zawsze", "Nie — ręczna stabilizacja, priorytet drogi oddechowe", "Obracam głowę"], correct: "Nie — ręczna stabilizacja, priorytet drogi oddechowe" } },
+    ref: "ERC 2025 First Aid", sourceRef: "Wytyczne ERC 2025 / ILCOR (kołnierz — odradzany laikowi)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "ILCOR CoSTR"
+  }, {
+    id: "pp:112-numer", formats: ["mcq", "scenario"],
+    why: "112 to jednolity numer alarmowy w całej UE — działa w państwach tranzytowych, także z telefonu bez karty SIM; nie rozłączaj się pierwszy.",
+    q: { mcq: { prompt: "Który numer alarmowy działa w całej UE?", options: ["997", "112", "911"], correct: "112" },
+         scenario: { prompt: "Wypadek za granicą, nie znasz lokalnego numeru. Dzwonisz?", options: ["Nigdzie", "112 — działa w całej UE", "Do bazy"], correct: "112 — działa w całej UE" } },
+    ref: "Ustawa o SPR (112)", sourceRef: "Ustawa o systemie powiadamiania ratunkowego (112)", reviewType: "M", copyright: "wolne", verifiedBy: null, monitorUntil: "stabilne"
+  }, {
+    id: "pp:korytarz-zycia", formats: ["mcq", "scenario"],
+    why: "Korytarz życia: na drodze z co najmniej 2 pasami w jednym kierunku pojazdy na skrajnie lewym pasie zjeżdżają maksymalnie w lewo, pozostałe maksymalnie w prawo.",
+    q: { mcq: { prompt: "Gdzie zjeżdżają auta na skrajnie lewym pasie, tworząc korytarz życia?", options: ["W prawo", "Maksymalnie w lewo", "Zatrzymują się"], correct: "Maksymalnie w lewo" },
+         scenario: { prompt: "Słyszysz karetkę, jedziesz środkowym pasem. Gdzie zjeżdżasz?", options: ["Maksymalnie w lewo", "Maksymalnie w prawo", "Hamuję na środku"], correct: "Maksymalnie w prawo" } },
+    ref: "PoRD art. 9", sourceRef: "Prawo o ruchu drogowym art. 9 (korytarz życia)", reviewType: "M", copyright: "wolne", verifiedBy: null, monitorUntil: "nowelizacje PoRD"
+  }, {
+    id: "pp:apteczka-din", formats: ["mcq", "fill"],
+    why: "Standardowa apteczka samochodowa odpowiada normie DIN 13164; materiały jałowe mają trwałość ok. 5 lat — kontroluj daty ważności.",
+    q: { mcq: { prompt: "Jakiej normie odpowiada typowa apteczka samochodowa?", options: ["DIN 13164", "ISO 9001", "EN 12195"], correct: "DIN 13164" },
+         fill: { prompt: "Materiały jałowe w apteczce mają trwałość ok. ___ lat.", correct: "5" } },
+    ref: "DIN 13164", sourceRef: "DIN 13164:2022 (skład apteczki)", reviewType: "M", copyright: "parafraza", verifiedBy: null, monitorUntil: "aktualizacje normy"
   }]
 }, {
   id: "eco-driving",
